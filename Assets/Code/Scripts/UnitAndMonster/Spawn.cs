@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Transform mySpawn;
+    public GameObject unitPrefab;
+    public GameObject monsterPrefab;
+    public List<Unit> unitList = new List<Unit>();
 
-    // Update is called once per frame
-    void Update()
-    {
+    public void SpawnUnits(){
+
+        GameObject obj = Instantiate(unitPrefab, mySpawn);
+        Unit unit = obj.GetComponent<Unit>();
         
+        unitList.Add(unit);
     }
 }
