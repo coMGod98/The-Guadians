@@ -1,14 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class MonsterSpawner : MonoBehaviour
 {
     public GameObject monsterPrefab;
     public Transform spawnPoint;
     public Transform[] waypoints;
-    public float spawntime = 2.0f;
+    public float spawnInterval = 2.0f;
 
     void Start()
     {
@@ -25,7 +23,7 @@ public class MonsterSpawner : MonoBehaviour
             {
                 movement.SetWaypoints(waypoints);
             }
-            yield return new WaitForSeconds(spawntime);
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 }

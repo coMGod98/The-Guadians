@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class MonsterMovement : MonoBehaviour
 {
@@ -12,7 +9,6 @@ public class MonsterMovement : MonoBehaviour
     public void SetWaypoints(Transform[] waypoints)
     {
         this.waypoints = waypoints;
-        transform.position = waypoints[0].position;
     }
 
     void Update()
