@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UnitController : MonoBehaviour
 {
+
     List<Unit> selectUnitList = new List<Unit>();
 
     void SelectUnit(Unit newUnit){
@@ -14,26 +15,26 @@ public class UnitController : MonoBehaviour
     void DeselectUnit(Unit newUnit){
         newUnit.DeselectUnit();
         selectUnitList.Remove(newUnit);
+
     }
-    void DeselectAll(){
-        for(int i = 0; i < selectUnitList.Count; i++){
-            selectUnitList[i].DeselectUnit();
+    public void DeselectAll(){
+        if (selectUnitList.Count > 0)
+        {
+            for (int i = 0; i < selectUnitList.Count; i++)
+            {
+                selectUnitList[i].DeselectUnit();
+            }
+            selectUnitList.Clear();
         }
-        selectUnitList.Clear();
     }
     public void OneSelectUnit(Unit newUnit){
         DeselectAll();
         SelectUnit(newUnit);
+        Debug.Log(selectUnitList.Count);
     }
     public void MulSelectAct(Unit newUnit){
         if(selectUnitList.Contains(newUnit)) DeselectUnit(newUnit);
         else SelectUnit(newUnit);
+        Debug.Log(selectUnitList.Count);
     }
-    public void DragSelectUnit(Unit newUnit)
-	{
-		if ( !selectUnitList.Contains(newUnit) )
-		{
-			SelectUnit(newUnit);
-		}
-	}
 }
