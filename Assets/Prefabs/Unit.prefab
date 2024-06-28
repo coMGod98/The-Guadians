@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4973957673318046631}
   - component: {fileID: -3409270158038479148}
-  - component: {fileID: 7658537379220982444}
   - component: {fileID: 1357031982203449426}
   - component: {fileID: 1611146808848828927}
   - component: {fileID: 1344455108360259261}
@@ -51,75 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitMarker: {fileID: 6809720743826538376}
---- !u!114 &7658537379220982444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2825263454759421428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ad012bd0a1cb8f4cb22d24406c13b9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 8192
-  attackMask:
-    serializedVersion: 2
-    m_Bits: 0
-  emptySelecAct:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1357031982203449426}
-        m_TargetAssemblyTypeName: UnitController, Assembly-CSharp
-        m_MethodName: DeselectAll
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  oneSelectAct:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1357031982203449426}
-        m_TargetAssemblyTypeName: UnitController, Assembly-CSharp
-        m_MethodName: OneSelectUnit
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  mulSelectAct:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1357031982203449426}
-        m_TargetAssemblyTypeName: UnitController, Assembly-CSharp
-        m_MethodName: MulSelectAct
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  moveAct:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1357031982203449426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2905e6e3962b3047ac575aed5c056dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectUnitList: []
+  allUnitList: []
 --- !u!136 &1611146808848828927
 CapsuleCollider:
   m_ObjectHideFlags: 0

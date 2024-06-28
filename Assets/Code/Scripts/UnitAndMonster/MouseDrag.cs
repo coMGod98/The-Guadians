@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class MouseDrag : MonoBehaviour
 {
-    Spawn list;
     Vector2 start = Vector2.zero;
     Vector2 end = Vector2.zero;
     Camera mainCamera;
@@ -14,7 +13,6 @@ public class MouseDrag : MonoBehaviour
 
     [SerializeField]
     RectTransform dragRectangle;
-    public UnityEvent<Unit> dragSelectAct;
 
     private void Awake() {
         mainCamera = Camera.main;
@@ -35,7 +33,7 @@ public class MouseDrag : MonoBehaviour
 		if ( Input.GetMouseButtonUp(0) )
 		{
 			CalculateDragRect();
-			SelectUnits();
+			// SelectUnits();
 
 			start = end = Vector2.zero;
 			DrawDragRectangle();
@@ -71,7 +69,7 @@ public class MouseDrag : MonoBehaviour
 			dragRect.yMax = Input.mousePosition.y;
 		}
 	}
-
+/*
 	void SelectUnits()
 	{
 		foreach (Unit unit in list.unitList)
@@ -81,5 +79,5 @@ public class MouseDrag : MonoBehaviour
                 dragSelectAct?.Invoke(unit);
 			}
 		}
-	}
+	}*/
 }

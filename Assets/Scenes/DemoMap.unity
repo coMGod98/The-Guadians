@@ -5304,9 +5304,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1034781555}
+  - component: {fileID: 1034781558}
   - component: {fileID: 1034781556}
   m_Layer: 0
-  m_Name: UnitSpawn
+  m_Name: UnitContoller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5339,10 +5340,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b862b216dc70a48918d6d14f72d4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mySpawn: {fileID: 1034781555}
+  unitSpawn: {fileID: 1034781555}
+  monsterSpawn: {fileID: 1034781555}
   unitPrefab: {fileID: 2825263454759421428, guid: 7b0ca59f805042b49beec6eb24c28ec0, type: 3}
-  monsterPrefab: {fileID: 2825263454759421428, guid: 7b0ca59f805042b49beec6eb24c28ec0, type: 3}
-  unitList: []
+  monsterPrefab: {fileID: 0}
+--- !u!114 &1034781558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034781554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad012bd0a1cb8f4cb22d24406c13b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 0
+  emptySelecAct:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1357031982203449426, guid: 7b0ca59f805042b49beec6eb24c28ec0, type: 3}
+        m_TargetAssemblyTypeName: UnitController, Assembly-CSharp
+        m_MethodName: DeselectAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  oneSelectAct:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1357031982203449426, guid: 7b0ca59f805042b49beec6eb24c28ec0, type: 3}
+        m_TargetAssemblyTypeName: UnitController, Assembly-CSharp
+        m_MethodName: OneSelectUnit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  mulSelectAct:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1357031982203449426, guid: 7b0ca59f805042b49beec6eb24c28ec0, type: 3}
+        m_TargetAssemblyTypeName: UnitController, Assembly-CSharp
+        m_MethodName: MulSelectAct
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  moveAct:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1079328761
 GameObject:
   m_ObjectHideFlags: 0

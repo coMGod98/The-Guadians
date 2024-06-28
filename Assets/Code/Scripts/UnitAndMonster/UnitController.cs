@@ -6,7 +6,8 @@ using UnityEngine;
 public class UnitController : MonoBehaviour
 {
 
-    List<Unit> selectUnitList = new List<Unit>();
+    public List<Unit> selectUnitList = new List<Unit>();
+    public List<Unit> allUnitList = new List<Unit>();
 
     void SelectUnit(Unit newUnit){
         newUnit.SelectUnit();
