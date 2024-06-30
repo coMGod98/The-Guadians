@@ -6,18 +6,19 @@ using UnityEngine;
 public class UnitController : MonoBehaviour
 {
 
-    public List<Unit> selectUnitList = new List<Unit>();
-    public List<Unit> allUnitList = new List<Unit>();
+    public static List<Unit> selectUnitList = new List<Unit>();
+    public static List<Unit> allUnitList = new List<Unit>();
 
     void SelectUnit(Unit newUnit){
         newUnit.SelectUnit();
         selectUnitList.Add(newUnit);
     }
+
     void DeselectUnit(Unit newUnit){
         newUnit.DeselectUnit();
         selectUnitList.Remove(newUnit);
-
     }
+
     public void DeselectAll(){
         if (selectUnitList.Count > 0)
         {
@@ -28,14 +29,21 @@ public class UnitController : MonoBehaviour
             selectUnitList.Clear();
         }
     }
+
     public void OneSelectUnit(Unit newUnit){
         DeselectAll();
         SelectUnit(newUnit);
-        Debug.Log(selectUnitList.Count);
     }
-    public void MulSelectAct(Unit newUnit){
+
+    public void MulSelectUnit(Unit newUnit){
         if(selectUnitList.Contains(newUnit)) DeselectUnit(newUnit);
         else SelectUnit(newUnit);
-        Debug.Log(selectUnitList.Count);
+    }
+
+    public void DragSelectUnit(Unit newUnit){
+        if ( !selectUnitList.Contains(newUnit) )
+		{
+			SelectUnit(newUnit);
+		}
     }
 }
