@@ -46,4 +46,10 @@ public class UnitController : MonoBehaviour
 			SelectUnit(newUnit);
 		}
     }
+
+    public void MoveSelectUnit(Vector3 pos){
+		for ( int i = 0; i < selectUnitList.Count; ++ i ){
+			selectUnitList[i].Move(pos);
+		}
+    }
 }
