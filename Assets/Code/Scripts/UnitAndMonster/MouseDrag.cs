@@ -15,7 +15,7 @@ public class MouseDrag : MonoBehaviour
 
     private void Awake() {
         mainCamera = Camera.main;
-		//DrawDragRectangle();
+		DrawDragRectangle();
     }
     void Update(){
         if ( Input.GetMouseButtonDown(0) )

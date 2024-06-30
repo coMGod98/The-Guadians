@@ -31,7 +31,7 @@ public class Movement : UnitController
             switch(myPath.status){
                 case NavMeshPathStatus.PathComplete:
                 case NavMeshPathStatus.PathPartial:
-                    StopMoveCoroutine();
+                    StopAllCoroutines();
                     corMove = corRotate = StartCoroutine(MovingByPath(myPath.corners));
                     break;
                 case NavMeshPathStatus.PathInvalid:
