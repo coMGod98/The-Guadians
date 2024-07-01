@@ -21,25 +21,7 @@ public class CameraedgeMoving : MonoBehaviour
         Vector3 moveDirection = Vector3.zero;
 
         
-        if (mousePosition.x < boundaryThickness && mousePosition.y < boundaryThickness)
-        {
-            moveDirection += new Vector3(-1, 0, -1).normalized; 
-        }
-        
-        else if (mousePosition.x > Screen.width - boundaryThickness && mousePosition.y < boundaryThickness)
-        {
-            moveDirection += new Vector3(1, 0, -1).normalized;
-        }
-       
-        else if (mousePosition.x < boundaryThickness && mousePosition.y > Screen.height - boundaryThickness)
-        {
-            moveDirection += new Vector3(-1, 0, 1).normalized; 
-        }
-       
-        else if (mousePosition.x > Screen.width - boundaryThickness && mousePosition.y > Screen.height - boundaryThickness)
-        {
-            moveDirection += new Vector3(1, 0, 1).normalized; 
-        }
+  
         if (mousePosition.x < boundaryThickness)
         {
             moveDirection += Vector3.left;
