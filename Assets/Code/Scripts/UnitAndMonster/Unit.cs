@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Unit : Movement
 {
     public GameObject unitMarker;
 
@@ -11,5 +11,8 @@ public class Unit : MonoBehaviour
     }
     public void DeselectUnit(){
         unitMarker.SetActive(false);
+    }
+    public void Move(Vector3 pos){
+        MoveToPos(pos);
     }
 }

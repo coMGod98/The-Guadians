@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    public Transform mySpawn;
+    public Transform unitSpawn;
+    public Transform monsterSpawn;
     public GameObject unitPrefab;
     public GameObject monsterPrefab;
-    public List<Unit> unitList = new List<Unit>();
 
     public void SpawnUnits(){
 
-        GameObject obj = Instantiate(unitPrefab, mySpawn);
+        GameObject obj = Instantiate(unitPrefab, unitSpawn);
         Unit unit = obj.GetComponent<Unit>();
         
-        unitList.Add(unit);
+        UnitController.allUnitList.Add(unit);
     }
 }

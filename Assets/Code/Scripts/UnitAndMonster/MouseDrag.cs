@@ -6,18 +6,16 @@ using UnityEngine.Events;
 
 public class MouseDrag : MonoBehaviour
 {
-    Spawn list;
+    [SerializeField] RectTransform dragRectangle;
     Vector2 start = Vector2.zero;
     Vector2 end = Vector2.zero;
     Camera mainCamera;
     Rect dragRect;
-
-    [SerializeField]
-    RectTransform dragRectangle;
-    public UnityEvent<Unit> dragSelectAct;
+	public UnityEvent<Unit> dragSelectAct;
 
     private void Awake() {
         mainCamera = Camera.main;
+		DrawDragRectangle();
     }
     void Update(){
         if ( Input.GetMouseButtonDown(0) )
@@ -74,7 +72,7 @@ public class MouseDrag : MonoBehaviour
 
 	void SelectUnits()
 	{
-		foreach (Unit unit in list.unitList)
+		foreach (Unit unit in UnitController.allUnitList)
 		{
 			if ( dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)) )
 			{
