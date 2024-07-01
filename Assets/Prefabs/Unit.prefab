@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4973957673318046631}
-  - component: {fileID: -3409270158038479148}
+  - component: {fileID: 5313907470244962693}
   - component: {fileID: 1611146808848828927}
   - component: {fileID: 1344455108360259261}
   m_Layer: 10
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 5028852588445731556}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-3409270158038479148
+--- !u!114 &5313907470244962693
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,11 +45,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2825263454759421428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b767ccaf166bff4b8e0f774d6d150be, type: 3}
+  m_Script: {fileID: 11500000, guid: b7ae4cc57fa9ee04b91b0509c329a752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 2
   rotSpeed: 360
+  unitSpawn: {fileID: 0}
+  unitPrefab: {fileID: 2825263454759421428}
   unitMarker: {fileID: 6809720743826538376}
 --- !u!136 &1611146808848828927
 CapsuleCollider:

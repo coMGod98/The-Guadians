@@ -7,8 +7,7 @@ public class UnitController : MonoBehaviour
 {
 
     public static List<Unit> selectUnitList = new List<Unit>();
-    public static List<Unit> allUnitList = new List<Unit>();
-
+    
     void SelectUnit(Unit newUnit){
         newUnit.SelectUnit();
         selectUnitList.Add(newUnit);

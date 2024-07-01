@@ -72,7 +72,7 @@ public class MouseDrag : MonoBehaviour
 
 	void SelectUnits()
 	{
-		foreach (Unit unit in UnitController.allUnitList)
+		foreach (Unit unit in Unit.allUnitList)
 		{
 			if ( dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)) )
 			{
