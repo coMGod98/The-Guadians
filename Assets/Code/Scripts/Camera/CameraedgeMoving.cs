@@ -15,7 +15,7 @@ public class CameraedgeMoving : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 mousePosition = Input.mousePosition;
         Vector3 moveDirection = Vector3.zero;
