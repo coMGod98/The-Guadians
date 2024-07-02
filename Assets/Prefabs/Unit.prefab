@@ -48,10 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ae4cc57fa9ee04b91b0509c329a752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 5
   rotSpeed: 360
-  unitSpawn: {fileID: 0}
-  unitPrefab: {fileID: 2825263454759421428}
   unitMarker: {fileID: 6809720743826538376}
 --- !u!136 &1611146808848828927
 CapsuleCollider:
