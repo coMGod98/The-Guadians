@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Monster : Movement
 {
@@ -9,21 +8,21 @@ public class Monster : Movement
         Create, Normal, Battle, Death
     }
     public static List<Monster> allMonsterList = new List<Monster>();
-    Transform[] wayPoint;
+    Transform[] wayPointList;
     int currentWaypointIndex = 1;
 
 
     public void SetWaypoint(Transform[] wayPoint)
     {
-        this.wayPoint = wayPoint;
+        wayPointList = wayPoint;
     }
 
     void Update(){
-        MoveToPos(wayPoint[currentWaypointIndex].position);
-        if(Vector3.Distance(transform.position, wayPoint[currentWaypointIndex].position) < 1.0f){
+         MoveToPos(wayPointList[currentWaypointIndex].position);
+         if(transform.position == wayPointList[currentWaypointIndex].position){
             currentWaypointIndex++;
             if(currentWaypointIndex > 3) currentWaypointIndex = 0;
-        }
+         }
     }
-    
+
 }
