@@ -6,12 +6,12 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-public class Movement : UnitController
+public class Movement : MonoBehaviour
 {
     public float moveSpeed = 2.0f;
     public float rotSpeed = 360.0f;
     NavMeshPath myPath;
-    Coroutine corMove = null;
+    protected Coroutine corMove = null;
     Coroutine corRotate = null;
 
     protected void StopMoveCoroutine(){
@@ -32,7 +32,7 @@ public class Movement : UnitController
                 case NavMeshPathStatus.PathComplete:
                 case NavMeshPathStatus.PathPartial:
                     StopAllCoroutines();
-                    corMove = corRotate = StartCoroutine(MovingByPath(myPath.corners));
+                    corMove = StartCoroutine(MovingByPath(myPath.corners));
                     break;
                 case NavMeshPathStatus.PathInvalid:
                     break;
@@ -52,7 +52,7 @@ public class Movement : UnitController
         float moveDist = moveDir.magnitude;
         moveDir.Normalize();
 
-        StartCoroutine(RotatingToPos(moveDir));
+        corRotate = StartCoroutine(RotatingToPos(moveDir));
 
         while(moveDist > 0.0f){
             float delta = moveSpeed * Time.deltaTime;

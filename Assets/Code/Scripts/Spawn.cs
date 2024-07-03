@@ -5,8 +5,8 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
 
-    public GameObject unitPrefab;
-    public GameObject monsterPrefab;
+    public List<GameObject> unitPrefabList = new List<GameObject>();
+    public List<GameObject> monsterPrefabList = new List<GameObject>();
     public Transform unitSpawn;
     public Transform monsterSpawn;
     public Transform[] wayPointList;
@@ -15,7 +15,8 @@ public class Spawn : MonoBehaviour
 
     public void SpawnUnit()
     {
-        GameObject obj = Instantiate(unitPrefab, unitSpawn);
+        int randIdx = Random.Range(0, unitPrefabList.Count);
+        GameObject obj = Instantiate(unitPrefabList[randIdx], unitSpawn);
         Unit unit = obj.GetComponent<Unit>();
 
         Unit.allUnitList.Add(unit);
@@ -30,7 +31,7 @@ public class Spawn : MonoBehaviour
     {
         while (true)
         {
-            GameObject obj = Instantiate(monsterPrefab, monsterSpawn);
+            GameObject obj = Instantiate(monsterPrefabList[0], monsterSpawn);
             Monster monster = obj.GetComponent<Monster>();
             Monster.allMonsterList.Add(monster);
             monster.SetWaypoint(wayPointList);
