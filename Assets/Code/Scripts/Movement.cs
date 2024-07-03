@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-public class Movement : MonoBehaviour
+public class Movement : AnimatorProperty
 {
+    public LayerMask crashMask;
     public float moveSpeed = 2.0f;
     public float rotSpeed = 360.0f;
     NavMeshPath myPath;
-    protected Coroutine corMove = null;
+    Coroutine corMove = null;
     Coroutine corRotate = null;
+    Coroutine corByPathMove = null;
 
     protected void StopMoveCoroutine(){
         if (corMove != null) {
@@ -23,6 +26,10 @@ public class Movement : MonoBehaviour
             StopCoroutine(corRotate);
             corRotate = null;
         }
+        if (corByPathMove != null) {
+            StopCoroutine(corByPathMove);
+            corByPathMove = null;
+        }
     }    
 
     public void MoveToPos(Vector3 pos){
@@ -31,8 +38,8 @@ public class Movement : MonoBehaviour
             switch(myPath.status){
                 case NavMeshPathStatus.PathComplete:
                 case NavMeshPathStatus.PathPartial:
-                    StopAllCoroutines();
-                    corMove = StartCoroutine(MovingByPath(myPath.corners));
+                    StopMoveCoroutine();
+                    corByPathMove = StartCoroutine(MovingByPath(myPath.corners));
                     break;
                 case NavMeshPathStatus.PathInvalid:
                     break;
@@ -43,11 +50,14 @@ public class Movement : MonoBehaviour
     IEnumerator MovingByPath(Vector3[] path){
         int curIdx = 1;
         while(curIdx < path.Length){
-            yield return StartCoroutine(MovingToPos(path[curIdx++]));
+            yield return corMove = StartCoroutine(MovingToPos(path[curIdx++]));
         }
     }
 
     IEnumerator MovingToPos(Vector3 pos){
+        if(myAnim.gameObject.GetComponentInParent<Unit>()){
+            myAnim.SetBool("IsMoving", true);
+        }
         Vector3 moveDir = pos - transform.position;
         float moveDist = moveDir.magnitude;
         moveDir.Normalize();
@@ -56,10 +66,18 @@ public class Movement : MonoBehaviour
 
         while(moveDist > 0.0f){
             float delta = moveSpeed * Time.deltaTime;
+            // Ray ray = new Ray(transform.position, transform.forward);
+            // if(Physics.Raycast(ray, out RaycastHit hit, delta, crashMask)){
+            //     CapsuleCollider col = transform.GetComponent<CapsuleCollider>();
+            //     delta = hit.distance - col.radius;
+            // }
             if(moveDist < delta) delta = moveDist;
             transform.Translate(moveDir * delta, Space.World);
             moveDist -= delta;
             yield return null;
+        }
+        if(myAnim.gameObject.GetComponentInParent<Unit>()){
+            myAnim.SetBool("IsMoving", false);
         }
     }
     IEnumerator RotatingToPos(Vector3 dir){
