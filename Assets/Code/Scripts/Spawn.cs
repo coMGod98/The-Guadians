@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Spawn : MonoBehaviour
 {
@@ -12,14 +13,29 @@ public class Spawn : MonoBehaviour
     public Transform[] wayPointArray;
     public float spawnInterval = 2.0f;
 
-
     public void SpawnUnit()
     {
         int randIdx = Random.Range(0, unitPrefabArray.Length);
-        GameObject obj = Instantiate(unitPrefabArray[randIdx], unitSpawn);
+        Vector3 randomSpawn = RandomSpawn();
+        GameObject obj = Instantiate(unitPrefabArray[randIdx], randomSpawn, Quaternion.identity);
+        obj.transform.parent = unitSpawn;
         Unit unit = obj.GetComponent<Unit>();
 
         Unit.allUnitList.Add(unit);
+    }
+
+    Vector3 RandomSpawn()
+    {
+        float radius = Random.Range(0.0f, 1.0f);
+        float angle = Random.Range(0.0f, 360.0f);
+
+        float x = radius * Mathf.Sin(angle);
+        float z = radius * Mathf.Cos(angle);
+
+        Vector3 randomVector = new Vector3(x, 0.55f, z);
+        Vector3 randomPosition = transform.position + randomVector;
+        return randomPosition;
+       
     }
 
     public void SpawnMonster()
