@@ -19,11 +19,11 @@ public class Monster : Movement
     }
 
     void Update(){
-         MoveToPos(wayPoint[currentWaypointIndex].position);
-         if(transform.position == wayPoint[currentWaypointIndex].position){
+        MoveToPos(wayPoint[currentWaypointIndex].position);
+        if (transform.position == wayPoint[currentWaypointIndex].position) {
             currentWaypointIndex++;
-            if(currentWaypointIndex > 3) currentWaypointIndex = 0;
-         }
+            if (currentWaypointIndex > 3) currentWaypointIndex = 0;
+        }
     }
 
 }

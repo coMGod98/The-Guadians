@@ -5,7 +5,6 @@ using UnityEngine;
 public class Unit : Movement
 {
     public static List<Unit> allUnitList = new List<Unit>();
-
     public GameObject unitMarker;
 
     public void SelectUnit(){

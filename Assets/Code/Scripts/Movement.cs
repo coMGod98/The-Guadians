@@ -17,6 +17,7 @@ public class Movement : AnimatorProperty
     Coroutine corRotate = null;
     Coroutine corByPathMove = null;
 
+
     protected void StopMoveCoroutine(){
         if (corMove != null) {
             StopCoroutine(corMove);
@@ -55,9 +56,7 @@ public class Movement : AnimatorProperty
     }
 
     IEnumerator MovingToPos(Vector3 pos){
-        if(myAnim.gameObject.GetComponentInParent<Unit>()){
-            myAnim.SetBool("IsMoving", true);
-        }
+        myAnim.SetBool("IsMoving", true);
         Vector3 moveDir = pos - transform.position;
         float moveDist = moveDir.magnitude;
         moveDir.Normalize();
@@ -76,9 +75,7 @@ public class Movement : AnimatorProperty
             moveDist -= delta;
             yield return null;
         }
-        if(myAnim.gameObject.GetComponentInParent<Unit>()){
-            myAnim.SetBool("IsMoving", false);
-        }
+        myAnim.SetBool("IsMoving", false);
     }
     IEnumerator RotatingToPos(Vector3 dir){
         float rotAngle = Vector3.Angle(transform.forward, dir);
