@@ -5,7 +5,6 @@ using UnityEngine.UIElements;
 
 public class Spawn : MonoBehaviour
 {
-
     public GameObject[] unitPrefabArray;
     public GameObject[] monsterPrefabArray;
     public Transform unitSpawn;

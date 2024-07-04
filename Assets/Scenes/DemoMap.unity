@@ -4798,7 +4798,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPrefabArray:
-  - {fileID: 3543524835903071566, guid: 24997c4ac5f2f4b429110ec933b2d474, type: 3}
+  - {fileID: 7791673034692077389, guid: 639f6e764ccd8844885d8b66452db408, type: 3}
+  - {fileID: 4807764840968278759, guid: 90eaa319ffb928949a34709c0cd51562, type: 3}
+  - {fileID: 8046509895250879175, guid: 7341e229ef23d98439eca131bb37bf31, type: 3}
   monsterPrefabArray:
   - {fileID: 7691311844662774141, guid: 86b02ba304411354da7db68301636d62, type: 3}
   unitSpawn: {fileID: 1034781555}
