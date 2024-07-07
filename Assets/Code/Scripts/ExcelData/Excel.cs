@@ -79,14 +79,14 @@ public class Excel : MonoBehaviour
 
     //외부로부터 몬스터의 이름과, EnemyParams 객체를 전달 받아서 해당 이름을 가진 몬스터의 
     //데이터(XML 에서 읽어 온 데이터)를 전달받은 EnemyParams 객체에 적용하는 역할을 하는 함수
-    public void LoadMonsterParamsFromXML(string Round,MonsterObject mParams)
+   /* public void LoadMonsterParamsFromXML(string Round,MonsterObject mParams)
     {
         mParams.MonsterHP = dicMonsters[Round].MonsterHP;
         mParams.MonsterGold = mParams.maxHp = dicMonsters[Round].MonsterGold;
         mParams.Movement = dicMonsters[Round].Movement;
         
        
-    }
+    }*/
 
 
     void Update()
