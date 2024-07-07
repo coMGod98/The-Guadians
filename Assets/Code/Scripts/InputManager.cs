@@ -10,11 +10,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private LayerMask unitMask;
     [SerializeField] private LayerMask monsterMask;
-    [Header("UnitSelect")]
-    [SerializeField] List<Unit> allUnitList = UnitManager.allUnitList;
-    [SerializeField] List<Unit> selectUnitList = UnitManager.selectUnitList;
-    [Header("MonsetrSelect")]
-    [SerializeField] private Monster selectMonster = null;
+    
     [Header("Drag")]
     [SerializeField] private RectTransform dragRectangle;
     [SerializeField] private Vector2 start = Vector2.zero;
@@ -72,42 +68,42 @@ public class InputManager : MonoBehaviour
         if(Input.GetMouseButtonDown(1)){
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundMask)){
-                MoveSelectUnit(hit.point);
+                GameWorld.Instance.UnitManager.MoveSelectedUnit(hit.point);
             }
         }
     }
 
     void SelectUnit(Unit newUnit){
         newUnit.unitMarker.SetActive(true);
-        selectUnitList.Add(newUnit);
+         GameWorld.Instance.UnitManager.selectedUnitList.Add(newUnit);
     }
 
     void DeselectUnit(Unit newUnit){
         newUnit.unitMarker.SetActive(false);
-        selectUnitList.Remove(newUnit);
+        GameWorld.Instance.UnitManager.selectedUnitList.Remove(newUnit);
     }
 
     public void SelectMonster(Monster newMonster){
         DeselectAll();
         newMonster.GetComponent<Outline>().enabled = true;
-        selectMonster = newMonster;
+        GameWorld.Instance.MonsterManager.selectedMonster = newMonster;
     }
 
     public void DeselectMonster(){
-        if(selectMonster != null){
-            selectMonster.GetComponent<Outline>().enabled = false;
-            selectMonster = null;
+        if(GameWorld.Instance.MonsterManager.selectedMonster != null){
+            GameWorld.Instance.MonsterManager.selectedMonster.GetComponent<Outline>().enabled = false;
+            GameWorld.Instance.MonsterManager.selectedMonster = null;
         }
     }
 
     public void DeselectAll(){
-        if (selectUnitList.Count > 0)
+        if (GameWorld.Instance.UnitManager.selectedUnitList.Count > 0)
         {
-            for (int i = 0; i < selectUnitList.Count; i++)
+            for (int i = 0; i < GameWorld.Instance.UnitManager.selectedUnitList.Count; i++)
             {
-                DeselectUnit(selectUnitList[i]);
+                DeselectUnit(GameWorld.Instance.UnitManager.selectedUnitList[i]);
             }
-            selectUnitList.Clear();
+            GameWorld.Instance.UnitManager.selectedUnitList.Clear();
         }
         DeselectMonster();
     }
@@ -118,16 +114,16 @@ public class InputManager : MonoBehaviour
     }
 
     public void MulSelectUnit(Unit newUnit){
-        if(selectUnitList.Contains(newUnit)) DeselectUnit(newUnit);
+        if(GameWorld.Instance.UnitManager.selectedUnitList.Contains(newUnit)) DeselectUnit(newUnit);
         else SelectUnit(newUnit);
     }
 
     public void DragSelectUnit(Unit newUnit){
-        foreach (Unit unit in allUnitList)
+        foreach (Unit unit in GameWorld.Instance.UnitManager.allUnitList)
 		{
 			if ( dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)) )
 			{
-                if ( !selectUnitList.Contains(newUnit) ){
+                if ( !GameWorld.Instance.UnitManager.selectedUnitList.Contains(newUnit) ){
 			        SelectUnit(newUnit);
 		        }
 			}
@@ -136,7 +132,7 @@ public class InputManager : MonoBehaviour
 
 	void DragUnit()
 	{
-		foreach (Unit unit in allUnitList)
+		foreach (Unit unit in GameWorld.Instance.UnitManager.allUnitList)
 		{
 			if ( dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)) )
 			{
@@ -174,8 +170,4 @@ public class InputManager : MonoBehaviour
 			dragRect.yMax = Input.mousePosition.y;
 		}
 	}
-
-    public void MoveSelectUnit(Vector3 pos){
-        moveAct?.Invoke(pos);
-    }
 }

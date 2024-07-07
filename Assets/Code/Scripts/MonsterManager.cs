@@ -4,6 +4,8 @@ using UnityEngine.AI;
 
 public class MonsterManager : MonoBehaviour
 {
+    [Header("SelectedMonster"), Tooltip("몬스터 선택")]
+    public Monster selectedMonster;
     [Header("Prefab"), Tooltip("몬스터 프리팹")]
     public GameObject[] monsterPrefabArray;
     public GameObject bossPrefab;
@@ -26,6 +28,10 @@ public class MonsterManager : MonoBehaviour
     private Coroutine corRotate = null;
     private Coroutine corByPathMove = null;
     private Coroutine spawningCoroutine;
+
+    private void Awake(){
+        selectedMonster = null;
+    }
 
 
     protected void StopMoveCoroutine(){
