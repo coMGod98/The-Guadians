@@ -4668,15 +4668,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf5aa3fdc19d9c4a8f8bfd8871a2859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitPrefab: {fileID: 2825263454759421428, guid: 7b0ca59f805042b49beec6eb24c28ec0, type: 3}
-  monsterPrefab: {fileID: 6023682325220812062, guid: 4affeeeac41de914baf956bee265a77a, type: 3}
+  unitPrefabArray: []
+  monsterPrefabArray: []
   unitSpawn: {fileID: 1034781555}
   monsterSpawn: {fileID: 1657917869}
-  wayPointList:
-  - {fileID: 821964887}
-  - {fileID: 2070595323}
-  - {fileID: 1853248348}
-  - {fileID: 1569064962}
+  wayPointArray: []
   spawnInterval: 2
 --- !u!4 &931979549
 Transform:
@@ -4835,9 +4831,15 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8192
-  attackMask:
+  monsterMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 0
+  selectMonsterAct:
+    m_PersistentCalls:
+      m_Calls: []
+  oneUnitSelectAct:
+    m_PersistentCalls:
+      m_Calls: []
   emptySelecAct:
     m_PersistentCalls:
       m_Calls:
@@ -4853,36 +4855,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  oneSelectAct:
+  mulUnitSelectAct:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 966280990}
-        m_TargetAssemblyTypeName: UnitController, Assembly-CSharp
-        m_MethodName: OneSelectUnit
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  mulSelectAct:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 966280990}
-        m_TargetAssemblyTypeName: UnitController, Assembly-CSharp
-        m_MethodName: MulSelectUnit
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   moveAct:
     m_PersistentCalls:
       m_Calls:
