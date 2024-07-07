@@ -29,7 +29,7 @@ public class Spawn : MonoBehaviour
         obj.transform.parent = unitSpawn;
         Unit unit = obj.GetComponent<Unit>();
 
-        Unit.allUnitList.Add(unit);
+        UnitManager.allUnitList.Add(unit);
     }
 
     Vector3 RandomSpawn()

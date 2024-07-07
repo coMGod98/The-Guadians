@@ -2,18 +2,30 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-interface IMove{
-
-}
-
-public class Movement : AnimatorProperty, IMove
+public class MonsterManager : MonoBehaviour
 {
+    [Header("Prefab"), Tooltip("몬스터 프리팹")]
+    public GameObject[] monsterPrefabArray;
+    public GameObject bossPrefab;
+    [Header("Spawn"), Tooltip("몬스터 스폰지")]
+    public Transform monsterSpawn;
+    [Header("SpawnInfo"), Tooltip("몬스터 스폰 정보")]
+    public float spawnInterval = 2.0f;
+    public int monsterSpawnCount = 0;
+    [Header("WayPoint"), Tooltip("몬스터 웨이포인트")]
+    public Transform[] wayPointArray;
+    [Header("Move"), Tooltip("몬스터 속도 제어")]
     public float moveSpeed = 2.0f;
     public float rotSpeed = 360.0f;
-    NavMeshPath myPath;
-    Coroutine corMove = null;
-    Coroutine corRotate = null;
-    Coroutine corByPathMove = null;
+
+    //네브메쉬
+    private NavMeshPath myPath;
+
+    // 코루틴
+    private Coroutine corMove = null;
+    private Coroutine corRotate = null;
+    private Coroutine corByPathMove = null;
+    private Coroutine spawningCoroutine;
 
 
     protected void StopMoveCoroutine(){
@@ -31,6 +43,7 @@ public class Movement : AnimatorProperty, IMove
         }
     }    
 
+    // 무브
     public void MoveToPos(Vector3 pos){
         if(myPath == null) myPath = new NavMeshPath();
         if(NavMesh.CalculatePath(transform.position, pos, NavMesh.AllAreas, myPath)){
@@ -54,7 +67,6 @@ public class Movement : AnimatorProperty, IMove
     }
 
     IEnumerator MovingToPos(Vector3 pos){
-        myAnim.SetBool("IsMoving", true);
         Vector3 moveDir = pos - transform.position;
         float moveDist = moveDir.magnitude;
         moveDir.Normalize();
@@ -68,7 +80,6 @@ public class Movement : AnimatorProperty, IMove
             moveDist -= delta;
             yield return null;
         }
-        myAnim.SetBool("IsMoving", false);
     }
     IEnumerator RotatingToPos(Vector3 dir){
         float rotAngle = Vector3.Angle(transform.forward, dir);
@@ -82,6 +93,38 @@ public class Movement : AnimatorProperty, IMove
             transform.Rotate(Vector3.up * rotDir * delta);
             rotAngle -= delta;
             yield return null;
+        }
+    }
+
+    //스폰
+    public void SpawnMonster(int round)
+    {
+        if (spawningCoroutine != null)
+        {
+            StopCoroutine(spawningCoroutine);
+        }
+        spawningCoroutine = StartCoroutine(SpawningMonster(round));
+    }
+
+    public void SpawnBoss()
+    {
+        GameObject obj = Instantiate(bossPrefab, monsterSpawn);
+        Monster boss = obj.GetComponent<Monster>();
+        Monster.allMonsterList.Add(boss);
+        monsterSpawnCount++;
+        boss.SetWaypoint(wayPointArray);
+    }
+    IEnumerator SpawningMonster(int round)
+    {
+        int monsterIndex = Mathf.Min(round - 1, monsterPrefabArray.Length - 1);
+        while (true)
+        {
+            GameObject obj = Instantiate(monsterPrefabArray[monsterIndex], monsterSpawn.position, Quaternion.identity);
+            Monster monster = obj.GetComponent<Monster>();
+            Monster.allMonsterList.Add(monster);
+            monster.SetWaypoint(wayPointArray);
+            monsterSpawnCount++;
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 }
