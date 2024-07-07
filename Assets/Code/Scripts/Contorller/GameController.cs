@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
-public class UnitController : MonoBehaviour
+public class GameController : MonoBehaviour
 {
+    private Monster selectMonster = null;
 
-    public static List<Unit> selectUnitList = new List<Unit>();
-    
+    private List<Unit> selectUnitList = new List<Unit>();
+
     void SelectUnit(Unit newUnit){
         newUnit.SelectUnit();
         selectUnitList.Add(newUnit);
@@ -16,6 +18,19 @@ public class UnitController : MonoBehaviour
     void DeselectUnit(Unit newUnit){
         newUnit.DeselectUnit();
         selectUnitList.Remove(newUnit);
+    }
+
+    public void SelectMonster(Monster newMonster){
+        DeselectAll();
+        newMonster.SelectMonster();
+        selectMonster = newMonster;
+    }
+
+    public void DeselectMonster(){
+        if(selectMonster != null){
+            selectMonster.DeselectMonster();
+            selectMonster = null;
+        }
     }
 
     public void DeselectAll(){
@@ -27,6 +42,7 @@ public class UnitController : MonoBehaviour
             }
             selectUnitList.Clear();
         }
+        DeselectMonster();
     }
 
     public void OneSelectUnit(Unit newUnit){

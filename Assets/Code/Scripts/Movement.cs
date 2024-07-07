@@ -9,7 +9,6 @@ using UnityEngine.UIElements;
 
 public class Movement : AnimatorProperty
 {
-    public LayerMask crashMask;
     public float moveSpeed = 2.0f;
     public float rotSpeed = 360.0f;
     NavMeshPath myPath;
@@ -65,11 +64,6 @@ public class Movement : AnimatorProperty
 
         while(moveDist > 0.0f){
             float delta = moveSpeed * Time.deltaTime;
-            // Ray ray = new Ray(transform.position, transform.forward);
-            // if(Physics.Raycast(ray, out RaycastHit hit, delta, crashMask)){
-            //     CapsuleCollider col = transform.GetComponent<CapsuleCollider>();
-            //     delta = hit.distance - col.radius;
-            // }
             if(moveDist < delta) delta = moveDist;
             transform.Translate(moveDir * delta, Space.World);
             moveDist -= delta;

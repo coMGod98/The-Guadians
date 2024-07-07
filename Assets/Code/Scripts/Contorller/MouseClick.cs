@@ -9,10 +9,11 @@ public class MouseClick : MonoBehaviour
 {
     public LayerMask unitMask;
     public LayerMask groundMask;
-    public LayerMask attackMask;
+    public LayerMask monsterMask;
+    public UnityEvent<Monster> selectMonsterAct;
+    public UnityEvent<Unit> oneUnitSelectAct;
     public UnityEvent emptySelecAct;
-    public UnityEvent<Unit> oneSelectAct;
-    public UnityEvent<Unit> mulSelectAct;
+    public UnityEvent<Unit> mulUnitSelectAct;
     public UnityEvent<Vector3> moveAct;
     
 
@@ -22,8 +23,12 @@ public class MouseClick : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, unitMask)){
                 if (hit.transform.GetComponent<Unit>() == null) return;
-                if(Input.GetKey(KeyCode.LeftControl)) mulSelectAct?.Invoke(hit.transform.GetComponent<Unit>());
-                else oneSelectAct?.Invoke(hit.transform.GetComponent<Unit>());
+                if(Input.GetKey(KeyCode.LeftControl)) mulUnitSelectAct?.Invoke(hit.transform.GetComponent<Unit>());
+                else oneUnitSelectAct?.Invoke(hit.transform.GetComponent<Unit>());
+            }
+            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, monsterMask)){
+                if(hit.transform.GetComponent<Monster>() == null) return;
+                selectMonsterAct?.Invoke(hit.transform.GetComponent<Monster>());
             }
             else
             {
