@@ -33,6 +33,7 @@ public class UnitManager : MonoBehaviour
     private void Awake(){
         allUnitList = new List<Unit>();
         selectedUnitList = new List<Unit>();
+        distFromOtherUnit = new List<float>();
     }
 
     protected void StopMoveCoroutine(){
@@ -57,9 +58,7 @@ public class UnitManager : MonoBehaviour
             unit.destination = pos;
         }
     }
-
     
-
     public void Move(){
         if(myPath == null) myPath = new NavMeshPath();
         foreach(Unit unit in allUnitList){
@@ -145,7 +144,7 @@ public class UnitManager : MonoBehaviour
 
 
     private void Update() {
-        if (distFromOtherUnit != null) distFromOtherUnit = new List<float>();
+        if(distFromOtherUnit == null) return;
         distFromOtherUnit.Clear();
 
         foreach(Unit unit in allUnitList){

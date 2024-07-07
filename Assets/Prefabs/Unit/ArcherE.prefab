@@ -132,12 +132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ae4cc57fa9ee04b91b0509c329a752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crashMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  moveSpeed: 5
-  rotSpeed: 360
   unitMarker: {fileID: 4746434387238546338}
+  seedID: 0
+  position: {x: 0, y: 0, z: 0}
+  destination: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
 --- !u!136 &6821721345796111915
 CapsuleCollider:
   m_ObjectHideFlags: 0
