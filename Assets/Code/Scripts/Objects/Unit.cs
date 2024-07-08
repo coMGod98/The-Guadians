@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Unit : MonoBehaviour
 {  
-    public enum State{
-        Normal, Hold
-    }
-    public State state;
     public GameObject unitMarker;
+    //public NavMeshAgent myNavagent;
     public int seedID;
     public Vector3 destination;
-    public Monster target;
+    public Animator myAnim;
+    
 }

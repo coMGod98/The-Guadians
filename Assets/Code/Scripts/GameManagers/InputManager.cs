@@ -48,6 +48,7 @@ public class InputManager : MonoBehaviour
             {
                 DeselectAll();
             }
+
         }
 
         if ( Input.GetMouseButton(0) )
@@ -68,57 +69,58 @@ public class InputManager : MonoBehaviour
         if(Input.GetMouseButtonDown(1)){
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundMask)){
-                GameWorld.Instance.UnitManager.MoveSelectedUnit(hit.point);
+                GameWorld.Instance.UnitManager.SetDesinationdUnits(hit.point);
             }
         }
     }
 
-    void SelectUnit(Unit newUnit){
+    private void SelectUnit(Unit newUnit){
         newUnit.unitMarker.SetActive(true);
-         GameWorld.Instance.UnitManager.selectedUnitList.Add(newUnit);
+        GameWorld.Instance.UnitManager.selectedUnitList.Add(newUnit);
     }
 
-    void DeselectUnit(Unit newUnit){
+    private void DeselectUnit(Unit newUnit){
         newUnit.unitMarker.SetActive(false);
         GameWorld.Instance.UnitManager.selectedUnitList.Remove(newUnit);
     }
 
-    public void SelectMonster(Monster newMonster){
+    private void SelectMonster(Monster newMonster){
         DeselectAll();
         newMonster.GetComponent<Outline>().enabled = true;
         GameWorld.Instance.MonsterManager.selectedMonster = newMonster;
     }
 
-    public void DeselectMonster(){
+    private void DeselectMonster(){
         if(GameWorld.Instance.MonsterManager.selectedMonster != null){
             GameWorld.Instance.MonsterManager.selectedMonster.GetComponent<Outline>().enabled = false;
             GameWorld.Instance.MonsterManager.selectedMonster = null;
         }
     }
 
-    public void DeselectAll(){
-        if (GameWorld.Instance.UnitManager.selectedUnitList.Count > 0)
+    private void DeselectAll(){
+        int _listLength = GameWorld.Instance.UnitManager.selectedUnitList.Count;
+        if (_listLength > 0)
         {
-            for (int i = 0; i < GameWorld.Instance.UnitManager.selectedUnitList.Count; i++)
+            for (int i = 0; i < _listLength; i++)
             {
                 DeselectUnit(GameWorld.Instance.UnitManager.selectedUnitList[i]);
+                Debug.Log("삭제");
             }
-            GameWorld.Instance.UnitManager.selectedUnitList.Clear();
         }
         DeselectMonster();
     }
 
-    public void OneSelectUnit(Unit newUnit){
+    private void OneSelectUnit(Unit newUnit){
         DeselectAll();
         SelectUnit(newUnit);
     }
 
-    public void MulSelectUnit(Unit newUnit){
+    private void MulSelectUnit(Unit newUnit){
         if(GameWorld.Instance.UnitManager.selectedUnitList.Contains(newUnit)) DeselectUnit(newUnit);
         else SelectUnit(newUnit);
     }
 
-    public void DragSelectUnit(Unit newUnit){
+    private void DragSelectUnit(Unit newUnit){
         foreach (Unit unit in GameWorld.Instance.UnitManager.allUnitList)
 		{
 			if ( dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)) )
@@ -130,7 +132,7 @@ public class InputManager : MonoBehaviour
 		}
     }
 
-	void DragUnit()
+	private void DragUnit()
 	{
 		foreach (Unit unit in GameWorld.Instance.UnitManager.allUnitList)
 		{
@@ -141,12 +143,12 @@ public class InputManager : MonoBehaviour
 		}
 	}
 
-    void DrawDragRectangle(){
+    private void DrawDragRectangle(){
         dragRectangle.position	= (start + end) * 0.5f;
 		dragRectangle.sizeDelta	= new Vector2(Mathf.Abs(start.x - end.x), Mathf.Abs(start.y - end.y));        
     }
 
-	void CalculateDragRect()
+	private void CalculateDragRect()
 	{
 		if ( Input.mousePosition.x < start.x )
 		{
