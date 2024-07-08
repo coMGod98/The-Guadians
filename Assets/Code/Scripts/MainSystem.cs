@@ -42,11 +42,11 @@ public class MainSystem : MonoBehaviour
         {
             if (currentRound % 5 == 0)
             {
-                spawnScript?.SpawnBoss();
+                //spawnScript?.SpawnBoss();
             }
             else
             {
-                spawnScript?.SpawnMonster(currentRound);
+                //spawnScript?.SpawnMonster(currentRound);
             }
         }
         RoundTime += Time.deltaTime;

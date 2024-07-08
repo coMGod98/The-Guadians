@@ -15,11 +15,11 @@ public class UnitManager : MonoBehaviour
     [Header("Spawn"), Tooltip("유닛 스폰지")]
     public Transform unitSpawn;
     [Header("Move"), Tooltip("유닛 속도제어")]
-    public float moveSpeed = 2.0f;
+    public float moveSpeed = 5.0f;
     public float rotSpeed = 360.0f;
 
-    private int _seedID = 0;
-    public List<float> distFromOtherUnit;
+    private int _seedNum = 0;
+    [SerializeField] public List<List<float>> distFromOtherUnit;
 
 
     // 네브메쉬패스
@@ -33,7 +33,7 @@ public class UnitManager : MonoBehaviour
     private void Awake(){
         allUnitList = new List<Unit>();
         selectedUnitList = new List<Unit>();
-        distFromOtherUnit = new List<float>();
+        distFromOtherUnit = new List<List<float>>();
     }
 
     protected void StopMoveCoroutine(){
@@ -52,6 +52,21 @@ public class UnitManager : MonoBehaviour
     }    
     
     //무브
+    public void CalculateDistBWUnits(){
+        if(allUnitList.Count > 1){
+            distFromOtherUnit.Clear();
+            for (int i = 0; i < allUnitList.Count; i++)
+            {
+                distFromOtherUnit.Add(new List<float>());
+                for (int j = 0; j < allUnitList.Count; j++)
+                {
+                    float dist = Vector3.Distance(allUnitList[i].transform.position, allUnitList[j].transform.position);
+                    distFromOtherUnit[i].Add(dist);
+                }
+            }
+        }
+    }
+
     public void MoveSelectedUnit(Vector3 pos)
     {
         foreach(Unit unit in selectedUnitList){
@@ -62,7 +77,7 @@ public class UnitManager : MonoBehaviour
     public void Move(){
         if(myPath == null) myPath = new NavMeshPath();
         foreach(Unit unit in allUnitList){
-            if(NavMesh.CalculatePath(unit.position, unit.destination, NavMesh.AllAreas, myPath)){
+            if(NavMesh.CalculatePath(unit.transform.position, unit.destination, NavMesh.AllAreas, myPath)){
                 switch(myPath.status){
                     case NavMeshPathStatus.PathComplete:
                     case NavMeshPathStatus.PathPartial:
@@ -123,8 +138,7 @@ public class UnitManager : MonoBehaviour
         GameObject obj = Instantiate(unitPrefabArray[randIdx], randomSpawn, Quaternion.identity);
         obj.transform.parent = unitSpawn;
         Unit unit = obj.GetComponent<Unit>();
-        unit.seedID = _seedID++;
-        unit.position = unit.transform.position;
+        unit.seedID = _seedNum++;
         unit.destination = unit.transform.position;
         unit.target = null;
 
@@ -140,16 +154,5 @@ public class UnitManager : MonoBehaviour
         Vector3 randomVector = new Vector3(x, 0.55f, z);
         Vector3 randomPosition = unitSpawn.transform.position + randomVector;
         return randomPosition;
-    }
-
-
-    private void Update() {
-        if(distFromOtherUnit == null) return;
-        distFromOtherUnit.Clear();
-
-        foreach(Unit unit in allUnitList){
-            float dist = Vector3.Distance(unit.transform.position, transform.position);
-            distFromOtherUnit.Add(dist);
-        }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8548822932139651455}
   - component: {fileID: -3291445034214502822}
   - component: {fileID: -8797513007081018677}
+  - component: {fileID: -2614220974183344882}
   m_Layer: 10
   m_Name: WarriorL
   m_TagString: Untagged
@@ -48,12 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ae4cc57fa9ee04b91b0509c329a752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crashMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  moveSpeed: 5
-  rotSpeed: 360
+  state: 0
   unitMarker: {fileID: 8337243605124688575}
+  seedID: 0
+  position: {x: 0, y: 0, z: 0}
+  destination: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
 --- !u!136 &-3291445034214502822
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -95,6 +96,33 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!54 &-2614220974183344882
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7791673034692077389}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &8337243605124688575
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,34 +44,34 @@ public class Spawn : MonoBehaviour
 
     }
 
-    public void SpawnMonster(int round)
-    {
-        if (spawningCoroutine != null)
-        {
-            StopCoroutine(spawningCoroutine);
-        }
-        spawningCoroutine = StartCoroutine(SpawningMonster(round));
-    }
+    // public void SpawnMonster(int round)
+    // {
+    //     if (spawningCoroutine != null)
+    //     {
+    //         StopCoroutine(spawningCoroutine);
+    //     }
+    //     spawningCoroutine = StartCoroutine(SpawningMonster(round));
+    // }
 
-    public void SpawnBoss()
-    {
-        GameObject obj = Instantiate(bossPrefab, monsterSpawn);
-        Monster boss = obj.GetComponent<Monster>();
-        Monster.allMonsterList.Add(boss);
-        monsterSpawnCount++;
-        boss.SetWaypoint(wayPointArray);
-    }
-    IEnumerator SpawningMonster(int round)
-    {
-        int monsterIndex = Mathf.Min(round - 1, monsterPrefabArray.Length - 1);
-        while (true)
-        {
-            GameObject obj = Instantiate(monsterPrefabArray[monsterIndex], monsterSpawn.position, Quaternion.identity);
-            Monster monster = obj.GetComponent<Monster>();
-            Monster.allMonsterList.Add(monster);
-            monster.SetWaypoint(wayPointArray);
-            monsterSpawnCount++;
-            yield return new WaitForSeconds(spawnInterval);
-        }
-    }
+    // public void SpawnBoss()
+    // {
+    //     GameObject obj = Instantiate(bossPrefab, monsterSpawn);
+    //     Monster boss = obj.GetComponent<Monster>();
+    //     Monster.allMonsterList.Add(boss);
+    //     monsterSpawnCount++;
+    //     boss.SetWaypoint(wayPointArray);
+    // }
+    // IEnumerator SpawningMonster(int round)
+    // {
+    //     int monsterIndex = Mathf.Min(round - 1, monsterPrefabArray.Length - 1);
+    //     while (true)
+    //     {
+    //         GameObject obj = Instantiate(monsterPrefabArray[monsterIndex], monsterSpawn.position, Quaternion.identity);
+    //         Monster monster = obj.GetComponent<Monster>();
+    //         Monster.allMonsterList.Add(monster);
+    //         monster.SetWaypoint(wayPointArray);
+    //         monsterSpawnCount++;
+    //         yield return new WaitForSeconds(spawnInterval);
+    //     }
+    // }
 }   

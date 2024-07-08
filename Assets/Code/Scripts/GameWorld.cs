@@ -13,11 +13,21 @@ public class GameWorld : Singleton<GameWorld>
     public MonsterManager MonsterManager => _monsterManager;
     public InputManager InputManager => _inputManager;
 
+    private float RoundTime = 0.0f;
+
     private void Awake(){
 
     }
     private void Update(){
+        RoundTime += Time.deltaTime;
+
         _inputManager.AdvanceInput();
+        if(RoundTime > 2.0f){
+            _monsterManager.SpawnMonster();
+            RoundTime = 0.0f;
+        }
+
         _unitManager.Move();
+        _monsterManager.Move();
     }
 }
