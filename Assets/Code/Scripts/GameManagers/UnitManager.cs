@@ -34,6 +34,11 @@ public class UnitManager : MonoBehaviour
     //         unit.myNavagent.SetDestination(unit.destination);
     //     }
     // }
+
+    public void FollowEnemny(){
+
+    }
+
     public void SetDesinationdUnits(Vector3 pos)
     {
         foreach(Unit unit in selectedUnitList){
@@ -50,8 +55,7 @@ public class UnitManager : MonoBehaviour
                     case NavMeshPathStatus.PathPartial:
                     if(myPath.corners.Length > 1){
                         unit.unitAnim.SetBool("IsMoving", true);
-                        Vector3 corner = myPath.corners[1];
-                        Vector3 moveDir = corner - unit.transform.position;
+                        Vector3 moveDir = myPath.corners[1] - unit.transform.position;
                         float moveDist = moveDir.magnitude;
                         moveDir.Normalize();
                         float rotAngle = Vector3.Angle(unit.transform.forward, moveDir);

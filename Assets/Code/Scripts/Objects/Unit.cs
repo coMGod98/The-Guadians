@@ -1,15 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
-using UnityEngine.AI;
+
+[Serializable]
+public struct UnitStat
+{
+    public int Job;
+    public int Rank;
+    public float AttackDelay;
+    public float AttackRange;
+    public float AttackPoint;
+}
 
 public class Unit : MonoBehaviour
 {  
     public GameObject unitMarker;
     public Animator unitAnim;
-    //public NavMeshAgent myNavagent;
     public int seedID;
     public Vector3 destination;
+    public UnitStat unitStat;
 }
