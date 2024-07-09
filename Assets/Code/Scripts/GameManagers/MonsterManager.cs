@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.UI.CanvasScaler;
 
 public class MonsterManager : MonoBehaviour
 {
@@ -12,12 +13,8 @@ public class MonsterManager : MonoBehaviour
 
     [Header("Prefab"), Tooltip("몬스터 프리팹")]
     public GameObject[] monsterPrefabArray;
-    public GameObject bossPrefab;
     [Header("Spawn"), Tooltip("몬스터 스폰지")]
     public Transform monsterSpawn;
-    [Header("SpawnInfo"), Tooltip("몬스터 스폰 정보")]
-    public float spawnInterval = 2.0f;
-    public int monsterSpawnCount = 0;
     [Header("WayPoint"), Tooltip("몬스터 웨이포인트")]
     public Transform[] wayPointArray;
     [Header("Move"), Tooltip("몬스터 속도 제어")]
@@ -27,30 +24,15 @@ public class MonsterManager : MonoBehaviour
     //네브메쉬
     private NavMeshPath myPath;
 
-    // 코루틴
-    private Coroutine corMove = null;
-    private Coroutine corRotate = null;
-    private Coroutine corByPathMove = null;
-    private Coroutine spawningCoroutine;
 
     private void Awake(){
         selectedMonster = null;
         allMonsterList = new List<Monster>();
     }
 
-    protected void StopMoveCoroutine(){
-        if (corMove != null) {
-            StopCoroutine(corMove);
-            corMove = null;
-        }
-        if (corRotate != null) {
-            StopCoroutine(corRotate);
-            corRotate = null;
-        }
-        if (corByPathMove != null) {
-            StopCoroutine(corByPathMove);
-            corByPathMove = null;
-        }
+    public void setDestination()
+    {
+
     }
 
     // 무브
@@ -95,11 +77,10 @@ public class MonsterManager : MonoBehaviour
     //스폰
     public void SpawnMonster()
     {
-        GameObject obj = Instantiate(monsterPrefabArray[0], monsterSpawn);
-        //obj.transform.parent = monsterSpawn;
+        GameObject obj = Instantiate(monsterPrefabArray[GameWorld.Instance.curRound - 1], monsterSpawn);
         Monster monster = obj.GetComponent<Monster>();
         monster.curWayPointIdx = 1;
+        monster.monsterAnim = monster.GetComponentInChildren<Animator>();
         allMonsterList.Add(monster);
-        monsterSpawnCount++;
     }
 }

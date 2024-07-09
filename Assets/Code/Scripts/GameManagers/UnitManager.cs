@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Scripting.APIUpdating;
 
 public class UnitManager : MonoBehaviour
 {
@@ -21,34 +18,13 @@ public class UnitManager : MonoBehaviour
 
     private int _seedNum = 0;
 
-
     // 네브메쉬패스
     private NavMeshPath myPath;
-
-    // 코루틴
-    Coroutine corMove = null;
-    Coroutine corRotate = null;
-    Coroutine corByPathMove = null;
 
     private void Awake(){
         allUnitList = new List<Unit>();
         selectedUnitList = new List<Unit>();
     }
-
-    protected void StopMoveCoroutine(){
-        if (corMove != null) {
-            StopCoroutine(corMove);
-            corMove = null;
-        }
-        if (corRotate != null) {
-            StopCoroutine(corRotate);
-            corRotate = null;
-        }
-        if (corByPathMove != null) {
-            StopCoroutine(corByPathMove);
-            corByPathMove = null;
-        }
-    }    
     
     //무브
     // NavMeshAgent
@@ -73,7 +49,7 @@ public class UnitManager : MonoBehaviour
                     case NavMeshPathStatus.PathComplete:
                     case NavMeshPathStatus.PathPartial:
                     if(myPath.corners.Length > 1){
-                        unit.myAnim.SetBool("IsMoving", true);
+                        unit.unitAnim.SetBool("IsMoving", true);
                         Vector3 corner = myPath.corners[1];
                         Vector3 moveDir = corner - unit.transform.position;
                         float moveDist = moveDir.magnitude;
@@ -92,7 +68,7 @@ public class UnitManager : MonoBehaviour
                         unit.transform.Translate(moveDir * moveAmount, Space.World);
                     }
                     else{
-                        unit.myAnim.SetBool("IsMoving", false);
+                        unit.unitAnim.SetBool("IsMoving", false);
                     }
                         break;
                     case NavMeshPathStatus.PathInvalid:
@@ -112,7 +88,7 @@ public class UnitManager : MonoBehaviour
         obj.transform.parent = unitSpawn;
         Unit unit = obj.GetComponent<Unit>();
         //unit.myNavagent = unit.GetComponent<NavMeshAgent>();
-        unit.myAnim = unit.GetComponentInChildren<Animator>();
+        unit.unitAnim = unit.GetComponentInChildren<Animator>();
         unit.seedID = _seedNum++;
 
         allUnitList.Add(unit);

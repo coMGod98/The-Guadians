@@ -21,17 +21,17 @@ public class MainSystem : MonoBehaviour
     public int totalRounds = 20;
 
     [Header("Scripts")]
-    public Spawn spawnScript; 
+    //public Spawn spawnScript; 
 
     private float RoundTime = 0.0f;
     private int currentRound = 1;
 
     private void Start()
     {
-        if (spawnScript == null)
+/*        if (spawnScript == null)
         {
             spawnScript = GetComponent<Spawn>();
-        }
+        }*/
     }
 
     private void Update()
@@ -67,11 +67,11 @@ public class MainSystem : MonoBehaviour
             roundText.text = $"{currentRound}/{totalRounds}";
         }
 
-        
+/*        
         if (monsterCountText != null && spawnScript != null)
         {
             monsterCountText.text = $"{spawnScript.monsterSpawnCount}";
-        }
+        }*/
 
         
         if (RoundTime > roundDuration)

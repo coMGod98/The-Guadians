@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
-{   
+{
+    public Animator monsterAnim;
     public int curWayPointIdx;
 }

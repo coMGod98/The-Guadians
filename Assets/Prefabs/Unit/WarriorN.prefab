@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8548822932139651455}
   - component: {fileID: -8797513007081018677}
   - component: {fileID: -3291445034214502822}
+  - component: {fileID: 7413250963926710517}
   m_Layer: 10
   m_Name: WarriorN
   m_TagString: Untagged
@@ -93,6 +94,22 @@ CapsuleCollider:
   m_Height: 2.4
   m_Direction: 1
   m_Center: {x: 0, y: 1.1, z: 0}
+--- !u!208 &7413250963926710517
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7791673034692077389}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8337243605124688575
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,8 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour
 {  
     public GameObject unitMarker;
+    public Animator unitAnim;
     //public NavMeshAgent myNavagent;
     public int seedID;
     public Vector3 destination;
-    public Animator myAnim;
-    
 }
