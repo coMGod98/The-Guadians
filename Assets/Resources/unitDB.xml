@@ -1,138 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rows>
-  <row>
-    <_unitType>Warrior</_unitType>
-    <_unitRank>Normal</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>5</_attackRange>
-    <_attackPoint>10</_attackPoint>
-    <_attackType>1</_attackType>
-    <_unitGold>5</_unitGold>
-  </row>
-  <row>
-    <_unitType>Warrior</_unitType>
-    <_unitRank>Rare</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>5</_attackRange>
-    <_attackPoint>20</_attackPoint>
-    <_attackType>1</_attackType>
-    <_unitGold>7</_unitGold>
-  </row>
-  <row>
-    <_unitType>Warrior</_unitType>
-    <_unitRank>Epic</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>5</_attackRange>
-    <_attackPoint>50</_attackPoint>
-    <_attackType>3</_attackType>
-    <_unitGold>10</_unitGold>
-  </row>
-  <row>
-    <_unitType>Warrior</_unitType>
-    <_unitRank>Unique</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>20</_attackRange>
-    <_attackPoint>100</_attackPoint>
-    <_attackType>5</_attackType>
-    <_unitGold>20</_unitGold>
-  </row>
-  <row>
-    <_unitType>Warrior</_unitType>
-    <_unitRank>Legendary</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>20</_attackRange>
-    <_attackPoint>300</_attackPoint>
-    <_attackType>-1</_attackType>
-    <_unitGold>100</_unitGold>
-  </row>
-  <row>
-    <_unitType>Archer</_unitType>
-    <_unitRank>Normal</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>5</_attackRange>
-    <_attackPoint>10</_attackPoint>
-    <_attackType>1</_attackType>
-    <_unitGold>5</_unitGold>
-  </row>
-  <row>
-    <_unitType>Archer</_unitType>
-    <_unitRank>Rare</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>5</_attackRange>
-    <_attackPoint>20</_attackPoint>
-    <_attackType>1</_attackType>
-    <_unitGold>7</_unitGold>
-  </row>
-  <row>
-    <_unitType>Archer</_unitType>
-    <_unitRank>Epic</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>5</_attackRange>
-    <_attackPoint>50</_attackPoint>
-    <_attackType>3</_attackType>
-    <_unitGold>10</_unitGold>
-  </row>
-  <row>
-    <_unitType>Archer</_unitType>
-    <_unitRank>Unique</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>20</_attackRange>
-    <_attackPoint>100</_attackPoint>
-    <_attackType>5</_attackType>
-    <_unitGold>20</_unitGold>
-  </row>
-  <row>
-    <_unitType>Archer</_unitType>
-    <_unitRank>Legendary</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>20</_attackRange>
-    <_attackPoint>300</_attackPoint>
-    <_attackType>-1</_attackType>
-    <_unitGold>100</_unitGold>
-  </row>
-  <row>
-    <_unitType>Wizard</_unitType>
-    <_unitRank>Normal</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>5</_attackRange>
-    <_attackPoint>10</_attackPoint>
-    <_attackType>1</_attackType>
-    <_unitGold>5</_unitGold>
-  </row>
-  <row>
-    <_unitType>Wizard</_unitType>
-    <_unitRank>Rare</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>5</_attackRange>
-    <_attackPoint>20</_attackPoint>
-    <_attackType>1</_attackType>
-    <_unitGold>7</_unitGold>
-  </row>
-  <row>
-    <_unitType>Wizard</_unitType>
-    <_unitRank>Epic</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>5</_attackRange>
-    <_attackPoint>50</_attackPoint>
-    <_attackType>3</_attackType>
-    <_unitGold>10</_unitGold>
-  </row>
-  <row>
-    <_unitType>Wizard</_unitType>
-    <_unitRank>Unique</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>20</_attackRange>
-    <_attackPoint>100</_attackPoint>
-    <_attackType>5</_attackType>
-    <_unitGold>20</_unitGold>
-  </row>
-  <row>
-    <_unitType>Wizard</_unitType>
-    <_unitRank>Legendary</_unitRank>
-    <_attackDealy>0</_attackDealy>
-    <_attackRange>20</_attackRange>
-    <_attackPoint>300</_attackPoint>
-    <_attackType>-1</_attackType>
-    <_unitGold>100</_unitGold>
-  </row>
-</rows>
+[{"_unitType":"Warrior","_unitRank":"N","_attackDealy":0,"_attackRange":5,"_attackPoint":10,"_attackType":1,"_unitGold":5},
+{"_unitType":"Warrior","_unitRank":"R","_attackDealy":0,"_attackRange":5,"_attackPoint":20,"_attackType":1,"_unitGold":7},
+{"_unitType":"Warrior","_unitRank":"E","_attackDealy":0,"_attackRange":5,"_attackPoint":50,"_attackType":3,"_unitGold":10},
+{"_unitType":"Warrior","_unitRank":"U","_attackDealy":0,"_attackRange":20,"_attackPoint":100,"_attackType":5,"_unitGold":20},
+{"_unitType":"Warrior","_unitRank":"L","_attackDealy":0,"_attackRange":20,"_attackPoint":300,"_attackType":-1,"_unitGold":100},
+{"_unitType":"Archer","_unitRank":"N","_attackDealy":0,"_attackRange":5,"_attackPoint":10,"_attackType":1,"_unitGold":5},
+{"_unitType":"Archer","_unitRank":"R","_attackDealy":0,"_attackRange":5,"_attackPoint":20,"_attackType":1,"_unitGold":7},
+{"_unitType":"Archer","_unitRank":"E","_attackDealy":0,"_attackRange":5,"_attackPoint":50,"_attackType":3,"_unitGold":10},
+{"_unitType":"Archer","_unitRank":"U","_attackDealy":0,"_attackRange":20,"_attackPoint":100,"_attackType":5,"_unitGold":20},
+{"_unitType":"Archer","_unitRank":"L","_attackDealy":0,"_attackRange":20,"_attackPoint":300,"_attackType":-1,"_unitGold":100},
+{"_unitType":"Wizard","_unitRank":"N","_attackDealy":0,"_attackRange":5,"_attackPoint":10,"_attackType":1,"_unitGold":5},
+{"_unitType":"Wizard","_unitRank":"R","_attackDealy":0,"_attackRange":5,"_attackPoint":20,"_attackType":1,"_unitGold":7},
+{"_unitType":"Wizard","_unitRank":"E","_attackDealy":0,"_attackRange":5,"_attackPoint":50,"_attackType":3,"_unitGold":10},
+{"_unitType":"Wizard","_unitRank":"U","_attackDealy":0,"_attackRange":20,"_attackPoint":100,"_attackType":5,"_unitGold":20},
+{"_unitType":"Wizard","_unitRank":"L","_attackDealy":0,"_attackRange":20,"_attackPoint":300,"_attackType":-1,"_unitGold":100}]
