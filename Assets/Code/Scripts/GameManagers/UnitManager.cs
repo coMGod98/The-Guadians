@@ -44,6 +44,10 @@ public class UnitManager : MonoBehaviour
                 {
                     if(!unit.target.Contains(monster)) unit.target.Add(monster);
                 }
+                else
+                {
+                    if(unit.target.Contains(monster)) unit.target.Remove(monster);
+                }
             }
         }
     }
@@ -101,6 +105,13 @@ public class UnitManager : MonoBehaviour
         GameObject obj = Instantiate(unitPrefabArray[randIdx], randomSpawn, Quaternion.identity);
         obj.transform.parent = unitSpawn;
         Unit unit = obj.GetComponent<Unit>();
+        string name = unit.gameObject.name;
+        string type = name[..^1];
+        char rank = name[^1];
+
+
+
+
         //unit.myNavagent = unit.GetComponent<NavMeshAgent>();
         unit.unitAnim = unit.GetComponentInChildren<Animator>();
         unit.seedID = _seedNum++;
