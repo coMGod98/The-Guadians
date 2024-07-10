@@ -73,6 +73,7 @@ public class UnitManager : MonoBehaviour
                     }
                     else{
                         unit.unitAnim.SetBool("IsMoving", false);
+                        unit.destination = unit.transform.position;
                     }
                         break;
                     case NavMeshPathStatus.PathInvalid:
