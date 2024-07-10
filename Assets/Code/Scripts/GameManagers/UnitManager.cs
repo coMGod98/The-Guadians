@@ -35,8 +35,17 @@ public class UnitManager : MonoBehaviour
     //     }
     // }
 
-    public void FollowEnemny(){
-
+    public void UnitAI(){
+        foreach(Unit unit in allUnitList)
+        {
+            foreach(Monster monster in GameWorld.Instance.MonsterManager.allMonsterList)
+            {
+                if(Vector3.Distance(unit.transform.position, monster.transform.position) < unit.unitStat.AttackRange)
+                {
+                    if(!unit.target.Contains(monster)) unit.target.Add(monster);
+                }
+            }
+        }
     }
 
     public void SetDesinationdUnits(Vector3 pos)
@@ -95,6 +104,9 @@ public class UnitManager : MonoBehaviour
         //unit.myNavagent = unit.GetComponent<NavMeshAgent>();
         unit.unitAnim = unit.GetComponentInChildren<Animator>();
         unit.seedID = _seedNum++;
+        unit.target = new List<Monster>();
+
+        unit.unitStat.AttackRange = 5.0f;
 
         allUnitList.Add(unit);
     }

@@ -1,14 +1,17 @@
-using System;
 using UnityEngine;
+using System.Collections.Generic;
 
-[Serializable]
+
+[System.Serializable]
 public struct UnitStat
 {
-    public int Job;
+    public int Type;
     public int Rank;
     public float AttackDelay;
     public float AttackRange;
     public float AttackPoint;
+    public int AttackType;
+    public int Gold;
 }
 
 public class Unit : MonoBehaviour
@@ -18,4 +21,5 @@ public class Unit : MonoBehaviour
     public int seedID;
     public Vector3 destination;
     public UnitStat unitStat;
+    public List<Monster> target;
 }

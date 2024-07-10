@@ -69,6 +69,7 @@ public class GameWorld : Singleton<GameWorld>
 
         _inputManager.AdvanceInput();
 
+        _unitManager.UnitAI();
 
         _unitManager.Move();
         _monsterManager.Move();

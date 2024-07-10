@@ -17,9 +17,8 @@ public class MonsterManager : MonoBehaviour
     public Transform monsterSpawn;
     [Header("WayPoint"), Tooltip("몬스터 웨이포인트")]
     public Transform[] wayPointArray;
-    [Header("Move"), Tooltip("몬스터 속도 제어")]
-    public float moveSpeed = 10.0f;
-    public float rotSpeed = 360.0f;
+
+    private float _rotSpeed = 360.0f;
 
     //네브메쉬
     private NavMeshPath myPath;
@@ -28,11 +27,6 @@ public class MonsterManager : MonoBehaviour
     private void Awake(){
         selectedMonster = null;
         allMonsterList = new List<Monster>();
-    }
-
-    public void setDestination()
-    {
-
     }
 
     // 무브
@@ -57,11 +51,11 @@ public class MonsterManager : MonoBehaviour
                         float rotDir = 1.0f;
                         if(Vector3.Dot(monster.transform.right, moveDir) < 0.0f) rotDir = -1.0f;
 
-                        float rotateAmount = rotSpeed * Time.deltaTime;
+                        float rotateAmount = _rotSpeed * Time.deltaTime;
                         if(rotAngle < rotateAmount) rotateAmount = rotAngle;
                         monster.transform.Rotate(Vector3.up * rotDir * rotateAmount);
             
-                        float moveAmount = moveSpeed * Time.deltaTime;
+                        float moveAmount = monster.monsterStat.Speed * Time.deltaTime;
                         if(moveDist < moveAmount) moveAmount = moveDist;
                         monster.transform.Translate(moveDir * moveAmount, Space.World);
                     }
@@ -81,6 +75,7 @@ public class MonsterManager : MonoBehaviour
         Monster monster = obj.GetComponent<Monster>();
         monster.curWayPointIdx = 1;
         monster.monsterAnim = monster.GetComponentInChildren<Animator>();
+        monster.monsterStat.Speed = 2;
         allMonsterList.Add(monster);
     }
 }

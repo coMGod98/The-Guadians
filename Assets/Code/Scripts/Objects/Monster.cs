@@ -5,9 +5,10 @@ using UnityEngine;
 
 public struct MonsterStat
 {
-    public int Type;
-    public float maxHealPoint;
-    public float curHealPoint;
+    public int Round;
+    public float HP;
+    public int Gold;
+    public float Speed;
 }
 
 public class Monster : MonoBehaviour
