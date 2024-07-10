@@ -4,26 +4,16 @@ using UnityEngine;
 using System.Xml;
 using System;
 
-public enum Type
-{
-    Warrior,Archer,Wizard
-}
-public enum Rank
-{
-    Normal,Rare,Epic,Unique,Legendary
-}
 public class Excel : MonoBehaviour
 {
     public static Excel instance;
 
-    //xml 파일
     public TextAsset unitDBFileXml;
 
-    //여러개의 변수들을 넣어서 구조체 하나를 한개의 상자처럼 간주하고 사용할수 있음
-   struct MonParams
+   public struct UnitState
     {
-        public Type unitType;
-        public Rank unitRank;
+        public string unitType;
+        public char unitRank;
         public float attackDealy;
         public float attackRange;
         public float attackPoint;
@@ -31,8 +21,8 @@ public class Excel : MonoBehaviour
         public int unitGold;
     }
 
-   //딕셔너리의 키값으로 적의이름을 사용할 예정이므로 string타입으로 하고 데이터 값으로는 구조체를 이용함 MonParams로 지정
-   Dictionary<Type, MonParams> dicMonsters = new Dictionary<Type, MonParams>();
+    Dictionary<string, Dictionary<char, UnitState>> dicUnits = new Dictionary<string, Dictionary<char, UnitState>>();
+    Dictionary<char, UnitState> dic = new Dictionary<char, UnitState>();
     void Awake()
     {
         if (instance == null)
@@ -43,77 +33,69 @@ public class Excel : MonoBehaviour
 
     private void Start()
     {
-        MakeMonsterXML();
+        MakeUnitXML();
     }
 
-    //XML로부터 파라미터 값 읽어 들이기
-    void MakeMonsterXML()
+    public void MakeUnitXML()
     {
-        XmlDocument monsterXMLDoc = new XmlDocument();
-        monsterXMLDoc.LoadXml(unitDBFileXml.text);
+        XmlDocument unitXMLDoc = new XmlDocument();
+        unitXMLDoc.LoadXml(unitDBFileXml.text);
 
-        XmlNodeList monsterNodeList = monsterXMLDoc.GetElementsByTagName("row");
+        XmlNodeList unitNodeList = unitXMLDoc.GetElementsByTagName("row");
 
-        //노드 리스트로부터 각각의 노드를 뽑아냄
-        foreach (XmlNode monsterNode in monsterNodeList)
+        foreach (XmlNode unitNode in unitNodeList)
         {
-            MonParams monParams = new MonParams();
+            UnitState unitState = new UnitState();
 
-            foreach (XmlNode childNode in monsterNode.ChildNodes)
+            foreach (XmlNode childNode in unitNode.ChildNodes)
             {
-                if (childNode.Name == "unitType")
+                if (childNode.Name == "_unitType")
                 {
-                    //<name>smallspider</name>
-                    monParams.unitType = (Type) Enum.Parse(typeof(Type), childNode.InnerText);
+                    unitState.unitType = childNode.InnerText;
                 }
 
-                if (childNode.Name == "unitRank")
+                if (childNode.Name == "_unitRank")
                 {
-                    //<level>1</level>    Int16.Parse() 은 문자열을 정수로 바꿔줌
-                    monParams.unitRank = (Rank)Enum.Parse(typeof(Rank),childNode.InnerText);
+                    unitState.unitRank = char.Parse(childNode.InnerText);
                 }
 
-                if (childNode.Name == "attackDealy")
+                if (childNode.Name == "_attackDealy")
                 {
-                    monParams.attackDealy = Int16.Parse(childNode.InnerText);
+                    unitState.attackDealy = Int16.Parse(childNode.InnerText);
                 }
 
-                if (childNode.Name == "attackRange")
+                if (childNode.Name == "_attackRange")
                 {
-                    monParams.attackRange = Int16.Parse(childNode.InnerText);
+                    unitState.attackRange = Int16.Parse(childNode.InnerText);
                 }
-                if (childNode.Name == "attackPoint")
+                if (childNode.Name == "_attackPoint")
                 {
-                    monParams.attackPoint = Int16.Parse(childNode.InnerText);
+                    unitState.attackPoint = Int16.Parse(childNode.InnerText);
                 }
-                if (childNode.Name == "attackType")
+                if (childNode.Name == "_attackType")
                 {
-                    monParams.attackType = Int16.Parse(childNode.InnerText);
+                    unitState.attackType = Int16.Parse(childNode.InnerText);
                 }
-                if (childNode.Name == "unitGold")
+                if (childNode.Name == "_unitGold")
                 {
-                    monParams.unitGold = Int16.Parse(childNode.InnerText);
+                    unitState.unitGold = Int16.Parse(childNode.InnerText);
                 }
                 print(childNode.Name + ": " + childNode.InnerText);
             }
-            dicMonsters[monParams.unitType] = monParams;
+            dic[unitState.unitRank] = unitState;
+            dicUnits[unitState.unitType] = dic;
         }
     }
 
-    //외부로부터 몬스터의 이름과, EnemyParams 객체를 전달 받아서 해당 이름을 가진 몬스터의 
-    //데이터(XML 에서 읽어 온 데이터)를 전달받은 EnemyParams 객체에 적용하는 역할을 하는 함수
-   /* public void LoadMonsterParamsFromXML(string Round,MonsterObject mParams)
+   public void LoadMonsterParamsFromXML(string unitName, Unit unit)
     {
-        mParams.MonsterHP = dicMonsters[Round].MonsterHP;
-        mParams.MonsterGold = mParams.maxHp = dicMonsters[Round].MonsterGold;
-        mParams.Movement = dicMonsters[Round].Movement;
-        
-       
-    }*/
+        string type = unitName[..^1];
+        char rank = unitName[^1];
 
-
-    void Update()
-    {
-
+        unit.unitStat.AttackDelay = dicUnits[type][rank].attackDealy;
+        unit.unitStat.AttackRange = dicUnits[type][rank].attackRange;
+        unit.unitStat.AttackPoint = dicUnits[type][rank].attackPoint;
+        unit.unitStat.AttackType = dicUnits[type][rank].attackType;
+        unit.unitStat.Gold =  dicUnits[type][rank].unitGold;
     }
 }

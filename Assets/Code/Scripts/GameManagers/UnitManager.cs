@@ -106,18 +106,14 @@ public class UnitManager : MonoBehaviour
         obj.transform.parent = unitSpawn;
         Unit unit = obj.GetComponent<Unit>();
         string name = unit.gameObject.name;
-        string type = name[..^1];
-        char rank = name[^1];
-
-
-
+        Excel.instance.LoadMonsterParamsFromXML(name, unit);
 
         //unit.myNavagent = unit.GetComponent<NavMeshAgent>();
         unit.unitAnim = unit.GetComponentInChildren<Animator>();
         unit.seedID = _seedNum++;
         unit.target = new List<Monster>();
 
-        unit.unitStat.AttackRange = 5.0f;
+        //unit.unitStat.AttackRange = 5.0f;
 
         allUnitList.Add(unit);
     }
