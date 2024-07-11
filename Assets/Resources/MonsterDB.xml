@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rows>
   <row>
-    <_round>1</_round>
-    <_monsterHP>30</_monsterHP>
-    <_monsterGold>1</_monsterGold>
-    <_monsterSpeed>6</_monsterSpeed>
+    <round>1</round>
+    <monsterHP>30</monsterHP>
+    <monsterGold>1</monsterGold>
+    <monsterSpeed>6</monsterSpeed>
   </row>
   <row>
-    <_round>2</_round>
-    <_monsterHP>60</_monsterHP>
-    <_monsterGold>2</_monsterGold>
-    <_monsterSpeed>6</_monsterSpeed>
+    <round>2</round>
+    <monsterHP>60</monsterHP>
+    <monsterGold>2</monsterGold>
+    <monsterSpeed>6</monsterSpeed>
   </row>
   <row>
-    <_round>3</_round>
-    <_monsterHP>100</_monsterHP>
-    <_monsterGold>3</_monsterGold>
-    <_monsterSpeed>6</_monsterSpeed>
+    <round>3</round>
+    <monsterHP>100</monsterHP>
+    <monsterGold>3</monsterGold>
+    <monsterSpeed>6</monsterSpeed>
   </row>
   <row>
-    <_round>4</_round>
-    <_monsterHP>200</_monsterHP>
-    <_monsterGold>5</_monsterGold>
-    <_monsterSpeed>6</_monsterSpeed>
+    <round>4</round>
+    <monsterHP>200</monsterHP>
+    <monsterGold>5</monsterGold>
+    <monsterSpeed>6</monsterSpeed>
   </row>
   <row>
-    <_round>5</_round>
-    <_monsterHP>1000</_monsterHP>
-    <_monsterGold>100</_monsterGold>
-    <_monsterSpeed>3</_monsterSpeed>
+    <round>5</round>
+    <monsterHP>1000</monsterHP>
+    <monsterGold>100</monsterGold>
+    <monsterSpeed>3</monsterSpeed>
   </row>
   <row>
-    <_round>6</_round>
-    <_monsterHP>250</_monsterHP>
-    <_monsterGold>7</_monsterGold>
-    <_monsterSpeed>6</_monsterSpeed>
+    <round>6</round>
+    <monsterHP>250</monsterHP>
+    <monsterGold>7</monsterGold>
+    <monsterSpeed>6</monsterSpeed>
   </row>
   <row>
-    <_round>7</_round>
-    <_monsterHP>400</_monsterHP>
-    <_monsterGold>10</_monsterGold>
-    <_monsterSpeed>6</_monsterSpeed>
+    <round>7</round>
+    <monsterHP>400</monsterHP>
+    <monsterGold>10</monsterGold>
+    <monsterSpeed>6</monsterSpeed>
   </row>
   <row>
-    <_round>8</_round>
-    <_monsterHP>700</_monsterHP>
-    <_monsterGold>12</_monsterGold>
-    <_monsterSpeed>6</_monsterSpeed>
+    <round>8</round>
+    <monsterHP>700</monsterHP>
+    <monsterGold>12</monsterGold>
+    <monsterSpeed>6</monsterSpeed>
   </row>
   <row>
-    <_round>9</_round>
-    <_monsterHP>1000</_monsterHP>
-    <_monsterGold>15</_monsterGold>
-    <_monsterSpeed>6</_monsterSpeed>
+    <round>9</round>
+    <monsterHP>1000</monsterHP>
+    <monsterGold>15</monsterGold>
+    <monsterSpeed>6</monsterSpeed>
   </row>
   <row>
-    <_round>10</_round>
-    <_monsterHP>5000</_monsterHP>
-    <_monsterGold>0</_monsterGold>
-    <_monsterSpeed>3</_monsterSpeed>
+    <round>10</round>
+    <monsterHP>5000</monsterHP>
+    <monsterGold>0</monsterGold>
+    <monsterSpeed>3</monsterSpeed>
   </row>
 </rows>
