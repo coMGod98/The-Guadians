@@ -83,7 +83,9 @@ public class UnitDB : MonoBehaviour
             }
             dic[unitStat.unitRank] = unitStat;
             dicUnits[unitStat.unitType] = dic;
+
         }
+        Debug.Log(dicUnits["Warrior"]);
     }
 
     public void LoadUnitStatFromXML(string unitName, Unit unit)

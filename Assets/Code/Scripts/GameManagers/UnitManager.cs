@@ -42,12 +42,30 @@ public class UnitManager : MonoBehaviour
             {
                 if(Vector3.Distance(unit.transform.position, monster.transform.position) < unit.unitStat.AttackRange)
                 {
-                    if(!unit.target.Contains(monster)) unit.target.Add(monster);
+                    if (!unit.rangeMonster.Contains(monster)) unit.rangeMonster.Add(monster);
                 }
                 else
                 {
-                    if(unit.target.Contains(monster)) unit.target.Remove(monster);
+                    if(unit.rangeMonster.Contains(monster)) unit.rangeMonster.Remove(monster);
                 }
+
+                if(unit.rangeMonster.Count > 0 || unit.targetMonster != null)
+                {
+                    if(unit.attackElapse > 3.0f && !unit.rangeMonster.Contains(unit.targetMonster) && unit.targetMonster != null)
+                    {
+                        unit.targetMonster = unit.rangeMonster[0];
+                        unit.attackElapse = 0.0f;
+                    }
+                    else if (unit.targetMonster == null)
+                    {
+                        unit.targetMonster = unit.rangeMonster[0];
+                    }
+                    unit.attackElapse += Time.deltaTime;
+                    unit.destination = unit.targetMonster.transform.position;
+                }
+
+
+
             }
         }
     }
@@ -105,14 +123,17 @@ public class UnitManager : MonoBehaviour
         GameObject obj = Instantiate(unitPrefabArray[randIdx], randomSpawn, Quaternion.identity);
         obj.transform.parent = unitSpawn;
         Unit unit = obj.GetComponent<Unit>();
+
         int index = unit.name.IndexOf("(Clone)");
         string name = unit.name.Substring(0, index);
         UnitDB.instance.LoadUnitStatFromXML(name, unit);
 
         //unit.myNavagent = unit.GetComponent<NavMeshAgent>();
         unit.unitAnim = unit.GetComponentInChildren<Animator>();
+
         unit.seedID = _seedNum++;
-        unit.target = new List<Monster>();
+        unit.rangeMonster = new List<Monster>();
+        unit.targetMonster = null;
 
         allUnitList.Add(unit);
     }

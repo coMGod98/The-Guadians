@@ -21,5 +21,7 @@ public class Unit : MonoBehaviour
     public int seedID;
     public Vector3 destination;
     public UnitStat unitStat;
-    public List<Monster> target;
+    public List<Monster> rangeMonster;
+    public Monster targetMonster; 
+    public float attackElapse;
 }
