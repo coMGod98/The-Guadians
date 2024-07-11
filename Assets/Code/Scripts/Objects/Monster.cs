@@ -6,7 +6,6 @@ using UnityEngine;
 [System.Serializable]
 public struct MonsterStat
 {
-    public int Round;
     public float HP;
     public int Gold;
     public float Speed;

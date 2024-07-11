@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class UnitManager : MonoBehaviour
 {
+
     [Header("UnitList"), Tooltip("유닛 리스트")]
     public List<Unit> allUnitList;
     public List<Unit> selectedUnitList;
@@ -16,7 +17,6 @@ public class UnitManager : MonoBehaviour
     public float moveSpeed = 5.0f;
     public float rotSpeed = 360.0f;
 
-    private int _seedNum = 0;
 
     // 네브메쉬패스
     private NavMeshPath myPath;
@@ -42,30 +42,29 @@ public class UnitManager : MonoBehaviour
             {
                 if(Vector3.Distance(unit.transform.position, monster.transform.position) < unit.unitStat.AttackRange)
                 {
-                    if (!unit.rangeMonster.Contains(monster)) unit.rangeMonster.Add(monster);
+                    if(!unit.rangeMonster.Contains(monster)) unit.rangeMonster.Add(monster);
                 }
                 else
                 {
                     if(unit.rangeMonster.Contains(monster)) unit.rangeMonster.Remove(monster);
                 }
+                if(unit.rangeMonster.Count > 0) unit.targetMonster = unit.rangeMonster[0];
 
-                if(unit.rangeMonster.Count > 0 || unit.targetMonster != null)
+
+                if(unit.targetMonster != null && unit.unitState == Unit.State.Normal)
                 {
-                    if(unit.attackElapse > 3.0f && !unit.rangeMonster.Contains(unit.targetMonster) && unit.targetMonster != null)
-                    {
-                        unit.targetMonster = unit.rangeMonster[0];
-                        unit.attackElapse = 0.0f;
-                    }
-                    else if (unit.targetMonster == null)
-                    {
-                        unit.targetMonster = unit.rangeMonster[0];
-                    }
-                    unit.attackElapse += Time.deltaTime;
                     unit.destination = unit.targetMonster.transform.position;
+                    if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) < unit.unitStat.AttackRange)
+                    {
+                        unit.destination = unit.transform.position;
+                        if(unit.unitAnim.GetBool("IsAttacking") == false) 
+                        {
+                            unit.unitAnim.SetTrigger("OnAttack");
+                        }
+                        
+                    }
                 }
-
-
-
+                
             }
         }
     }
@@ -73,6 +72,7 @@ public class UnitManager : MonoBehaviour
     public void SetDesinationdUnits(Vector3 pos)
     {
         foreach(Unit unit in selectedUnitList){
+            unit.unitState = Unit.State.Normal;
             unit.destination = pos;
         }
     }
@@ -126,14 +126,11 @@ public class UnitManager : MonoBehaviour
 
         int index = unit.name.IndexOf("(Clone)");
         string name = unit.name.Substring(0, index);
-        UnitDB.instance.LoadUnitStatFromXML(name, unit);
+        //UnitDB.instance.LoadUnitStatFromXML(name, unit);
 
-        //unit.myNavagent = unit.GetComponent<NavMeshAgent>();
-        unit.unitAnim = unit.GetComponentInChildren<Animator>();
+        unit.unitStat.AttackRange = 5.0f;
+        unit.Init();
 
-        unit.seedID = _seedNum++;
-        unit.rangeMonster = new List<Monster>();
-        unit.targetMonster = null;
 
         allUnitList.Add(unit);
     }

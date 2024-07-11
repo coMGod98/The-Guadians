@@ -5,8 +5,6 @@ using System.Collections.Generic;
 [System.Serializable]
 public struct UnitStat
 {
-    public string Type;
-    public char Rank;
     public float AttackDelay;
     public float AttackRange;
     public float AttackPoint;
@@ -16,12 +14,24 @@ public struct UnitStat
 
 public class Unit : MonoBehaviour
 {  
+    public enum State{
+        Normal, Hold
+    }
+
     public GameObject unitMarker;
-    public Animator unitAnim;
-    public int seedID;
-    public Vector3 destination;
     public UnitStat unitStat;
-    public List<Monster> rangeMonster;
+    public Animator unitAnim;
+    
+    public State unitState;
+    public Vector3 destination;
     public Monster targetMonster; 
-    public float attackElapse;
+    public List<Monster> rangeMonster;
+
+    public void Init(){
+        unitState = State.Normal;
+        unitAnim = GetComponentInChildren<Animator>();
+        destination = transform.position;
+        targetMonster = null;
+        rangeMonster = new List<Monster>();
+    }
 }

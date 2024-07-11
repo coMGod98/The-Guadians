@@ -10,7 +10,7 @@ public class MonsterDB : MonoBehaviour
 
     public TextAsset monsterDBFileXml;
 
-    public struct MonsterStat
+    public struct MonsterData
     {
         public int round;
         public float monsterHP;
@@ -18,7 +18,7 @@ public class MonsterDB : MonoBehaviour
         public float monsterSpeed;
     }
 
-    Dictionary<int, MonsterStat> dicMonsters = new Dictionary<int, MonsterStat>();
+    Dictionary<int, MonsterData> dicMonsters = new Dictionary<int, MonsterData>();
 
     void Awake()
     {
@@ -42,39 +42,38 @@ public class MonsterDB : MonoBehaviour
 
         foreach (XmlNode monsterNode in monsterNodeList)
         {
-            MonsterStat monsterStat = new MonsterStat();
+            MonsterData monsterData = new MonsterData();
 
             foreach (XmlNode childNode in monsterNode.ChildNodes)
             {
                 if (childNode.Name == "round")
                 {
-                    monsterStat.round = int.Parse(childNode.InnerText);
+                    monsterData.round = int.Parse(childNode.InnerText);
                 }
 
                 if (childNode.Name == "monsterHP")
                 {
-                    monsterStat.monsterHP = float.Parse(childNode.InnerText);
+                    monsterData.monsterHP = float.Parse(childNode.InnerText);
                 }
 
                 if (childNode.Name == "monsterGold")
                 {
-                    monsterStat.monsterGold = int.Parse(childNode.InnerText);
+                    monsterData.monsterGold = int.Parse(childNode.InnerText);
                 }
 
                 if (childNode.Name == "monsterSpeed")
                 {
-                    monsterStat.monsterSpeed = float.Parse(childNode.InnerText);
+                    monsterData.monsterSpeed = float.Parse(childNode.InnerText);
                 }
             }
-            dicMonsters[monsterStat.round] = monsterStat;
+            dicMonsters[monsterData.round] = monsterData;
         }
     }
 
     public void LoadMonsterStatFromXML(string monsterName, Monster monster)
     {
         int round = (int)Char.GetNumericValue(monsterName[^1]);
-
-        monster.monsterStat.Round = dicMonsters[round].round;
+        
         monster.monsterStat.HP = dicMonsters[round].monsterHP;
         monster.monsterStat.Gold = dicMonsters[round].monsterGold;
         monster.monsterStat.Speed = dicMonsters[round].monsterSpeed;

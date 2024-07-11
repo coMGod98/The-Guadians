@@ -10,10 +10,9 @@ public class UnitDB : MonoBehaviour
 
     public TextAsset unitDBFileXml;
 
-    public struct UnitStat
+    public struct UnitData
     {
-        public string unitType;
-        public char unitRank;
+        public string unitName;
         public float attackDelay;
         public float attackRange;
         public float attackPoint;
@@ -21,8 +20,8 @@ public class UnitDB : MonoBehaviour
         public int unitGold;
     }
 
-    Dictionary<string, Dictionary<char, UnitStat>> dicUnits = new Dictionary<string, Dictionary<char, UnitStat>>();
-    Dictionary<char, UnitStat> dic = new Dictionary<char, UnitStat>();
+    Dictionary<string, UnitData> dicUnits = new Dictionary<string, UnitData>();
+
     void Awake()
     {
         if (instance == null)
@@ -45,60 +44,48 @@ public class UnitDB : MonoBehaviour
 
         foreach (XmlNode unitNode in unitNodeList)
         {
-            UnitStat unitStat = new UnitStat();
+            UnitData unitData = new UnitData();
 
             foreach (XmlNode childNode in unitNode.ChildNodes)
             {
-                if (childNode.Name == "unitType")
+                if (childNode.Name == "unitName")
                 {
-                    unitStat.unitType = childNode.InnerText;
-                }
-
-                if (childNode.Name == "unitRank")
-                {
-                    unitStat.unitRank = char.Parse(childNode.InnerText);
+                    unitData.unitName = childNode.InnerText;
                 }
 
                 if (childNode.Name == "attackDelay")
                 {
-                    unitStat.attackDelay = float.Parse(childNode.InnerText);
+                    unitData.attackDelay = float.Parse(childNode.InnerText);
                 }
 
                 if (childNode.Name == "attackRange")
                 {
-                    unitStat.attackRange = float.Parse(childNode.InnerText);
+                    unitData.attackRange = float.Parse(childNode.InnerText);
                 }
                 if (childNode.Name == "attackPoint")
                 {
-                    unitStat.attackPoint = float.Parse(childNode.InnerText);
+                    unitData.attackPoint = float.Parse(childNode.InnerText);
                 }
                 if (childNode.Name == "attackType")
                 {
-                    unitStat.attackType = int.Parse(childNode.InnerText);
+                    unitData.attackType = int.Parse(childNode.InnerText);
                 }
                 if (childNode.Name == "unitGold")
                 {
-                    unitStat.unitGold = int.Parse(childNode.InnerText);
+                    unitData.unitGold = int.Parse(childNode.InnerText);
                 }
             }
-            dic[unitStat.unitRank] = unitStat;
-            dicUnits[unitStat.unitType] = dic;
-
+            dicUnits[unitData.unitName] = unitData;
         }
-        Debug.Log(dicUnits["Warrior"]);
     }
 
     public void LoadUnitStatFromXML(string unitName, Unit unit)
     {
-        string type = unitName[..^1];
-        char rank = unitName[^1];
 
-        unit.unitStat.Type = dicUnits[type][rank].unitType;
-        unit.unitStat.Rank = dicUnits[type][rank].unitRank;
-        unit.unitStat.AttackDelay = dicUnits[type][rank].attackDelay;
-        unit.unitStat.AttackRange = dicUnits[type][rank].attackRange;
-        unit.unitStat.AttackPoint = dicUnits[type][rank].attackPoint;
-        unit.unitStat.AttackType = dicUnits[type][rank].attackType;
-        unit.unitStat.Gold = dicUnits[type][rank].unitGold;
+        unit.unitStat.AttackDelay = dicUnits[unitName].attackDelay;
+        unit.unitStat.AttackRange = dicUnits[unitName].attackRange;
+        unit.unitStat.AttackPoint = dicUnits[unitName].attackPoint;
+        unit.unitStat.AttackType = dicUnits[unitName].attackType;
+        unit.unitStat.Gold = dicUnits[unitName].unitGold;
     }
 }

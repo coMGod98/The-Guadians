@@ -78,7 +78,9 @@ public class MonsterManager : MonoBehaviour
         int index = monster.name.IndexOf("(Clone)");
         string name = monster.name.Substring(0, index);
 
-        MonsterDB.instance.LoadMonsterStatFromXML(name, monster);
+        monster.monsterStat.Speed = 5.0f;
+
+        //MonsterDB.instance.LoadMonsterStatFromXML(name, monster);
 
         allMonsterList.Add(monster);
     }
