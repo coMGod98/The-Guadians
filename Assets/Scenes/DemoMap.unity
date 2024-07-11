@@ -6190,7 +6190,7 @@ MonoBehaviour:
   - {fileID: 4807764840968278759, guid: 2579947fe523e5d4298326fc39b97b1b, type: 3}
   - {fileID: 8046509895250879175, guid: 07e07e043fc1cc0428deda8917523150, type: 3}
   unitSpawn: {fileID: 1034781555}
-  moveSpeed: 3
+  moveSpeed: 5
   rotSpeed: 360
 --- !u!4 &1061386835
 Transform:
@@ -6214,7 +6214,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061386833}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88138acf73bf84847bce6baea5f9e351, type: 3}
   m_Name: 
