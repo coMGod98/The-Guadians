@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4752430700891008103}
   - component: {fileID: 54488013970267915}
-  - component: {fileID: 4366040243444760153}
   - component: {fileID: -3563500447889310118}
+  - component: {fileID: 4366040243444760153}
   m_Layer: 11
   m_Name: Round1
   m_TagString: Untagged
@@ -47,9 +47,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc240165934fe6449acb3d9a952e421e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotSpeed: 360
-  monsterOutline: {fileID: -3563500447889310118}
+  monsterAnim: {fileID: 0}
+  curWayPointIdx: 0
+--- !u!114 &-3563500447889310118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691311844662774141}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!136 &4366040243444760153
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -73,24 +90,6 @@ CapsuleCollider:
   m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &-3563500447889310118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691311844662774141}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 1
-  outlineColor: {r: 1, g: 0, b: 0, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1001 &5520135598440424029
 PrefabInstance:
   m_ObjectHideFlags: 0

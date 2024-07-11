@@ -105,15 +105,14 @@ public class UnitManager : MonoBehaviour
         GameObject obj = Instantiate(unitPrefabArray[randIdx], randomSpawn, Quaternion.identity);
         obj.transform.parent = unitSpawn;
         Unit unit = obj.GetComponent<Unit>();
-        string name = unit.gameObject.name;
-        Excel.instance.LoadMonsterParamsFromXML(name, unit);
+        int index = unit.name.IndexOf("(Clone)");
+        string name = unit.name.Substring(0, index);
+        UnitDB.instance.LoadUnitStatFromXML(name, unit);
 
         //unit.myNavagent = unit.GetComponent<NavMeshAgent>();
         unit.unitAnim = unit.GetComponentInChildren<Animator>();
         unit.seedID = _seedNum++;
         unit.target = new List<Monster>();
-
-        //unit.unitStat.AttackRange = 5.0f;
 
         allUnitList.Add(unit);
     }

@@ -75,7 +75,11 @@ public class MonsterManager : MonoBehaviour
         Monster monster = obj.GetComponent<Monster>();
         monster.curWayPointIdx = 1;
         monster.monsterAnim = monster.GetComponentInChildren<Animator>();
-        monster.monsterStat.Speed = 2;
+        int index = monster.name.IndexOf("(Clone)");
+        string name = monster.name.Substring(0, index);
+
+        MonsterDB.instance.LoadMonsterStatFromXML(name, monster);
+
         allMonsterList.Add(monster);
     }
 }

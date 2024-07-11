@@ -5,8 +5,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public struct UnitStat
 {
-    // public string Type;
-    // public char Rank;
+    public string Type;
+    public char Rank;
     public float AttackDelay;
     public float AttackRange;
     public float AttackPoint;

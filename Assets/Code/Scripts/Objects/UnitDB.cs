@@ -4,13 +4,13 @@ using UnityEngine;
 using System.Xml;
 using System;
 
-public class Excel : MonoBehaviour
+public class UnitDB : MonoBehaviour
 {
-    public static Excel instance;
+    public static UnitDB instance;
 
     public TextAsset unitDBFileXml;
 
-   public struct UnitStat
+    public struct UnitStat
     {
         public string unitType;
         public char unitRank;
@@ -61,24 +61,24 @@ public class Excel : MonoBehaviour
 
                 if (childNode.Name == "attackDelay")
                 {
-                    unitStat.attackDelay = Int16.Parse(childNode.InnerText);
+                    unitStat.attackDelay = float.Parse(childNode.InnerText);
                 }
 
                 if (childNode.Name == "attackRange")
                 {
-                    unitStat.attackRange = Int16.Parse(childNode.InnerText);
+                    unitStat.attackRange = float.Parse(childNode.InnerText);
                 }
                 if (childNode.Name == "attackPoint")
                 {
-                    unitStat.attackPoint = Int16.Parse(childNode.InnerText);
+                    unitStat.attackPoint = float.Parse(childNode.InnerText);
                 }
                 if (childNode.Name == "attackType")
                 {
-                    unitStat.attackType = Int16.Parse(childNode.InnerText);
+                    unitStat.attackType = int.Parse(childNode.InnerText);
                 }
                 if (childNode.Name == "unitGold")
                 {
-                    unitStat.unitGold = Int16.Parse(childNode.InnerText);
+                    unitStat.unitGold = int.Parse(childNode.InnerText);
                 }
             }
             dic[unitStat.unitRank] = unitStat;
@@ -86,15 +86,17 @@ public class Excel : MonoBehaviour
         }
     }
 
-   public void LoadMonsterParamsFromXML(string unitName, Unit unit)
+    public void LoadUnitStatFromXML(string unitName, Unit unit)
     {
         string type = unitName[..^1];
         char rank = unitName[^1];
 
+        unit.unitStat.Type = dicUnits[type][rank].unitType;
+        unit.unitStat.Rank = dicUnits[type][rank].unitRank;
         unit.unitStat.AttackDelay = dicUnits[type][rank].attackDelay;
         unit.unitStat.AttackRange = dicUnits[type][rank].attackRange;
         unit.unitStat.AttackPoint = dicUnits[type][rank].attackPoint;
         unit.unitStat.AttackType = dicUnits[type][rank].attackType;
-        unit.unitStat.Gold =  dicUnits[type][rank].unitGold;
+        unit.unitStat.Gold = dicUnits[type][rank].unitGold;
     }
 }
