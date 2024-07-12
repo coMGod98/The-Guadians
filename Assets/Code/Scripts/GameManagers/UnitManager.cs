@@ -67,50 +67,44 @@ public class UnitManager : MonoBehaviour
                     {
                         if (unit.rangeMonster.Count > 0 && unit.targetMonster == null) unit.targetMonster = unit.rangeMonster[0];
                         if (unit.targetMonster != null && unit.unitAnim.GetBool("IsAttacking") == false) unit.destination = unit.targetMonster.transform.position;
+                        OnAttack(unit);
+
                     }
                         break;
                     case State.Hold:
-                        if(unit.rangeMonster.Count > 0) unit.targetMonster = unit.rangeMonster[0];
-                        break;
-                }
-
-                if (unit.targetMonster != null)
-                {
-                    if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) < unit.unitStat.AttackRange)
                     {
-                        if(unit.unitAnim.GetBool("IsAttacking") == false) 
-                        {
-                            unit.unitAnim.SetTrigger("OnAttack");
-                            Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
-                            dir.Normalize();
-                            float rotAngle = Vector3.Angle(unit.transform.right, dir);
-                            float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
-                            float rotateAmount = rotSpeed * Time.deltaTime;
-                            if (rotAngle < rotateAmount) rotateAmount = rotAngle;
-                            unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
-                        }
+                        if(unit.rangeMonster.Count > 0) unit.targetMonster = unit.rangeMonster[0];
+                        OnAttack(unit);
                     }
+                        break;
                 }
             }
         }
     }
 
-    public void SetDesinationdUnits(Vector3 pos)
-    {
-        foreach(Unit unit in selectedUnitList){
-            unit.unitState = State.Normal;
-            unit.destination = pos;
-        }
-    }
-
     public void OnHold()
     {
-
         foreach (Unit unit in selectedUnitList)
         {
             unit.unitState = State.Hold;
         }
+    }
 
+    public void OnAttack(Unit unit){
+        if (unit.targetMonster != null)
+        {
+            if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) < unit.unitStat.AttackRange)
+            {
+                if(unit.unitAnim.GetBool("IsAttacking") == false) 
+                {
+                    Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
+                    dir.Normalize();
+                    Rotate(dir, unit);
+                    
+                    unit.unitAnim.SetTrigger("OnAttack");
+                }
+            }
+        }
     }
 
 
@@ -126,12 +120,8 @@ public class UnitManager : MonoBehaviour
                         Vector3 moveDir = myPath.corners[1] - unit.transform.position;
                         float moveDist = moveDir.magnitude;
                         moveDir.Normalize();
-                        float rotAngle = Vector3.Angle(unit.transform.forward, moveDir);
-                        float rotDir = Vector3.Dot(unit.transform.right, moveDir) < 0.0f ? -1.0f : 1.0f;
 
-                        float rotateAmount = rotSpeed * Time.deltaTime;
-                        if(rotAngle < rotateAmount) rotateAmount = rotAngle;
-                        unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
+                        Rotate(moveDir, unit);
             
                         float moveAmount = moveSpeed * Time.deltaTime;
                         if(moveDist < moveAmount) moveAmount = moveDist;
@@ -147,6 +137,61 @@ public class UnitManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetDesinationdUnits(Vector3 pos)
+    {
+        
+        List<Vector3> destinationList = GetDestinationListAround(pos, new float[] { 2.0f, 4.0f, 6.0f}, new int[] { 5, 10, 20 });
+        
+        int destinationListIdx = 0;
+
+        foreach(Unit unit in selectedUnitList){
+            unit.destination = destinationList[destinationListIdx];
+            destinationListIdx = (destinationListIdx + 1) % destinationList.Count;
+            
+            if(unit.targetMonster != null) {
+                unit.targetMonster = null;
+                unit.unitState = State.Normal;
+            }
+        }
+    }
+
+    private List<Vector3> GetDestinationListAround(Vector3 pos, float[] ringRadiusArray, int[] ringPositionCount){
+        List<Vector3> destinatnionList = new List<Vector3>();
+        destinatnionList.Add(pos);
+        for(int i = 0; i < ringRadiusArray.Length; i++){
+            destinatnionList.AddRange(GetDestinationListAround(pos, ringRadiusArray[i], ringPositionCount[i]));
+        }
+        return destinatnionList;
+    }
+
+    private List<Vector3> GetDestinationListAround(Vector3 pos, float radius, int positionCount){
+        List<Vector3> destinationList = new List<Vector3>();
+        for (int i = 0; i < positionCount; i++)
+        {
+            float angle = i * (360.0f / positionCount);
+            float x = Mathf.Sin(angle);
+            float z = Mathf.Cos(angle);
+            Vector3 dir = new Vector3(x, 0.0f, z);
+            Vector3 destination = pos + dir * radius;
+            destinationList.Add(destination);
+        }
+        return destinationList;
+    }
+
+    private Vector3 ApplyRotationToVector(Vector3 vec, float angle)
+    {
+        return Quaternion.Euler(0, 0, angle) * vec;
+    }
+
+    void Rotate(Vector3 dir, Unit unit){
+        float rotAngle = Vector3.Angle(unit.transform.forward, dir);
+        float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
+
+        float rotateAmount = rotSpeed * Time.deltaTime;
+        if(rotAngle < rotateAmount) rotateAmount = rotAngle;
+        unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
     }
 
 
