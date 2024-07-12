@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class SumonCircle : MonoBehaviour,IPointerUpHandler,IPointerDownHandler
 {
+   public Animator animator;
    public void OnPointerDown(PointerEventData eventData)
     {
-
+        animator.SetBool("OnClick", true);
     }
    public void OnPointerUp(PointerEventData eventData)
     {
+        animator.SetBool("OnClick", false);
 
     }
    
