@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rows>
   <row>
-    <unitType>Warrior</unitType>
-    <unitRank>N</unitRank>
+    <unitName>WarriorN</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>5</attackRange>
     <attackPoint>10</attackPoint>
@@ -10,8 +9,7 @@
     <unitGold>5</unitGold>
   </row>
   <row>
-    <unitType>Warrior</unitType>
-    <unitRank>R</unitRank>
+    <unitName>WarriorR</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>5</attackRange>
     <attackPoint>20</attackPoint>
@@ -19,8 +17,7 @@
     <unitGold>7</unitGold>
   </row>
   <row>
-    <unitType>Warrior</unitType>
-    <unitRank>E</unitRank>
+    <unitName>WarriorE</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>5</attackRange>
     <attackPoint>50</attackPoint>
@@ -28,8 +25,7 @@
     <unitGold>10</unitGold>
   </row>
   <row>
-    <unitType>Warrior</unitType>
-    <unitRank>U</unitRank>
+    <unitName>WarriorU</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>20</attackRange>
     <attackPoint>100</attackPoint>
@@ -37,8 +33,7 @@
     <unitGold>20</unitGold>
   </row>
   <row>
-    <unitType>Warrior</unitType>
-    <unitRank>L</unitRank>
+    <unitName>WarriorL</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>20</attackRange>
     <attackPoint>300</attackPoint>
@@ -46,8 +41,7 @@
     <unitGold>100</unitGold>
   </row>
   <row>
-    <unitType>Archer</unitType>
-    <unitRank>N</unitRank>
+    <unitName>ArcherN</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>5</attackRange>
     <attackPoint>10</attackPoint>
@@ -55,8 +49,7 @@
     <unitGold>5</unitGold>
   </row>
   <row>
-    <unitType>Archer</unitType>
-    <unitRank>R</unitRank>
+    <unitName>ArcherR</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>5</attackRange>
     <attackPoint>20</attackPoint>
@@ -64,8 +57,7 @@
     <unitGold>7</unitGold>
   </row>
   <row>
-    <unitType>Archer</unitType>
-    <unitRank>E</unitRank>
+    <unitName>ArcherE</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>5</attackRange>
     <attackPoint>50</attackPoint>
@@ -73,8 +65,7 @@
     <unitGold>10</unitGold>
   </row>
   <row>
-    <unitType>Archer</unitType>
-    <unitRank>U</unitRank>
+    <unitName>ArcherU</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>20</attackRange>
     <attackPoint>100</attackPoint>
@@ -82,8 +73,7 @@
     <unitGold>20</unitGold>
   </row>
   <row>
-    <unitType>Archer</unitType>
-    <unitRank>L</unitRank>
+    <unitName>ArcherL</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>20</attackRange>
     <attackPoint>300</attackPoint>
@@ -91,8 +81,7 @@
     <unitGold>100</unitGold>
   </row>
   <row>
-    <unitType>Wizard</unitType>
-    <unitRank>N</unitRank>
+    <unitName>WizardN</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>5</attackRange>
     <attackPoint>10</attackPoint>
@@ -100,8 +89,7 @@
     <unitGold>5</unitGold>
   </row>
   <row>
-    <unitType>Wizard</unitType>
-    <unitRank>R</unitRank>
+    <unitName>WizardR</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>5</attackRange>
     <attackPoint>20</attackPoint>
@@ -109,8 +97,7 @@
     <unitGold>7</unitGold>
   </row>
   <row>
-    <unitType>Wizard</unitType>
-    <unitRank>E</unitRank>
+    <unitName>WizardE</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>5</attackRange>
     <attackPoint>50</attackPoint>
@@ -118,8 +105,7 @@
     <unitGold>10</unitGold>
   </row>
   <row>
-    <unitType>Wizard</unitType>
-    <unitRank>U</unitRank>
+    <unitName>WizardU</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>20</attackRange>
     <attackPoint>100</attackPoint>
@@ -127,8 +113,7 @@
     <unitGold>20</unitGold>
   </row>
   <row>
-    <unitType>Wizard</unitType>
-    <unitRank>L</unitRank>
+    <unitName>WizardL</unitName>
     <attackDelay>0</attackDelay>
     <attackRange>20</attackRange>
     <attackPoint>300</attackPoint>

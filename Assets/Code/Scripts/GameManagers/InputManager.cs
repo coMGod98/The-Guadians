@@ -19,9 +19,6 @@ public class InputManager : MonoBehaviour
     Rect dragRect;
     Camera mainCamera;
 
-    [Header("UnitManager")]
-    public UnityEvent<Vector3> moveAct;
-
 
     private void Awake() {
         mainCamera = Camera.main;
@@ -73,11 +70,11 @@ public class InputManager : MonoBehaviour
             else if (Physics.Raycast(ray, out hit, Mathf.Infinity, monsterMask)) {
                 GameWorld.Instance.UnitManager.SetDesinationdUnits(hit.point);
             }
+        }
 
-            if (Input.GetKeyDown(KeyCode.H))
-            {
-
-            }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            GameWorld.Instance.UnitManager.OnHold();
         }
     }
 

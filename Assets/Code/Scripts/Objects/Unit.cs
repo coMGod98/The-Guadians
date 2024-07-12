@@ -14,9 +14,6 @@ public struct UnitStat
 
 public class Unit : MonoBehaviour
 {  
-    public enum State{
-        Normal, Hold
-    }
 
     public GameObject unitMarker;
     public UnitStat unitStat;
@@ -27,11 +24,14 @@ public class Unit : MonoBehaviour
     public Monster targetMonster; 
     public List<Monster> rangeMonster;
 
+    //public float attackElapsed;
+
     public void Init(){
         unitState = State.Normal;
         unitAnim = GetComponentInChildren<Animator>();
         destination = transform.position;
         targetMonster = null;
         rangeMonster = new List<Monster>();
+        //attackElapsed = 0.0f;
     }
 }

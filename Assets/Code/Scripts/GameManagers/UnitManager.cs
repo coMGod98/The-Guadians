@@ -1,6 +1,12 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+
+public enum State
+{
+    Normal, Hold, Move, Combat
+}
 
 public class UnitManager : MonoBehaviour
 {
@@ -48,23 +54,43 @@ public class UnitManager : MonoBehaviour
                 {
                     if(unit.rangeMonster.Contains(monster)) unit.rangeMonster.Remove(monster);
                 }
-                if(unit.rangeMonster.Count > 0) unit.targetMonster = unit.rangeMonster[0];
 
-
-                if(unit.targetMonster != null && unit.unitState == Unit.State.Normal)
+                if (unit.rangeMonster.Count > 0)
                 {
-                    unit.destination = unit.targetMonster.transform.position;
+                    if (unit.unitState == State.Normal) unit.unitState = State.Combat;
+                    unit.targetMonster = unit.rangeMonster[0];
+                }
+
+                switch (unit.unitState)
+                {
+                    case State.Combat:
+                    {
+                        if (unit.rangeMonster.Count > 0 && unit.targetMonster == null) unit.targetMonster = unit.rangeMonster[0];
+                        if (unit.targetMonster != null && unit.unitAnim.GetBool("IsAttacking") == false) unit.destination = unit.targetMonster.transform.position;
+                    }
+                        break;
+                    case State.Hold:
+                        if(unit.rangeMonster.Count > 0) unit.targetMonster = unit.rangeMonster[0];
+                        break;
+                }
+
+                if (unit.targetMonster != null)
+                {
                     if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) < unit.unitStat.AttackRange)
                     {
-                        unit.destination = unit.transform.position;
                         if(unit.unitAnim.GetBool("IsAttacking") == false) 
                         {
                             unit.unitAnim.SetTrigger("OnAttack");
+                            Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
+                            dir.Normalize();
+                            float rotAngle = Vector3.Angle(unit.transform.right, dir);
+                            float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
+                            float rotateAmount = rotSpeed * Time.deltaTime;
+                            if (rotAngle < rotateAmount) rotateAmount = rotAngle;
+                            unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
                         }
-                        
                     }
                 }
-                
             }
         }
     }
@@ -72,10 +98,21 @@ public class UnitManager : MonoBehaviour
     public void SetDesinationdUnits(Vector3 pos)
     {
         foreach(Unit unit in selectedUnitList){
-            unit.unitState = Unit.State.Normal;
+            unit.unitState = State.Normal;
             unit.destination = pos;
         }
     }
+
+    public void OnHold()
+    {
+
+        foreach (Unit unit in selectedUnitList)
+        {
+            unit.unitState = State.Hold;
+        }
+
+    }
+
 
     public void Move(){
         if(myPath == null) myPath = new NavMeshPath();
@@ -90,9 +127,7 @@ public class UnitManager : MonoBehaviour
                         float moveDist = moveDir.magnitude;
                         moveDir.Normalize();
                         float rotAngle = Vector3.Angle(unit.transform.forward, moveDir);
-                        
-                        float rotDir = 1.0f;
-                        if(Vector3.Dot(unit.transform.right, moveDir) < 0.0f) rotDir = -1.0f;
+                        float rotDir = Vector3.Dot(unit.transform.right, moveDir) < 0.0f ? -1.0f : 1.0f;
 
                         float rotateAmount = rotSpeed * Time.deltaTime;
                         if(rotAngle < rotateAmount) rotateAmount = rotAngle;
@@ -126,9 +161,9 @@ public class UnitManager : MonoBehaviour
 
         int index = unit.name.IndexOf("(Clone)");
         string name = unit.name.Substring(0, index);
-        //UnitDB.instance.LoadUnitStatFromXML(name, unit);
+        UnitDB.instance.LoadUnitStatFromXML(name, unit);
 
-        unit.unitStat.AttackRange = 5.0f;
+        //unit.unitStat.AttackRange = 5.0f;
         unit.Init();
 
 
