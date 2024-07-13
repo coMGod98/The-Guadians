@@ -80,7 +80,7 @@ public class MonsterManager : MonoBehaviour
 
         monster.monsterStat.Speed = 5.0f;
 
-        //MonsterDB.instance.LoadMonsterStatFromXML(name, monster);
+        MonsterDB.instance.LoadMonsterStatFromXML(name, monster);
 
         allMonsterList.Add(monster);
     }

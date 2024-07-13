@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 
 [System.Serializable]
@@ -18,20 +19,21 @@ public class Unit : MonoBehaviour
     public GameObject unitMarker;
     public UnitStat unitStat;
     public Animator unitAnim;
+    public Outline outline;
     
     public State unitState;
     public Vector3 destination;
     public Monster targetMonster; 
     public List<Monster> rangeMonster;
 
-    //public float attackElapsed;
 
     public void Init(){
+
         unitState = State.Normal;
         unitAnim = GetComponentInChildren<Animator>();
+        outline = GetComponent<Outline>();
         destination = transform.position;
         targetMonster = null;
         rangeMonster = new List<Monster>();
-        //attackElapsed = 0.0f;
     }
 }

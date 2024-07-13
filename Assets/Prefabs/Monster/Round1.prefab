@@ -49,6 +49,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterAnim: {fileID: 0}
   curWayPointIdx: 0
+  monsterStat:
+    HP: 0
+    Gold: 0
+    Speed: 0
 --- !u!114 &-3563500447889310118
 MonoBehaviour:
   m_ObjectHideFlags: 0

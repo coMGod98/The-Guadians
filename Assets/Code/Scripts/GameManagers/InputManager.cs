@@ -65,10 +65,10 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundMask)) {
-                GameWorld.Instance.UnitManager.SetDesinationdUnits(hit.point);
+                GameWorld.Instance.UnitManager.InputDestination(hit.point);
             }
             else if (Physics.Raycast(ray, out hit, Mathf.Infinity, monsterMask)) {
-                GameWorld.Instance.UnitManager.SetDesinationdUnits(hit.point);
+                GameWorld.Instance.UnitManager.InputDestination(hit.point);
             }
         }
 

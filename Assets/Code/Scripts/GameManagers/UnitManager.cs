@@ -23,6 +23,10 @@ public class UnitManager : MonoBehaviour
     public float moveSpeed = 5.0f;
     public float rotSpeed = 360.0f;
 
+    //유닛 랜덤
+    private Dictionary<string, double> dicRank;
+    double SumOfWeights;
+
 
     // 네브메쉬패스
     private NavMeshPath myPath;
@@ -30,16 +34,20 @@ public class UnitManager : MonoBehaviour
     private void Awake(){
         allUnitList = new List<Unit>();
         selectedUnitList = new List<Unit>();
+
+        Dictionary<string, double> dicRank = new Dictionary<string, double>()
+        {
+            {"N", 60.0f},
+            {"R", 30.0f},
+            {"E", 12.4f},
+            {"U", 2.4f},
+            {"L", 0.01f}
+        };
+
+        foreach(float value in dicRank.Values){
+            SumOfWeights += value;
+        }
     }
-    
-    //무브
-    // NavMeshAgent
-    // public void Move(){
-    //     if(myPath == null) myPath = new NavMeshPath();
-    //     foreach(Unit unit in allUnitList){
-    //         unit.myNavagent.SetDestination(unit.destination);
-    //     }
-    // }
 
     public void UnitAI(){
         foreach(Unit unit in allUnitList)
@@ -55,7 +63,7 @@ public class UnitManager : MonoBehaviour
                     if(unit.rangeMonster.Contains(monster)) unit.rangeMonster.Remove(monster);
                 }
 
-                if (unit.rangeMonster.Count > 0)
+                if (unit.rangeMonster.Count > 0 && unit.unitState != State.Combat) 
                 {
                     if (unit.unitState == State.Normal) unit.unitState = State.Combat;
                     unit.targetMonster = unit.rangeMonster[0];
@@ -65,15 +73,17 @@ public class UnitManager : MonoBehaviour
                 {
                     case State.Combat:
                     {
-                        if (unit.rangeMonster.Count > 0 && unit.targetMonster == null) unit.targetMonster = unit.rangeMonster[0];
-                        if (unit.targetMonster != null && unit.unitAnim.GetBool("IsAttacking") == false) unit.destination = unit.targetMonster.transform.position;
-                        OnAttack(unit);
+                        if (unit.targetMonster != null && unit.unitAnim.GetBool("IsAttacking") == false && unit.unitAnim.GetBool("IsMoving") == false) 
+                        {
+                            unit.destination = unit.targetMonster.transform.position;
+                            OnAttack(unit);
+                        }
 
                     }
                         break;
                     case State.Hold:
                     {
-                        if(unit.rangeMonster.Count > 0) unit.targetMonster = unit.rangeMonster[0];
+                        if(unit.targetMonster != null)
                         OnAttack(unit);
                     }
                         break;
@@ -91,18 +101,15 @@ public class UnitManager : MonoBehaviour
     }
 
     public void OnAttack(Unit unit){
-        if (unit.targetMonster != null)
+        if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) < unit.unitStat.AttackRange)
         {
-            if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) < unit.unitStat.AttackRange)
+            if(unit.unitAnim.GetBool("IsAttacking") == false && unit.unitAnim.GetBool("IsMoving") == false) 
             {
-                if(unit.unitAnim.GetBool("IsAttacking") == false) 
-                {
-                    Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
-                    dir.Normalize();
-                    Rotate(dir, unit);
-                    
-                    unit.unitAnim.SetTrigger("OnAttack");
-                }
+                Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
+                dir.Normalize();
+                Rotate(dir, unit);
+                
+                unit.unitAnim.SetTrigger("OnAttack");
             }
         }
     }
@@ -139,9 +146,8 @@ public class UnitManager : MonoBehaviour
         }
     }
 
-    public void SetDesinationdUnits(Vector3 pos)
+    public void InputDestination(Vector3 pos)
     {
-        
         List<Vector3> destinationList = GetDestinationListAround(pos, new float[] { 2.0f, 4.0f, 6.0f}, new int[] { 5, 10, 20 });
         
         int destinationListIdx = 0;
@@ -180,11 +186,6 @@ public class UnitManager : MonoBehaviour
         return destinationList;
     }
 
-    private Vector3 ApplyRotationToVector(Vector3 vec, float angle)
-    {
-        return Quaternion.Euler(0, 0, angle) * vec;
-    }
-
     void Rotate(Vector3 dir, Unit unit){
         float rotAngle = Vector3.Angle(unit.transform.forward, dir);
         float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
@@ -203,13 +204,32 @@ public class UnitManager : MonoBehaviour
         GameObject obj = Instantiate(unitPrefabArray[randIdx], randomSpawn, Quaternion.identity);
         obj.transform.parent = unitSpawn;
         Unit unit = obj.GetComponent<Unit>();
-
+        string rank = GetRandomPick();
         int index = unit.name.IndexOf("(Clone)");
-        string name = unit.name.Substring(0, index);
-        UnitDB.instance.LoadUnitStatFromXML(name, unit);
+        unit.name = unit.name.Substring(0, index) + rank;
+        UnitDB.instance.LoadUnitStatFromXML(unit.name, unit);
+
+        unit.Init();
+        switch(rank)
+        {
+            case "N":
+            unit.outline.enabled = false;
+            break;
+            case "R":
+            unit.outline.outlineColor = Color.green;
+            break;
+            case "E":
+            unit.outline.outlineColor = Color.cyan;
+            break;
+            case "U":
+            unit.outline.outlineColor = Color.yellow;
+            break;
+            case "L":
+            unit.outline.outlineColor = Color.magenta;
+            break;
+        }
 
         //unit.unitStat.AttackRange = 5.0f;
-        unit.Init();
 
 
         allUnitList.Add(unit);
@@ -217,7 +237,7 @@ public class UnitManager : MonoBehaviour
 
     Vector3 RandomSpawn()
     {
-        float radius = Random.Range(0.0f, 1.0f);
+        float radius = Random.Range(0.0f, 2.0f);
         float angle = Random.Range(0.0f, 360.0f);
         float x = radius * Mathf.Sin(angle);
         float z = radius * Mathf.Cos(angle);
@@ -225,4 +245,36 @@ public class UnitManager : MonoBehaviour
         Vector3 randomPosition = unitSpawn.transform.position + randomVector;
         return randomPosition;
     }
+
+    public string GetRandomPick(){
+        Dictionary<string, double> dicRank = new Dictionary<string, double>()
+        {
+            {"N", 60.0f},
+            {"R", 30.0f},
+            {"E", 12.4f},
+            {"U", 2.4f},
+            {"L", 0.01f}
+        };
+        
+        double randomValue = Random.Range(0.0f, 1.0f);
+        randomValue *= SumOfWeights;
+
+        if(randomValue < 0.0) randomValue = 0.0f;
+        if(randomValue > SumOfWeights) randomValue = SumOfWeights - 0.00000001;
+
+        double current = 0.0f;
+        foreach(KeyValuePair<string, double> item in dicRank)
+        {
+            current += item.Value;
+
+            if(randomValue < current)
+            {
+                return item.Key;
+            }
+        }
+        
+        throw new System.Exception($"Unreachable - [Random Value : {randomValue}, Current Value : {current}]");
+    }
+
+
 }

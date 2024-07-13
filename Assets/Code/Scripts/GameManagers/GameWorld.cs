@@ -50,7 +50,7 @@ public class GameWorld : Singleton<GameWorld>
             {
                 if (spawnDelay > spawnInterval)
                 {
-                    //_monsterManager.SpawnMonster();
+                    _monsterManager.SpawnMonster();
                     spawnCount++;
                     spawnDelay = 0.0f;
                 }
@@ -72,6 +72,6 @@ public class GameWorld : Singleton<GameWorld>
         _unitManager.UnitAI();
 
         _unitManager.Move();
-        //_monsterManager.Move();
+        _monsterManager.Move();
     }
 }
