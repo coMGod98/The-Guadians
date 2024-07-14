@@ -11,32 +11,51 @@ public class Enhance : MonoBehaviour
     {
         filePath = Application.dataPath + "/Code/Scripts/Object/UnitDB.xml";
     }
-
-    public int LoadAttackPoint()
+    public void UpgaradePoint(params string[] unitNames)
     {
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(filePath);
-        XmlNode aPnode = xmlDoc.SelectSingleNode("/UnitDB/attackPoint");
-        int attackPower = int.Parse(aPnode.InnerText);
 
-        return attackPower;
-        
+        foreach (string unitName in unitNames)
+        {
+            XmlNode rowNode = xmlDoc.SelectSingleNode("/rows/row[unitName='" + unitName + "']");
+            if (rowNode != null)
+            {
+                XmlNode attackPointNode = rowNode.SelectSingleNode("attackPoint");
+                int currentAttackPoint = int.Parse(attackPointNode.InnerText);
+                int newAttackPoint = currentAttackPoint + 5; // 예시로 5 증가
+                attackPointNode.InnerText = newAttackPoint.ToString();
+            }
+            else
+            {
+                Debug.LogWarning("Unit with name '" + unitName + "' not found. Cannot upgrade AttackPoint.");
+            }
+            xmlDoc.Save(filePath);
+        }
     }
-    public void SaveStats(int attackPoint)
+
+    public int LoadAttackPoint(string unitName)
     {
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(filePath);
-        XmlNode aPnode = xmlDoc.SelectSingleNode("/UnitStats/attackPoint");
-        aPnode.InnerText = aPnode.ToString();
-        xmlDoc.Save(filePath);
-    }
 
-    public void Increase(int AttackinCrease)
-    {
-        int curPoint = LoadAttackPoint();
-        int newPoint = curPoint + AttackinCrease;
-        SaveStats(newPoint);
+        XmlNode aPnode = xmlDoc.SelectSingleNode("/rows/row[unitName='" + unitName + "']");
+        if (aPnode != null)
+        {
+            XmlNode attackPointNode = aPnode.SelectSingleNode("attackPoint");
+            int attackPoint = int.Parse(attackPointNode.InnerText);
+            return attackPoint;
+        }
+        else
+        {
+            Debug.LogWarning("Unit with name '" + unitName + "' not found.");
+            return 0;
+        }
+
     }
+    
+
+  
      
     
 }
