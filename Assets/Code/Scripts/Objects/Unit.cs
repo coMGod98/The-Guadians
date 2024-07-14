@@ -23,8 +23,11 @@ public class Unit : MonoBehaviour
     
     public State unitState;
     public Vector3 destination;
-    public Monster targetMonster; 
-    public List<Monster> rangeMonster;
+    public Monster targetMonster;
+    public float attackDuration = 1.0f;
+    public float attackElapsedTime;
+    public float attackCoolTime = 2.0f;
+    public bool forceMove = false;
 
 
     public void Init(){
@@ -34,6 +37,8 @@ public class Unit : MonoBehaviour
         outline = GetComponent<Outline>();
         destination = transform.position;
         targetMonster = null;
-        rangeMonster = new List<Monster>();
     }
+
+    public bool IsAttacking => attackDuration > attackElapsedTime;
+    public bool IsAttackable => !IsAttacking && attackCoolTime <= attackElapsedTime;
 }

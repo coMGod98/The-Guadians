@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.UI.CanvasScaler;
 
 public class MonsterManager : MonoBehaviour
 {
@@ -27,6 +24,18 @@ public class MonsterManager : MonoBehaviour
     private void Awake(){
         selectedMonster = null;
         allMonsterList = new List<Monster>();
+    }
+
+    public void MonsterAI()
+    {
+        for (var i = allMonsterList.Count - 1; i >= 0; --i){
+            var monster = allMonsterList[i];
+            if(monster.IsDead)
+            {
+                allMonsterList.RemoveAt(i);
+                Destroy(monster.gameObject);
+            }
+        }
     }
 
     // 무브
@@ -73,12 +82,16 @@ public class MonsterManager : MonoBehaviour
     {
         GameObject obj = Instantiate(monsterPrefabArray[GameWorld.Instance.curRound - 1], monsterSpawn);
         Monster monster = obj.GetComponent<Monster>();
-        monster.curWayPointIdx = 1;
-        monster.monsterAnim = monster.GetComponentInChildren<Animator>();
+
         int index = monster.name.IndexOf("(Clone)");
         string name = monster.name.Substring(0, index);
 
-        monster.monsterStat.Speed = 5.0f;
+        var stat = new MonsterStat(){
+            Speed = 5.0f,
+            HP = 1000,
+        };
+        monster.monsterStat = stat;
+        monster.Init();
 
         MonsterDB.instance.LoadMonsterStatFromXML(name, monster);
 

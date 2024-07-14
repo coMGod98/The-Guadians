@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Pool;
 
 public enum State
 {
@@ -35,13 +35,13 @@ public class UnitManager : MonoBehaviour
         allUnitList = new List<Unit>();
         selectedUnitList = new List<Unit>();
 
-        Dictionary<string, double> dicRank = new Dictionary<string, double>()
+        dicRank = new Dictionary<string, double>()
         {
-            {"N", 60.0f},
-            {"R", 30.0f},
-            {"E", 12.4f},
-            {"U", 2.4f},
-            {"L", 0.01f}
+            {"N", 25.0f},
+            {"R", 25.0f},
+            {"E", 25.4f},
+            {"U", 25.4f},
+            {"L", 25.01f}
         };
 
         foreach(float value in dicRank.Values){
@@ -52,41 +52,55 @@ public class UnitManager : MonoBehaviour
     public void UnitAI(){
         foreach(Unit unit in allUnitList)
         {
+            unit.attackElapsedTime += Time.deltaTime;
+            if(unit.forceMove)
+            {
+                unit.targetMonster = null;
+                unit.unitState = State.Normal;
+                unit.unitAnim.SetBool("IsAttacking", false);
+                continue;
+            }
+            unit.unitAnim.SetBool("IsAttacking", unit.IsAttacking);
+            if(unit.IsAttacking) continue;
+
             foreach(Monster monster in GameWorld.Instance.MonsterManager.allMonsterList)
             {
-                if(Vector3.Distance(unit.transform.position, monster.transform.position) < unit.unitStat.AttackRange)
-                {
-                    if(!unit.rangeMonster.Contains(monster)) unit.rangeMonster.Add(monster);
-                }
-                else
-                {
-                    if(unit.rangeMonster.Contains(monster)) unit.rangeMonster.Remove(monster);
-                }
-
-                if (unit.rangeMonster.Count > 0 && unit.unitState != State.Combat) 
-                {
-                    if (unit.unitState == State.Normal) unit.unitState = State.Combat;
-                    unit.targetMonster = unit.rangeMonster[0];
-                }
-
-                switch (unit.unitState)
-                {
-                    case State.Combat:
+                using (ListPool<Monster>.Get(out var rangedMonsters)){
+                    if(Vector3.Distance(unit.transform.position, monster.transform.position) <= unit.unitStat.AttackRange)
                     {
-                        if (unit.targetMonster != null && unit.unitAnim.GetBool("IsAttacking") == false && unit.unitAnim.GetBool("IsMoving") == false) 
+                        rangedMonsters.Add(monster);
+                    }
+
+                    if (rangedMonsters.Count > 0 && unit.unitState != State.Combat) 
+                    {
+                        if (unit.unitState == State.Normal) unit.unitState = State.Combat;
+                        unit.targetMonster = rangedMonsters[0]; // 거리 정렬 후에 가까운 애 공격 (우선순위를 정하는 로직 필요)
+                    }
+
+                    switch (unit.unitState)
+                    {
+                        case State.Combat:
                         {
-                            unit.destination = unit.targetMonster.transform.position;
-                            OnAttack(unit);
+                            if (unit.targetMonster != null) 
+                            {
+                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) > unit.unitStat.AttackRange)
+                                    unit.destination = unit.targetMonster.transform.position;
+                                else{
+                                    unit.destination = unit.transform.position;
+                                    if(unit.IsAttackable)
+                                        OnAttack(unit);
+                                }
+                            }
+                            break;
                         }
-
+                        case State.Hold:
+                        {
+                            unit.destination = unit.transform.position;
+                            if(unit.targetMonster != null && unit.IsAttackable)
+                                OnAttack(unit);
+                            break;
+                        }
                     }
-                        break;
-                    case State.Hold:
-                    {
-                        if(unit.targetMonster != null)
-                        OnAttack(unit);
-                    }
-                        break;
                 }
             }
         }
@@ -97,50 +111,53 @@ public class UnitManager : MonoBehaviour
         foreach (Unit unit in selectedUnitList)
         {
             unit.unitState = State.Hold;
+            unit.forceMove = false;
+            unit.destination = unit.transform.position;
         }
     }
 
     public void OnAttack(Unit unit){
-        if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) < unit.unitStat.AttackRange)
-        {
-            if(unit.unitAnim.GetBool("IsAttacking") == false && unit.unitAnim.GetBool("IsMoving") == false) 
-            {
-                Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
-                dir.Normalize();
-                Rotate(dir, unit);
-                
-                unit.unitAnim.SetTrigger("OnAttack");
-            }
-        }
+        unit.attackElapsedTime = 0.0f;
+        unit.unitAnim.CrossFade("Attack", 0.1f);
+        Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
+        dir.Normalize();
+        Rotate(dir, unit);
+
+
+        unit.targetMonster.InflictDamage(unit.unitStat.AttackPoint);
     }
 
 
     public void Move(){
         if(myPath == null) myPath = new NavMeshPath();
         foreach(Unit unit in allUnitList){
-            if(NavMesh.CalculatePath(unit.transform.position, unit.destination, NavMesh.AllAreas, myPath)){
-                switch(myPath.status){
-                    case NavMeshPathStatus.PathComplete:
-                    case NavMeshPathStatus.PathPartial:
-                    if(myPath.corners.Length > 1){
-                        unit.unitAnim.SetBool("IsMoving", true);
-                        Vector3 moveDir = myPath.corners[1] - unit.transform.position;
-                        float moveDist = moveDir.magnitude;
-                        moveDir.Normalize();
+            if(!unit.IsAttacking || unit.forceMove) 
+            {
+                if(NavMesh.CalculatePath(unit.transform.position, unit.destination, NavMesh.AllAreas, myPath)){
+                    switch(myPath.status){
+                        case NavMeshPathStatus.PathComplete:
+                        case NavMeshPathStatus.PathPartial:
+                        if(myPath.corners.Length > 1){
+                            unit.unitAnim.SetBool("IsMoving", true);
+                            Vector3 moveDir = myPath.corners[1] - unit.transform.position;
+                            float moveDist = moveDir.magnitude;
+                            moveDir.Normalize();
 
-                        Rotate(moveDir, unit);
-            
-                        float moveAmount = moveSpeed * Time.deltaTime;
-                        if(moveDist < moveAmount) moveAmount = moveDist;
-                        unit.transform.Translate(moveDir * moveAmount, Space.World);
+                            Rotate(moveDir, unit);
+                
+                            float moveAmount = moveSpeed * Time.deltaTime;
+                            if(moveDist < moveAmount) moveAmount = moveDist;
+                            unit.transform.Translate(moveDir * moveAmount, Space.World);
+                        }
+                        else{
+                            unit.destination = unit.transform.position;
+                            unit.unitAnim.SetBool("IsMoving", false);
+                            unit.forceMove = false;
+                        }
+                            break;
+                        case NavMeshPathStatus.PathInvalid:
+                            break;
                     }
-                    else{
-                        unit.unitAnim.SetBool("IsMoving", false);
-                        unit.destination = unit.transform.position;
-                    }
-                        break;
-                    case NavMeshPathStatus.PathInvalid:
-                        break;
                 }
             }
         }
@@ -155,11 +172,7 @@ public class UnitManager : MonoBehaviour
         foreach(Unit unit in selectedUnitList){
             unit.destination = destinationList[destinationListIdx];
             destinationListIdx = (destinationListIdx + 1) % destinationList.Count;
-            
-            if(unit.targetMonster != null) {
-                unit.targetMonster = null;
-                unit.unitState = State.Normal;
-            }
+            unit.forceMove = true;
         }
     }
 
@@ -204,6 +217,7 @@ public class UnitManager : MonoBehaviour
         GameObject obj = Instantiate(unitPrefabArray[randIdx], randomSpawn, Quaternion.identity);
         obj.transform.parent = unitSpawn;
         Unit unit = obj.GetComponent<Unit>();
+
         string rank = GetRandomPick();
         int index = unit.name.IndexOf("(Clone)");
         unit.name = unit.name.Substring(0, index) + rank;
@@ -213,7 +227,6 @@ public class UnitManager : MonoBehaviour
         switch(rank)
         {
             case "N":
-            unit.outline.enabled = false;
             break;
             case "R":
             unit.outline.outlineColor = Color.green;
@@ -247,14 +260,6 @@ public class UnitManager : MonoBehaviour
     }
 
     public string GetRandomPick(){
-        Dictionary<string, double> dicRank = new Dictionary<string, double>()
-        {
-            {"N", 60.0f},
-            {"R", 30.0f},
-            {"E", 12.4f},
-            {"U", 2.4f},
-            {"L", 0.01f}
-        };
         
         double randomValue = Random.Range(0.0f, 1.0f);
         randomValue *= SumOfWeights;
@@ -272,8 +277,7 @@ public class UnitManager : MonoBehaviour
                 return item.Key;
             }
         }
-        
-        throw new System.Exception($"Unreachable - [Random Value : {randomValue}, Current Value : {current}]");
+        return null;
     }
 
 

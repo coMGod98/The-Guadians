@@ -1,7 +1,3 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameWorld : Singleton<GameWorld>
@@ -9,11 +5,12 @@ public class GameWorld : Singleton<GameWorld>
     [SerializeField] private UnitManager _unitManager;
     [SerializeField] private MonsterManager _monsterManager;
     [SerializeField] private InputManager _inputManager;
+    [SerializeField] private BulletManager _bulletManager;
 
     public UnitManager UnitManager => _unitManager;
     public MonsterManager MonsterManager => _monsterManager;
     public InputManager InputManager => _inputManager;
-
+    public BulletManager BulletManager => _bulletManager;
 
     private float spawnDelay;
     private float spawnInterval;
@@ -70,6 +67,7 @@ public class GameWorld : Singleton<GameWorld>
         _inputManager.AdvanceInput();
 
         _unitManager.UnitAI();
+        _monsterManager.MonsterAI();
 
         _unitManager.Move();
         _monsterManager.Move();
