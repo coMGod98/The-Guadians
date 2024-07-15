@@ -1,4 +1,5 @@
 using TMPro.EditorUtilities;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class GameWorld : Singleton<GameWorld>
@@ -27,11 +28,13 @@ public class GameWorld : Singleton<GameWorld>
     public int curRound;
     public int totalRounds;
 
-    public int playerGolds;
+    public int playerGolds = 100;
     
 
     private void Awake()
     {
+        playerGolds = 100;
+
         spawnDelay = 0.0f;
         spawnInterval = 1.0f;
         spawnCount = 0;
@@ -69,6 +72,15 @@ public class GameWorld : Singleton<GameWorld>
                 remainTime = 0.0f;
                 spawnCount = 0;
             }
+            if (curRound >= totalRounds)
+            {
+                UIManager.Instance.GameVictory();
+            }
+
+            if (_monsterManager.GetMonsterCount() >= 4)
+            {
+                UIManager.Instance.GameOver();
+            }
         }
 
         _inputManager.AdvanceInput();
@@ -79,5 +91,10 @@ public class GameWorld : Singleton<GameWorld>
         _unitManager.Move();
         _monsterManager.Move();
     }
-    
+    public void DeductGold(int amount)
+    {
+        playerGolds -= amount;
+        if (playerGolds < 0) playerGolds = 0;
+    }
+
 }

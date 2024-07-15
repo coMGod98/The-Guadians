@@ -2,20 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    private static UIManager _instance;
+    public static UIManager Instance => _instance;
+
     [Header("Info")]
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI monsterCountText;
 
     [Header("Panel")]
-    public GameObject gameWinPanel;
-    public GameObject gameLostPanel;
+    public GameObject gameWin;
+    public GameObject gameLost;
 
     [Header("Gold")]
     public TextMeshProUGUI curGold;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+
+        }
+    }
 
 
     // Start is called before the first frame update
@@ -40,6 +57,21 @@ public class UIManager : MonoBehaviour
 
     private void GoldUI()
     {
+        curGold.text = "" + GameWorld.Instance.playerGolds.ToString();
+    }
 
+    public void OnButtonPress()
+    {
+        GameWorld.Instance.DeductGold(5);
+    }
+
+    public void GameOver()
+    {
+        gameLost.SetActive(true);
+    }
+
+    public void GameVictory()
+    {
+        gameWin.SetActive(true);
     }
 }

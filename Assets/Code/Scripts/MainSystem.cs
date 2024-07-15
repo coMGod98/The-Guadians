@@ -42,7 +42,6 @@ public class MainSystem : MonoBehaviour
         {
             if (currentRound % 5 == 0)
             {
-                GameWorld?.Curro
                 //spawnScript?.SpawnBoss();
             }
             else
