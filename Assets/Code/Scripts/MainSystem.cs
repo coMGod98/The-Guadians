@@ -42,6 +42,7 @@ public class MainSystem : MonoBehaviour
         {
             if (currentRound % 5 == 0)
             {
+                GameWorld?.Curro
                 //spawnScript?.SpawnBoss();
             }
             else
@@ -66,12 +67,6 @@ public class MainSystem : MonoBehaviour
         {
             roundText.text = $"{currentRound}/{totalRounds}";
         }
-
-/*        
-        if (monsterCountText != null && spawnScript != null)
-        {
-            monsterCountText.text = $"{spawnScript.monsterSpawnCount}";
-        }*/
 
         
         if (RoundTime > roundDuration)

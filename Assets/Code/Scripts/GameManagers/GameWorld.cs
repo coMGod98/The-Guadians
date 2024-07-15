@@ -1,3 +1,4 @@
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class GameWorld : Singleton<GameWorld>
@@ -6,30 +7,36 @@ public class GameWorld : Singleton<GameWorld>
     [SerializeField] private MonsterManager _monsterManager;
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private BulletManager _bulletManager;
+    [SerializeField] private UIManager _uiManager;
 
-    public UnitManager UnitManager => _unitManager;
+   public UnitManager UnitManager => _unitManager;
     public MonsterManager MonsterManager => _monsterManager;
     public InputManager InputManager => _inputManager;
     public BulletManager BulletManager => _bulletManager;
+    public UIManager UIManager => _uiManager;
 
     private float spawnDelay;
     private float spawnInterval;
     private int spawnCount;
 
-    private float normalRoundTime;
-    private float bossRoundTime;
-    private float roundElapsedTime;
-    private float remainTime;
+    public float normalRoundTime;
+    public float bossRoundTime;
+    public float roundElapsedTime;
+    public float remainTime;
 
     public int curRound;
-    private int totalRounds;
+    public int totalRounds;
 
-    private void Awake(){
+    public int playerGolds;
+    
+
+    private void Awake()
+    {
         spawnDelay = 0.0f;
         spawnInterval = 1.0f;
         spawnCount = 0;
 
-        normalRoundTime = 10.0f;
+        normalRoundTime = 15.0f;
         bossRoundTime = 20.0f;
         roundElapsedTime = 0.0f;
         remainTime = 0.0f;
@@ -72,4 +79,5 @@ public class GameWorld : Singleton<GameWorld>
         _unitManager.Move();
         _monsterManager.Move();
     }
+    
 }

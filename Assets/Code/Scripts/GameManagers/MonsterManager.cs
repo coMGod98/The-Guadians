@@ -20,17 +20,18 @@ public class MonsterManager : MonoBehaviour
     //네브메쉬
     private NavMeshPath myPath;
 
-
-    private void Awake(){
+    private void Awake()
+    {
         selectedMonster = null;
         allMonsterList = new List<Monster>();
     }
 
     public void MonsterAI()
     {
-        for (var i = allMonsterList.Count - 1; i >= 0; --i){
+        for (var i = allMonsterList.Count - 1; i >= 0; --i)
+        {
             var monster = allMonsterList[i];
-            if(monster.IsDead)
+            if (monster.IsDead)
             {
                 allMonsterList.RemoveAt(i);
                 Destroy(monster.gameObject);
@@ -39,35 +40,41 @@ public class MonsterManager : MonoBehaviour
     }
 
     // 무브
-    public void Move(){
-        if(myPath == null) myPath = new NavMeshPath();
-        foreach(Monster monster in allMonsterList){
-            if(monster.transform.position == wayPointArray[monster.curWayPointIdx].position){
+    public void Move()
+    {
+        if (myPath == null) myPath = new NavMeshPath();
+        foreach (Monster monster in allMonsterList)
+        {
+            if (monster.transform.position == wayPointArray[monster.curWayPointIdx].position)
+            {
                 monster.curWayPointIdx++;
-                if(monster.curWayPointIdx > 3) monster.curWayPointIdx = 0;
+                if (monster.curWayPointIdx > 3) monster.curWayPointIdx = 0;
             }
-            if(NavMesh.CalculatePath(monster.transform.position, wayPointArray[monster.curWayPointIdx].position, NavMesh.AllAreas, myPath)){
-                switch(myPath.status){
+            if (NavMesh.CalculatePath(monster.transform.position, wayPointArray[monster.curWayPointIdx].position, NavMesh.AllAreas, myPath))
+            {
+                switch (myPath.status)
+                {
                     case NavMeshPathStatus.PathComplete:
                     case NavMeshPathStatus.PathPartial:
-                    if(myPath.corners.Length > 1){
-                        var corner = myPath.corners[1];
-                        Vector3 moveDir = corner - monster.transform.position;
-                        float moveDist = moveDir.magnitude;
-                        moveDir.Normalize();
-                        float rotAngle = Vector3.Angle(monster.transform.forward, moveDir);
-                        
-                        float rotDir = 1.0f;
-                        if(Vector3.Dot(monster.transform.right, moveDir) < 0.0f) rotDir = -1.0f;
+                        if (myPath.corners.Length > 1)
+                        {
+                            var corner = myPath.corners[1];
+                            Vector3 moveDir = corner - monster.transform.position;
+                            float moveDist = moveDir.magnitude;
+                            moveDir.Normalize();
+                            float rotAngle = Vector3.Angle(monster.transform.forward, moveDir);
 
-                        float rotateAmount = _rotSpeed * Time.deltaTime;
-                        if(rotAngle < rotateAmount) rotateAmount = rotAngle;
-                        monster.transform.Rotate(Vector3.up * rotDir * rotateAmount);
-            
-                        float moveAmount = monster.monsterStat.Speed * Time.deltaTime;
-                        if(moveDist < moveAmount) moveAmount = moveDist;
-                        monster.transform.Translate(moveDir * moveAmount, Space.World);
-                    }
+                            float rotDir = 1.0f;
+                            if (Vector3.Dot(monster.transform.right, moveDir) < 0.0f) rotDir = -1.0f;
+
+                            float rotateAmount = _rotSpeed * Time.deltaTime;
+                            if (rotAngle < rotateAmount) rotateAmount = rotAngle;
+                            monster.transform.Rotate(Vector3.up * rotDir * rotateAmount);
+
+                            float moveAmount = monster.monsterStat.Speed * Time.deltaTime;
+                            if (moveDist < moveAmount) moveAmount = moveDist;
+                            monster.transform.Translate(moveDir * moveAmount, Space.World);
+                        }
                         break;
                     case NavMeshPathStatus.PathInvalid:
                         break;
@@ -75,7 +82,6 @@ public class MonsterManager : MonoBehaviour
             }
         }
     }
-
 
     //스폰
     public void SpawnMonster()
@@ -86,7 +92,8 @@ public class MonsterManager : MonoBehaviour
         int index = monster.name.IndexOf("(Clone)");
         string name = monster.name.Substring(0, index);
 
-        var stat = new MonsterStat(){
+        var stat = new MonsterStat()
+        {
             Speed = 5.0f,
             HP = 1000,
         };
@@ -96,5 +103,11 @@ public class MonsterManager : MonoBehaviour
         MonsterDB.instance.LoadMonsterStatFromXML(name, monster);
 
         allMonsterList.Add(monster);
+    }
+
+    // 몬스터 수 반환
+    public int GetMonsterCount()
+    {
+        return allMonsterList.Count;
     }
 }
