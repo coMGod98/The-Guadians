@@ -36,7 +36,7 @@ public class MonsterDB : MonoBehaviour
     public void MakeMonsterXML()
     {
         XmlDocument monsterXMLDoc = new XmlDocument();
-        monsterXMLDoc.LoadXml(monsterDBFileXml.text);
+        //monsterXMLDoc.LoadXml(monsterDBFileXml.text);
 
         XmlNodeList monsterNodeList = monsterXMLDoc.GetElementsByTagName("row");
 

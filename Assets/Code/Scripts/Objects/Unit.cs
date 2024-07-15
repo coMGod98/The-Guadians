@@ -6,11 +6,14 @@ using UnityEngine.AI;
 [System.Serializable]
 public struct UnitStat
 {
-    public float AttackDelay;
+    public float AttackDuration;
+    public float AttackCoolTime;
     public float AttackRange;
     public float AttackPoint;
     public int AttackType;
     public int Gold;
+
+    public float AttackDelay;
 }
 
 public class Unit : MonoBehaviour
@@ -24,9 +27,7 @@ public class Unit : MonoBehaviour
     public State unitState;
     public Vector3 destination;
     public Monster targetMonster;
-    public float attackDuration = 1.0f;
     public float attackElapsedTime;
-    public float attackCoolTime = 2.0f;
     public bool forceMove = false;
 
 
@@ -37,8 +38,10 @@ public class Unit : MonoBehaviour
         outline = GetComponent<Outline>();
         destination = transform.position;
         targetMonster = null;
+        unitStat.AttackDuration = 1.0f;
+        unitStat.AttackCoolTime = 2.0f;
     }
 
-    public bool IsAttacking => attackDuration > attackElapsedTime;
-    public bool IsAttackable => !IsAttacking && attackCoolTime <= attackElapsedTime;
+    public bool IsAttacking => unitStat.AttackDuration > attackElapsedTime;
+    public bool IsAttackable => !IsAttacking && unitStat.AttackCoolTime <= attackElapsedTime;
 }

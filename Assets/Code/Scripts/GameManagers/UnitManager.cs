@@ -127,6 +127,15 @@ public class UnitManager : MonoBehaviour
         unit.targetMonster.InflictDamage(unit.unitStat.AttackPoint);
     }
 
+    void Rotate(Vector3 dir, Unit unit)
+    {
+        float rotAngle = Vector3.Angle(unit.transform.forward, dir);
+        float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
+
+        float rotateAmount = rotSpeed * Time.deltaTime;
+        if (rotAngle < rotateAmount) rotateAmount = rotAngle;
+        unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
+    }
 
     public void Move(){
         if(myPath == null) myPath = new NavMeshPath();
@@ -199,16 +208,6 @@ public class UnitManager : MonoBehaviour
         return destinationList;
     }
 
-    void Rotate(Vector3 dir, Unit unit){
-        float rotAngle = Vector3.Angle(unit.transform.forward, dir);
-        float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
-
-        float rotateAmount = rotSpeed * Time.deltaTime;
-        if(rotAngle < rotateAmount) rotateAmount = rotAngle;
-        unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
-    }
-
-
     // 스폰
     public void SpawnUnit()
     {
@@ -221,7 +220,7 @@ public class UnitManager : MonoBehaviour
         string rank = GetRandomPick();
         int index = unit.name.IndexOf("(Clone)");
         unit.name = unit.name.Substring(0, index) + rank;
-        UnitDB.instance.LoadUnitStatFromXML(unit.name, unit);
+        //UnitDB.instance.LoadUnitStatFromXML(unit.name, unit);
 
         unit.Init();
         switch(rank)

@@ -38,7 +38,7 @@ public class UnitDB : MonoBehaviour
     public void MakeUnitXML()
     {
         XmlDocument unitXMLDoc = new XmlDocument();
-        unitXMLDoc.LoadXml(unitDBFileXml.text);
+        //unitXMLDoc.LoadXml(unitDBFileXml.text);
 
         XmlNodeList unitNodeList = unitXMLDoc.GetElementsByTagName("row");
 

@@ -134,20 +134,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitMarker: {fileID: 4024676153467650685}
   unitStat:
-    AttackDelay: 0
+    AttackDuration: 0
+    AttackCoolTime: 0
     AttackRange: 0
     AttackPoint: 0
     AttackType: 0
     Gold: 0
+    AttackDelay: 0
   unitAnim: {fileID: 0}
   outline: {fileID: 0}
   unitState: 0
   destination: {x: 0, y: 0, z: 0}
   targetMonster: {fileID: 0}
-  rangeMonster: []
-  attackDuration: 1
   attackElapsedTime: 0
-  attackCoolTime: 2
+  forceMove: 0
 --- !u!114 &3064313835755014545
 MonoBehaviour:
   m_ObjectHideFlags: 0
