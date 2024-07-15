@@ -66,7 +66,7 @@ public class UnitManager : MonoBehaviour
             foreach(Monster monster in GameWorld.Instance.MonsterManager.allMonsterList)
             {
                 using (ListPool<Monster>.Get(out var rangedMonsters)){
-                    if(Vector3.Distance(unit.transform.position, monster.transform.position) <= unit.unitStat.AttackRange)
+                    if(Vector3.Distance(unit.transform.position, monster.transform.position) <= unit.unitData.AttackRange)
                     {
                         rangedMonsters.Add(monster);
                     }
@@ -83,7 +83,7 @@ public class UnitManager : MonoBehaviour
                         {
                             if (unit.targetMonster != null) 
                             {
-                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) > unit.unitStat.AttackRange)
+                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) > unit.unitData.AttackRange)
                                     unit.destination = unit.targetMonster.transform.position;
                                 else{
                                     unit.destination = unit.transform.position;
@@ -124,7 +124,7 @@ public class UnitManager : MonoBehaviour
         Rotate(dir, unit);
 
 
-        unit.targetMonster.InflictDamage(unit.unitStat.AttackPoint);
+        unit.targetMonster.InflictDamage(unit.unitData.AttackPoint);
     }
 
     void Rotate(Vector3 dir, Unit unit)

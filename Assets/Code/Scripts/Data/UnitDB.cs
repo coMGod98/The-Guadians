@@ -81,10 +81,9 @@ public class UnitDB : MonoBehaviour
 
     public void LoadUnitStatFromXML(string unitName, Unit unit)
     {
-        unit.unitStat.AttackDelay = dicUnits[unitName].attackDelay;
-        unit.unitStat.AttackRange = dicUnits[unitName].attackRange;
+       /* unit.unitStat.AttackRange = dicUnits[unitName].attackRange;
         unit.unitStat.AttackPoint = dicUnits[unitName].attackPoint;
         unit.unitStat.AttackType = dicUnits[unitName].attackType;
-        unit.unitStat.Gold = dicUnits[unitName].unitGold;
+        unit.unitStat.Gold = dicUnits[unitName].unitGold;*/
     }
 }

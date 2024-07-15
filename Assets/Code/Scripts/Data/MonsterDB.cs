@@ -74,8 +74,8 @@ public class MonsterDB : MonoBehaviour
     {
         int round = (int)Char.GetNumericValue(monsterName[^1]);
         
-        monster.monsterStat.HP = dicMonsters[round].monsterHP;
+/*        monster.monsterStat.HP = dicMonsters[round].monsterHP;
         monster.monsterStat.Gold = dicMonsters[round].monsterGold;
-        monster.monsterStat.Speed = dicMonsters[round].monsterSpeed;
+        monster.monsterStat.Speed = dicMonsters[round].monsterSpeed;*/
     }
 }
