@@ -25,7 +25,7 @@ public class EnhanceController : MonoBehaviour
     void OnUpgradeButtonClick()
     {
         
-        enhance.UpgaradePoint("WarriorN", "WarriorR", "WarriorE", "WarriorU", "WarriorL");
+       enhance.UpgaradePoint("WarriorN", "WarriorR", "WarriorE", "WarriorU", "WarriorL");
 
     
     }

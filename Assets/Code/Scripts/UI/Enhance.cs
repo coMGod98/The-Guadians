@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
+using UnityEngine.EventSystems;
 
-public class Enhance : MonoBehaviour
+public class Enhance : MonoBehaviour,IPointerClickHandler
 {
     private string filePath;
+   
+
     // Start is called before the first frame update
     void Start()
     {
         filePath = Application.dataPath + "/Code/Scripts/Object/UnitDB.xml";
     }
+   public void OnPointerClick(PointerEventData eventData)
+    {
+        UpgaradePoint();
+    }
+
     public void UpgaradePoint(params string[] unitNames)
     {
         XmlDocument xmlDoc = new XmlDocument();
@@ -23,7 +31,7 @@ public class Enhance : MonoBehaviour
             {
                 XmlNode attackPointNode = rowNode.SelectSingleNode("attackPoint");
                 int currentAttackPoint = int.Parse(attackPointNode.InnerText);
-                int newAttackPoint = currentAttackPoint + 5; // 예시로 5 증가
+                int newAttackPoint = currentAttackPoint + 5; 
                 attackPointNode.InnerText = newAttackPoint.ToString();
             }
             else
@@ -53,9 +61,13 @@ public class Enhance : MonoBehaviour
         }
 
     }
-    
+    public void Update()
+    {
+        
+    }
 
-  
-     
-    
+
+
+
+
 }

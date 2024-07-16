@@ -2144,7 +2144,8 @@ Transform:
   m_LocalPosition: {x: -6, y: 0.25, z: 0}
   m_LocalScale: {x: 3, y: 0.5, z: 3}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1806225229}
   m_Father: {fileID: 1242383749}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &439994808
@@ -2953,7 +2954,15 @@ MonoBehaviour:
   _unitManager: {fileID: 1061386834}
   _monsterManager: {fileID: 959494304}
   _inputManager: {fileID: 680347724}
+  _bulletManager: {fileID: 0}
+  _uiManager: {fileID: 0}
+  normalRoundTime: 0
+  bossRoundTime: 0
+  roundElapsedTime: 0
+  remainTime: 0
   curRound: 0
+  totalRounds: 0
+  playerGolds: 100
 --- !u!1 &598837100
 GameObject:
   m_ObjectHideFlags: 0
@@ -6607,6 +6616,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2103052211}
+  - {fileID: 1546681649}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1121188187
@@ -7453,15 +7463,14 @@ Transform:
   - {fileID: 1257395214}
   - {fileID: 508713481}
   - {fileID: 869344703}
-  - {fileID: 1806225229}
   - {fileID: 439994807}
   - {fileID: 500567836}
   - {fileID: 1717034706}
   - {fileID: 72263129}
   - {fileID: 671477163}
   - {fileID: 1200070568}
-  - {fileID: 981143569}
   - {fileID: 129333833}
+  - {fileID: 981143569}
   - {fileID: 1565939579}
   - {fileID: 755630450}
   - {fileID: 1291727272}
@@ -8879,6 +8888,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546146036}
   m_CullTransparentMesh: 1
+--- !u!1 &1546681648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546681649}
+  - component: {fileID: 1546681651}
+  - component: {fileID: 1546681650}
+  m_Layer: 0
+  m_Name: Terrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1546681649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546681648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25, y: 0.52, z: -25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1118400288}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!154 &1546681650
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546681648}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_TerrainData: {fileID: 15600000, guid: 69a53e4d506700044b372ebb02eb78af, type: 2}
+  m_EnableTreeColliders: 1
+--- !u!218 &1546681651
+Terrain:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546681648}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_TerrainData: {fileID: 15600000, guid: 69a53e4d506700044b372ebb02eb78af, type: 2}
+  m_TreeDistance: 5000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMinimumLODSimplification: 0
+  m_HeightmapMaximumLOD: 0
+  m_ShadowCastingMode: 2
+  m_DrawHeightmap: 1
+  m_DrawInstanced: 0
+  m_DrawTreesAndFoliage: 1
+  m_StaticShadowCaster: 0
+  m_IgnoreQualitySettings: 0
+  m_ReflectionProbeUsage: 1
+  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_BakeLightProbesForTrees: 1
+  m_PreserveTreePrototypeLayers: 0
+  m_DeringLightProbesForTrees: 1
+  m_ReceiveGI: 1
+  m_ScaleInLightmap: 0.0256
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_GroupingID: 0
+  m_RenderingLayerMask: 1
+  m_AllowAutoConnect: 1
+  m_EnableHeightmapRayTracing: 1
+  m_EnableTreesAndDetailsRayTracing: 0
+  m_TreeMotionVectorModeOverride: 3
 --- !u!1 &1565939578
 GameObject:
   m_ObjectHideFlags: 0
@@ -10182,6 +10284,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a09bc0a2d907f49a7e206c1b2a6043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerText: {fileID: 0}
+  roundText: {fileID: 0}
+  monsterCountText: {fileID: 0}
+  gameWin: {fileID: 0}
+  gameLost: {fileID: 0}
+  curGold: {fileID: 0}
 --- !u!1 &1717034705
 GameObject:
   m_ObjectHideFlags: 0
@@ -10630,11 +10738,11 @@ Transform:
   m_GameObject: {fileID: 1806225228}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: -6}
-  m_LocalScale: {x: 3, y: 0.5, z: 3}
+  m_LocalPosition: {x: 2, y: 0, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1242383749}
+  m_Father: {fileID: 439994807}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1806225230
 BoxCollider:
