@@ -3330,7 +3330,7 @@ MonoBehaviour:
   _monsterManager: {fileID: 959494304}
   _inputManager: {fileID: 680347724}
   _bulletManager: {fileID: 129776943}
-  _uiManager: {fileID: 0}
+  _uiManager: {fileID: 1696669178}
   normalRoundTime: 0
   bossRoundTime: 0
   roundElapsedTime: 0
