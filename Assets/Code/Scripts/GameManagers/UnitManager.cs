@@ -66,7 +66,7 @@ public class UnitManager : MonoBehaviour
             foreach(Monster monster in GameWorld.Instance.MonsterManager.allMonsterList)
             {
                 using (ListPool<Monster>.Get(out var rangedMonsters)){
-                    if(Vector3.Distance(unit.transform.position, monster.transform.position) <= unit.unitStat.AttackRange)
+                    if(Vector3.Distance(unit.transform.position, monster.transform.position) <= unit.unitData.AttackRange)
                     {
                         rangedMonsters.Add(monster);
                     }
@@ -83,7 +83,7 @@ public class UnitManager : MonoBehaviour
                         {
                             if (unit.targetMonster != null) 
                             {
-                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) > unit.unitStat.AttackRange)
+                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) > unit.unitData.AttackRange)
                                     unit.destination = unit.targetMonster.transform.position;
                                 else{
                                     unit.destination = unit.transform.position;
@@ -124,9 +124,18 @@ public class UnitManager : MonoBehaviour
         Rotate(dir, unit);
 
 
-        unit.targetMonster.InflictDamage(unit.unitStat.AttackPoint);
+        unit.targetMonster.InflictDamage(unit.unitData.AttackPoint);
     }
 
+    void Rotate(Vector3 dir, Unit unit)
+    {
+        float rotAngle = Vector3.Angle(unit.transform.forward, dir);
+        float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
+
+        float rotateAmount = rotSpeed * Time.deltaTime;
+        if (rotAngle < rotateAmount) rotateAmount = rotAngle;
+        unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
+    }
 
     public void Move(){
         if(myPath == null) myPath = new NavMeshPath();
@@ -199,16 +208,6 @@ public class UnitManager : MonoBehaviour
         return destinationList;
     }
 
-    void Rotate(Vector3 dir, Unit unit){
-        float rotAngle = Vector3.Angle(unit.transform.forward, dir);
-        float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
-
-        float rotateAmount = rotSpeed * Time.deltaTime;
-        if(rotAngle < rotateAmount) rotateAmount = rotAngle;
-        unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
-    }
-
-
     // 스폰
     public void SpawnUnit()
     {
@@ -221,7 +220,7 @@ public class UnitManager : MonoBehaviour
         string rank = GetRandomPick();
         int index = unit.name.IndexOf("(Clone)");
         unit.name = unit.name.Substring(0, index) + rank;
-        UnitDB.instance.LoadUnitStatFromXML(unit.name, unit);
+        //UnitDB.instance.LoadUnitStatFromXML(unit.name, unit);
 
         unit.Init();
         switch(rank)

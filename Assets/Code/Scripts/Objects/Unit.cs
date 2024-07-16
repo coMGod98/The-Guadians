@@ -4,9 +4,10 @@ using UnityEngine.AI;
 
 
 [System.Serializable]
-public struct UnitStat
+public struct UnitData
 {
-    public float AttackDelay;
+    public float AttackDuration;
+    public float AttackCoolTime;
     public float AttackRange;
     public float AttackPoint;
     public int AttackType;
@@ -17,16 +18,14 @@ public class Unit : MonoBehaviour
 {  
 
     public GameObject unitMarker;
-    public UnitStat unitStat;
+    public UnitData unitData;
     public Animator unitAnim;
     public Outline outline;
     
     public State unitState;
     public Vector3 destination;
     public Monster targetMonster;
-    public float attackDuration = 1.0f;
     public float attackElapsedTime;
-    public float attackCoolTime = 2.0f;
     public bool forceMove = false;
 
 
@@ -37,8 +36,10 @@ public class Unit : MonoBehaviour
         outline = GetComponent<Outline>();
         destination = transform.position;
         targetMonster = null;
+        unitData.AttackDuration = 1.0f;
+        unitData.AttackCoolTime = 2.0f;
     }
 
-    public bool IsAttacking => attackDuration > attackElapsedTime;
-    public bool IsAttackable => !IsAttacking && attackCoolTime <= attackElapsedTime;
+    public bool IsAttacking => unitData.AttackDuration > attackElapsedTime;
+    public bool IsAttackable => !IsAttacking && unitData.AttackCoolTime <= attackElapsedTime;
 }

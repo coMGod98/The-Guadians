@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
-public struct MonsterStat
+public struct MonsterData
 {
     public float HP;
     public int Gold;
@@ -15,14 +15,14 @@ public class Monster : MonoBehaviour
 {
     public Animator monsterAnim;
     public int curWayPointIdx;
-    public MonsterStat monsterStat;
+    public MonsterData monsterData;
     public float curHP;
 
     public void Init()
     {
         monsterAnim = GetComponentInChildren<Animator>();   
         curWayPointIdx = 1;
-        curHP = monsterStat.HP;
+        curHP = monsterData.HP;
     }
     
     public void InflictDamage(float dmg)

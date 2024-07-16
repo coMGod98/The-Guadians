@@ -71,7 +71,7 @@ public class MonsterManager : MonoBehaviour
                             if (rotAngle < rotateAmount) rotateAmount = rotAngle;
                             monster.transform.Rotate(Vector3.up * rotDir * rotateAmount);
 
-                            float moveAmount = monster.monsterStat.Speed * Time.deltaTime;
+                            float moveAmount = monster.monsterData.Speed * Time.deltaTime;
                             if (moveDist < moveAmount) moveAmount = moveDist;
                             monster.transform.Translate(moveDir * moveAmount, Space.World);
                         }
@@ -92,12 +92,12 @@ public class MonsterManager : MonoBehaviour
         int index = monster.name.IndexOf("(Clone)");
         string name = monster.name.Substring(0, index);
 
-        var stat = new MonsterStat()
+        var stat = new MonsterData()
         {
             Speed = 5.0f,
             HP = 1000,
         };
-        monster.monsterStat = stat;
+        monster.monsterData = stat;
         monster.Init();
 
         MonsterDB.instance.LoadMonsterStatFromXML(name, monster);
