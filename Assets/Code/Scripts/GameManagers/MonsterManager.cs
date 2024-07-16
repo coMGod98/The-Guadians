@@ -90,24 +90,11 @@ public class MonsterManager : MonoBehaviour
         Monster monster = obj.GetComponent<Monster>();
 
         int index = monster.name.IndexOf("(Clone)");
-        string name = monster.name.Substring(0, index);
-
-        var stat = new MonsterData()
-        {
-            Speed = 5.0f,
-            HP = 1000,
-        };
-        monster.monsterData = stat;
+        monster.name = monster.name.Substring(0, index);
+        GameWorld.Instance.BalanceManager.LoadMonsterData(monster);
+        
         monster.Init();
 
-        MonsterDB.instance.LoadMonsterStatFromXML(name, monster);
-
         allMonsterList.Add(monster);
-    }
-
-    // 몬스터 수 반환
-    public int GetMonsterCount()
-    {
-        return allMonsterList.Count;
     }
 }

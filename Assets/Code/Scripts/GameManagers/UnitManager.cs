@@ -37,11 +37,11 @@ public class UnitManager : MonoBehaviour
 
         dicRank = new Dictionary<string, double>()
         {
-            {"N", 25.0f},
-            {"R", 25.0f},
-            {"E", 25.4f},
-            {"U", 25.4f},
-            {"L", 25.01f}
+            {"_Common", 25.0f},
+            {"_Uncommon", 25.0f},
+            {"_Rare", 25.4f},
+            {"_Epic", 25.4f},
+            {"_Legendary", 25.01f}
         };
 
         foreach(float value in dicRank.Values){
@@ -66,7 +66,7 @@ public class UnitManager : MonoBehaviour
             foreach(Monster monster in GameWorld.Instance.MonsterManager.allMonsterList)
             {
                 using (ListPool<Monster>.Get(out var rangedMonsters)){
-                    if(Vector3.Distance(unit.transform.position, monster.transform.position) <= unit.unitData.AttackRange)
+                    if(Vector3.Distance(unit.transform.position, monster.transform.position) <= unit.unitData.attackRange)
                     {
                         rangedMonsters.Add(monster);
                     }
@@ -83,7 +83,7 @@ public class UnitManager : MonoBehaviour
                         {
                             if (unit.targetMonster != null) 
                             {
-                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) > unit.unitData.AttackRange)
+                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) > unit.unitData.attackRange)
                                     unit.destination = unit.targetMonster.transform.position;
                                 else{
                                     unit.destination = unit.transform.position;
@@ -124,7 +124,7 @@ public class UnitManager : MonoBehaviour
         Rotate(dir, unit);
 
 
-        unit.targetMonster.InflictDamage(unit.unitData.AttackPoint);
+        unit.targetMonster.InflictDamage(unit.unitData.attackDamage[unit.upgarde]);
     }
 
     void Rotate(Vector3 dir, Unit unit)
@@ -220,24 +220,24 @@ public class UnitManager : MonoBehaviour
         string rank = GetRandomPick();
         int index = unit.name.IndexOf("(Clone)");
         unit.name = unit.name.Substring(0, index) + rank;
-        //UnitDB.instance.LoadUnitStatFromXML(unit.name, unit);
+        GameWorld.Instance.BalanceManager.LoadUnitData(unit);
 
         unit.Init();
         switch(rank)
         {
-            case "N":
+            case "_Common":
             break;
-            case "R":
+            case "_Uncommon":
             unit.outline.outlineColor = Color.green;
             break;
-            case "E":
+            case "_Rare":
             unit.outline.outlineColor = Color.cyan;
             break;
-            case "U":
-            unit.outline.outlineColor = Color.yellow;
-            break;
-            case "L":
+            case "_Epic":
             unit.outline.outlineColor = Color.magenta;
+            break;
+            case "_Legendary":
+            unit.outline.outlineColor = Color.yellow;
             break;
         }
 

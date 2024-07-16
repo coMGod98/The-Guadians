@@ -3,14 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[System.Serializable]
-public struct MonsterData
-{
-    public float HP;
-    public int Gold;
-    public float Speed;
-}
-
 public class Monster : MonoBehaviour
 {
     public Animator monsterAnim;

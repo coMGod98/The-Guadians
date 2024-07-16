@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class GameWorld : Singleton<GameWorld>
 {
+    [SerializeField] private BalanceManager _balanceManager;
     [SerializeField] private UnitManager _unitManager;
     [SerializeField] private MonsterManager _monsterManager;
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private BulletManager _bulletManager;
     [SerializeField] private UIManager _uiManager;
 
-   public UnitManager UnitManager => _unitManager;
+    public BalanceManager BalanceManager => _balanceManager;
+    public UnitManager UnitManager => _unitManager;
     public MonsterManager MonsterManager => _monsterManager;
     public InputManager InputManager => _inputManager;
     public BulletManager BulletManager => _bulletManager;
     public UIManager UIManager => _uiManager;
+
 
     private float spawnDelay;
     private float spawnInterval;
@@ -47,6 +50,13 @@ public class GameWorld : Singleton<GameWorld>
         curRound = 0;
         totalRounds = _monsterManager.monsterPrefabArray.Length;
     }
+
+    private void Start()
+    {
+        _balanceManager.Init();
+
+    }
+
     private void Update()
     {
         if (curRound < totalRounds)
@@ -77,7 +87,7 @@ public class GameWorld : Singleton<GameWorld>
                 UIManager.Instance.GameVictory();
             }
 
-            if (_monsterManager.GetMonsterCount() >= 4)
+            if (_monsterManager.allMonsterList.Count >= 4)
             {
                 UIManager.Instance.GameOver();
             }
