@@ -62,10 +62,9 @@ public class MonsterManager : MonoBehaviour
                             Vector3 moveDir = corner - monster.transform.position;
                             float moveDist = moveDir.magnitude;
                             moveDir.Normalize();
-                            float rotAngle = Vector3.Angle(monster.transform.forward, moveDir);
 
-                            float rotDir = 1.0f;
-                            if (Vector3.Dot(monster.transform.right, moveDir) < 0.0f) rotDir = -1.0f;
+                            float rotAngle = Vector3.Angle(monster.transform.forward, moveDir);
+                            float rotDir = Vector3.Dot(monster.transform.right, moveDir) < 0.0f ? -1.0f : 1.0f;
 
                             float rotateAmount = _rotSpeed * Time.deltaTime;
                             if (rotAngle < rotateAmount) rotateAmount = rotAngle;
@@ -90,8 +89,8 @@ public class MonsterManager : MonoBehaviour
         Monster monster = obj.GetComponent<Monster>();
 
         int index = monster.name.IndexOf("(Clone)");
-        monster.name = monster.name.Substring(0, index);
-        GameWorld.Instance.BalanceManager.LoadMonsterData(monster);
+        monster.monsterKey = monster.name.Substring(0, index);
+        monster.monsterData = GameWorld.Instance.BalanceManager.monsterDic[monster.monsterKey];
         
         monster.Init();
 

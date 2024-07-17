@@ -50,6 +50,7 @@ public struct BulletData
     public float scale;
     public float damageCoefficient;
     public float damageRange;
+    public float speed;
     public int attackableNumber;
 }
 
@@ -275,14 +276,6 @@ public class BalanceManager : MonoBehaviour
         }
     }
 
-    public void LoadUnitData(Unit unit)
-    {
-        UnitType type = (UnitType)Enum.Parse(typeof(UnitType), unit.name);
-
-        unit.unitData = unitDic[type];
-    }
-
-
     void SaveMonsterData()
     {
         monsterDic = new Dictionary<string, MonsterData>();
@@ -297,11 +290,6 @@ public class BalanceManager : MonoBehaviour
         }
     }
 
-    public void LoadMonsterData(Monster monster)
-    {
-        monster.monsterData = monsterDic[monster.name];
-    }
-
     void SaveBulletData()
     {
         bulletDic = new Dictionary<int, BulletData>();
@@ -314,6 +302,7 @@ public class BalanceManager : MonoBehaviour
         bulletData.scale = 1.0f; // 생각
         bulletData.damageCoefficient = 0.5f;
         bulletData.damageRange = 0.0f; // 생각
+        bulletData.speed = 3.0f;
         bulletData.attackableNumber = 1;
 
         bulletDic[bulletData.key] = bulletData;
@@ -325,6 +314,7 @@ public class BalanceManager : MonoBehaviour
         bulletData.scale = 1.0f; // 생각
         bulletData.damageCoefficient = 0.8f;
         bulletData.damageRange = 0.0f; // 생각
+        bulletData.speed = 3.0f;
         bulletData.attackableNumber = 1;
 
         bulletDic[bulletData.key] = bulletData;
@@ -336,6 +326,7 @@ public class BalanceManager : MonoBehaviour
         bulletData.scale = 1.0f; // 생각
         bulletData.damageCoefficient = 0.8f;
         bulletData.damageRange = 0.0f; // 생각
+        bulletData.speed = 3.0f;
         bulletData.attackableNumber = 3;
 
         bulletDic[bulletData.key] = bulletData;
@@ -347,6 +338,7 @@ public class BalanceManager : MonoBehaviour
         bulletData.scale = 1.0f; // 생각
         bulletData.damageCoefficient = 1.0f;
         bulletData.damageRange = 0.0f; // 생각
+        bulletData.speed = 3.0f;
         bulletData.attackableNumber = 5;    
 
         bulletDic[bulletData.key] = bulletData;    
@@ -358,6 +350,7 @@ public class BalanceManager : MonoBehaviour
         bulletData.scale = 1.0f; // 생각
         bulletData.damageCoefficient = 1.0f;
         bulletData.damageRange = 0.0f; // 생각
+        bulletData.speed = 3.0f;
         bulletData.attackableNumber = 20;       
 
         bulletDic[bulletData.key] = bulletData; 

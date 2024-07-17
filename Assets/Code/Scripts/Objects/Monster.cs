@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    public string monsterKey;
+
     public Animator monsterAnim;
     public int curWayPointIdx;
     public MonsterData monsterData;

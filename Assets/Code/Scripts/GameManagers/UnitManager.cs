@@ -123,7 +123,8 @@ public class UnitManager : MonoBehaviour
         dir.Normalize();
         Rotate(dir, unit);
 
-
+        
+        GameWorld.Instance.BulletManager.SpawnBullet(unit);
         unit.targetMonster.InflictDamage(unit.unitData.attackDamage[unit.upgarde]);
     }
 
@@ -219,8 +220,8 @@ public class UnitManager : MonoBehaviour
 
         string rank = GetRandomPick();
         int index = unit.name.IndexOf("(Clone)");
-        unit.name = unit.name.Substring(0, index) + rank;
-        GameWorld.Instance.BalanceManager.LoadUnitData(unit);
+        unit.unitKey = (UnitType)System.Enum.Parse(typeof(UnitType) ,unit.name.Substring(0, index) + rank);
+        unit.unitData = GameWorld.Instance.BalanceManager.unitDic[unit.unitKey];
 
         unit.Init();
         switch(rank)
@@ -240,9 +241,6 @@ public class UnitManager : MonoBehaviour
             unit.outline.outlineColor = Color.yellow;
             break;
         }
-
-        //unit.unitStat.AttackRange = 5.0f;
-
 
         allUnitList.Add(unit);
     }

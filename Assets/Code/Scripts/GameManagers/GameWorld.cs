@@ -9,14 +9,18 @@ public class GameWorld : Singleton<GameWorld>
     [SerializeField] private MonsterManager _monsterManager;
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private BulletManager _bulletManager;
+    [SerializeField] private FXManager _fxManager;
     [SerializeField] private UIManager _uiManager;
+    [SerializeField] private SoundManager _soundManager;
 
     public BalanceManager BalanceManager => _balanceManager;
     public UnitManager UnitManager => _unitManager;
     public MonsterManager MonsterManager => _monsterManager;
     public InputManager InputManager => _inputManager;
     public BulletManager BulletManager => _bulletManager;
+    public FXManager FXManager => _fxManager;
     public UIManager UIManager => _uiManager;
+    public SoundManager SoundManager => _soundManager;
 
 
     private float spawnDelay;
@@ -82,15 +86,15 @@ public class GameWorld : Singleton<GameWorld>
                 remainTime = 0.0f;
                 spawnCount = 0;
             }
-            if (curRound >= totalRounds)
+/*            if (curRound >= totalRounds)
             {
-                UIManager.Instance.GameVictory();
+                _uiManager.GameVictory();
             }
 
             if (_monsterManager.allMonsterList.Count >= 4)
             {
-                UIManager.Instance.GameOver();
-            }
+                _uiManager.GameOver();
+            }*/
         }
 
         _inputManager.AdvanceInput();
@@ -100,6 +104,7 @@ public class GameWorld : Singleton<GameWorld>
 
         _unitManager.Move();
         _monsterManager.Move();
+        _bulletManager.Move();
     }
     public void DeductGold(int amount)
     {

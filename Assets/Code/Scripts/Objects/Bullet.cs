@@ -5,5 +5,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public int bulletKey;
+    public Monster targetMonster;
 
+    public BulletData bulletData;
+    
 }

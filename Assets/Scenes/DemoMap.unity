@@ -1198,6 +1198,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51b08675a58149628d9f6378bb2aba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefabsArray:
+  - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
+  - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
+  - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
+  - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
+  - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
+  - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
+  allBulletList: []
 --- !u!1 &130632625
 GameObject:
   m_ObjectHideFlags: 0
@@ -3369,7 +3377,9 @@ Transform:
   - {fileID: 1061386835}
   - {fileID: 959494303}
   - {fileID: 129776942}
+  - {fileID: 1126644347}
   - {fileID: 1696669177}
+  - {fileID: 1389065433}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &598639057
@@ -3389,7 +3399,9 @@ MonoBehaviour:
   _monsterManager: {fileID: 959494304}
   _inputManager: {fileID: 680347724}
   _bulletManager: {fileID: 129776943}
+  _fxManager: {fileID: 1126644348}
   _uiManager: {fileID: 1696669178}
+  _soundManager: {fileID: 1389065434}
   normalRoundTime: 0
   bossRoundTime: 0
   roundElapsedTime: 0
@@ -6912,7 +6924,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1061386835}
   - component: {fileID: 1061386834}
-  - component: {fileID: 1061386836}
   m_Layer: 0
   m_Name: UnitManager
   m_TagString: Untagged
@@ -6956,19 +6967,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 598639056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1061386836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1061386833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88138acf73bf84847bce6baea5f9e351, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitDBFileXml: {fileID: 4900000, guid: 00a156912d33cdf49adfc15687ad468c, type: 3}
 --- !u!1 &1079328761
 GameObject:
   m_ObjectHideFlags: 0
@@ -7502,6 +7500,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1126644346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1126644347}
+  - component: {fileID: 1126644348}
+  m_Layer: 0
+  m_Name: FXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1126644347
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126644346}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 598639056}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1126644348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126644346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea33478032323c14db87d8ab3f74d1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1154884592
 GameObject:
   m_ObjectHideFlags: 0
@@ -9314,6 +9356,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371903617}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1389065432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1389065433}
+  - component: {fileID: 1389065434}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1389065433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389065432}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 598639056}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1389065434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389065432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07aba2262be921c48a101885f467d9d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1392588567
 GameObject:
   m_ObjectHideFlags: 0

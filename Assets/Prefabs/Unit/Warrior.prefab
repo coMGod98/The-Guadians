@@ -34,6 +34,7 @@ Transform:
   m_Children:
   - {fileID: 4816316769394946082}
   - {fileID: 3739813277774534119}
+  - {fileID: 4859141877689186324}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8548822932139651455
@@ -48,17 +49,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ae4cc57fa9ee04b91b0509c329a752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitKey: 0
   unitMarker: {fileID: 8337243605124688575}
-  unitStat:
-    AttackDuration: 0
-    AttackCoolTime: 0
-    AttackRange: 0
-    AttackPoint: 0
-    AttackType: 0
-    Gold: 0
-    AttackDelay: 0
+  unitData:
+    type: 0
+    attackDamage: []
+    attackSpeed: 0
+    attackRange: 0
+    attackDuration: 0
+    attackCoolTime: 0
+    salesGold: 0
+    bulletKey: 0
   unitAnim: {fileID: 0}
   outline: {fileID: 0}
+  unitDamage: 0
+  upgarde: 0
   unitState: 0
   destination: {x: 0, y: 0, z: 0}
   targetMonster: {fileID: 0}
@@ -189,6 +194,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8659169913430545529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4859141877689186324}
+  - component: {fileID: 4891572789206419962}
+  m_Layer: 10
+  m_Name: Socket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4859141877689186324
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659169913430545529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6937358026593022346}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4891572789206419962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659169913430545529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f34c1c33b37d0346b55e0ea8370b833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4997948748420585417
 PrefabInstance:
   m_ObjectHideFlags: 0
