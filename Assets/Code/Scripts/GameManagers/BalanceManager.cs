@@ -267,7 +267,7 @@ public class BalanceManager : MonoBehaviour
         unitDic[unitData.type] = unitData;
     }
 
-    void UnitDamageList(List<float> list, float dmg)
+   public void UnitDamageList(List<float> list, float dmg)
     {
         for(int i = 0; i < 20; i++)
         {
