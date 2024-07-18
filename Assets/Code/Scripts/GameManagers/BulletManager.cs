@@ -13,13 +13,19 @@ public class BulletManager : MonoBehaviour
 
     public void BulletAI()
     {
-        foreach(Bullet bullet in allBulletList)
+        for (int i = allBulletList.Count - 1; i >= 0; --i)
         {
+            Bullet bullet = allBulletList[i];
             switch (bullet.bulletData.hitCheck)
             {
                 case BulletHitCheck.Targeting:
                 {
-
+                    if(bullet.transform.position == bullet.targetMonster.transform.position)
+                    {
+                        bullet.targetMonster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageRange);
+                        allBulletList.Remove(bullet);
+                        Destroy(bullet.gameObject);
+                    }
                     break;
                 }
                 case BulletHitCheck.Moving:
@@ -32,14 +38,16 @@ public class BulletManager : MonoBehaviour
                         {
                             bullet.hitMonsterList.Add(monster);
                             monster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageRange);
+                            Debug.Log("Hit");
                         }
                     }
-
+                    // 어느 정도 이동하면 삭제
                     break;
                 }
             }
         }
     }
+
 
     public void BulletMove()
     {

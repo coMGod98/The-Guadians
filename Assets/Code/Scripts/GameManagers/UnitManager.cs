@@ -86,10 +86,10 @@ public class UnitManager : MonoBehaviour
                             {
                                 if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) > unit.unitData.attackRange)
                                     unit.destination = unit.targetMonster.transform.position;
-                                else{
+                                else
+                                {
                                     unit.destination = unit.transform.position;
-                                    if(unit.IsAttackable)
-                                        OnAttack(unit);
+                                    if(unit.IsAttackable) OnAttack(unit);
                                 }
                             }
                             break;
@@ -97,8 +97,13 @@ public class UnitManager : MonoBehaviour
                         case State.Hold:
                         {
                             unit.destination = unit.transform.position;
-                            if(unit.targetMonster != null && unit.IsAttackable)
-                                OnAttack(unit);
+                            if(unit.targetMonster != null)
+                            {
+                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) <= unit.unitData.attackRange && unit.IsAttackable) 
+                                {
+                                    OnAttack(unit);
+                                }
+                            }
                             break;
                         }
                     }

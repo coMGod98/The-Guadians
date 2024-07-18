@@ -6,9 +6,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int bulletKey;
+    public Unit bulletOwner;
     public Monster targetMonster;
     public List<Monster> hitMonsterList;
-    public Unit bulletOwner;
+    
 
     public BulletData bulletData;
     

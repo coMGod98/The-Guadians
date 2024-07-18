@@ -28,15 +28,7 @@ public class MonsterManager : MonoBehaviour
 
     public void MonsterAI()
     {
-        foreach(Monster monster in allMonsterList)
-        {
-            if (monster.IsDead)
-            {
-                allMonsterList.Remove(monster);
-                Destroy(monster.gameObject);
-            }
-        }
-/*        for (var i = allMonsterList.Count - 1; i >= 0; --i)
+        for (var i = allMonsterList.Count - 1; i >= 0; --i)
         {
             var monster = allMonsterList[i];
             if (monster.IsDead)
@@ -44,7 +36,7 @@ public class MonsterManager : MonoBehaviour
                 allMonsterList.RemoveAt(i);
                 Destroy(monster.gameObject);
             }
-        }*/
+        }
     }
 
     // 무브
