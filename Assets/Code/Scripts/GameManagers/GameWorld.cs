@@ -101,10 +101,11 @@ public class GameWorld : Singleton<GameWorld>
 
         _unitManager.UnitAI();
         _monsterManager.MonsterAI();
+        _bulletManager.BulletAI();
 
-        _unitManager.Move();
-        _monsterManager.Move();
-        _bulletManager.Move();
+        _unitManager.UnitMove();
+        _monsterManager.MonsterMove();
+        _bulletManager.BulletMove();
     }
     public void DeductGold(int amount)
     {

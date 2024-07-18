@@ -301,8 +301,8 @@ public class BalanceManager : MonoBehaviour
         bulletData.hitCheck = BulletHitCheck.Targeting;
         bulletData.scale = 1.0f; // 생각
         bulletData.damageCoefficient = 0.5f;
-        bulletData.damageRange = 0.0f; // 생각
-        bulletData.speed = 3.0f;
+        bulletData.damageRange = 1.0f; // 생각
+        bulletData.speed = 12.0f;
         bulletData.attackableNumber = 1;
 
         bulletDic[bulletData.key] = bulletData;
@@ -313,8 +313,8 @@ public class BalanceManager : MonoBehaviour
         bulletData.hitCheck = BulletHitCheck.Targeting;
         bulletData.scale = 1.0f; // 생각
         bulletData.damageCoefficient = 0.8f;
-        bulletData.damageRange = 0.0f; // 생각
-        bulletData.speed = 3.0f;
+        bulletData.damageRange = 1.0f; // 생각
+        bulletData.speed = 12.0f;
         bulletData.attackableNumber = 1;
 
         bulletDic[bulletData.key] = bulletData;
@@ -325,8 +325,8 @@ public class BalanceManager : MonoBehaviour
         bulletData.hitCheck = BulletHitCheck.Moving;
         bulletData.scale = 1.0f; // 생각
         bulletData.damageCoefficient = 0.8f;
-        bulletData.damageRange = 0.0f; // 생각
-        bulletData.speed = 3.0f;
+        bulletData.damageRange = 1.0f; // 생각
+        bulletData.speed = 9.0f;
         bulletData.attackableNumber = 3;
 
         bulletDic[bulletData.key] = bulletData;
@@ -337,8 +337,8 @@ public class BalanceManager : MonoBehaviour
         bulletData.hitCheck = BulletHitCheck.Moving;
         bulletData.scale = 1.0f; // 생각
         bulletData.damageCoefficient = 1.0f;
-        bulletData.damageRange = 0.0f; // 생각
-        bulletData.speed = 3.0f;
+        bulletData.damageRange = 1.0f; // 생각
+        bulletData.speed = 9.0f;
         bulletData.attackableNumber = 5;    
 
         bulletDic[bulletData.key] = bulletData;    
@@ -349,8 +349,8 @@ public class BalanceManager : MonoBehaviour
         bulletData.hitCheck = BulletHitCheck.Moving;
         bulletData.scale = 1.0f; // 생각
         bulletData.damageCoefficient = 1.0f;
-        bulletData.damageRange = 0.0f; // 생각
-        bulletData.speed = 3.0f;
+        bulletData.damageRange = 1.0f; // 생각
+        bulletData.speed = 12.0f;
         bulletData.attackableNumber = 20;       
 
         bulletDic[bulletData.key] = bulletData; 

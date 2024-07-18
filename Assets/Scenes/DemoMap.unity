@@ -1198,6 +1198,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51b08675a58149628d9f6378bb2aba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterMask:
+    serializedVersion: 2
+    m_Bits: 2048
   bulletPrefabsArray:
   - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
   - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
@@ -2353,58 +2356,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394333244}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &407205241
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 407205243}
-  - component: {fileID: 407205242}
-  m_Layer: 0
-  m_Name: MainSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &407205242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407205241}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 347e57b248f69d44784b3a7afb141002, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerText: {fileID: 1465655823}
-  roundText: {fileID: 674134329}
-  monsterCountText: {fileID: 63725007}
-  gameWinPanel: {fileID: 0}
-  gameLostPanel: {fileID: 0}
-  normalRound: 60
-  bossRound: 120
-  totalRounds: 6
---- !u!4 &407205243
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407205241}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &429302549
 GameObject:
   m_ObjectHideFlags: 0
@@ -13548,7 +13499,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 733598948}
-  - {fileID: 407205243}
   - {fileID: 684990940}
   - {fileID: 759010178}
   - {fileID: 1118400288}

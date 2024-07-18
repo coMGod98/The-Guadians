@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
 {
     public int bulletKey;
     public Monster targetMonster;
+    public List<Monster> hitMonsterList;
+    public Unit bulletOwner;
 
     public BulletData bulletData;
     

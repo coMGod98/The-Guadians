@@ -11,7 +11,6 @@ public class Unit : MonoBehaviour
     public Animator unitAnim;
     public Outline outline;
 
-    public float unitDamage;
     public int upgarde;
 
     public State unitState;
@@ -32,4 +31,5 @@ public class Unit : MonoBehaviour
 
     public bool IsAttacking => unitData.attackDuration > attackElapsedTime;
     public bool IsAttackable => !IsAttacking && unitData.attackCoolTime <= attackElapsedTime;
+    public float unitDamage => unitData.attackDamage[upgarde];
 }

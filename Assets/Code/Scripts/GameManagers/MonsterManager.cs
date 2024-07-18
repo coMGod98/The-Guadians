@@ -28,7 +28,15 @@ public class MonsterManager : MonoBehaviour
 
     public void MonsterAI()
     {
-        for (var i = allMonsterList.Count - 1; i >= 0; --i)
+        foreach(Monster monster in allMonsterList)
+        {
+            if (monster.IsDead)
+            {
+                allMonsterList.Remove(monster);
+                Destroy(monster.gameObject);
+            }
+        }
+/*        for (var i = allMonsterList.Count - 1; i >= 0; --i)
         {
             var monster = allMonsterList[i];
             if (monster.IsDead)
@@ -36,11 +44,11 @@ public class MonsterManager : MonoBehaviour
                 allMonsterList.RemoveAt(i);
                 Destroy(monster.gameObject);
             }
-        }
+        }*/
     }
 
     // 무브
-    public void Move()
+    public void MonsterMove()
     {
         if (myPath == null) myPath = new NavMeshPath();
         foreach (Monster monster in allMonsterList)

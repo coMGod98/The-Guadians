@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 318372008865901707}
   - component: {fileID: 4861819343815096548}
   - component: {fileID: 8800693006489401618}
-  - component: {fileID: 5429407666529456022}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5429407666529456022
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3344610747983043527}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6832079743754989998
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,6 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletKey: 0
+  targetMonster: {fileID: 0}
+  hitMonsterList: []
   bulletData:
     key: 0
     shootingType: 0
@@ -158,4 +138,5 @@ MonoBehaviour:
     scale: 0
     damageCoefficient: 0
     damageRange: 0
+    speed: 0
     attackableNumber: 0

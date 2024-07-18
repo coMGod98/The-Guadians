@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -121,24 +122,29 @@ public class UnitManager : MonoBehaviour
         unit.unitAnim.CrossFade("Attack", 0.1f);
         Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
         dir.Normalize();
-        Rotate(dir, unit);
+
+        StopAllCoroutines();
+        StartCoroutine(Rotating(dir, unit));
 
         
         GameWorld.Instance.BulletManager.SpawnBullet(unit);
-        unit.targetMonster.InflictDamage(unit.unitData.attackDamage[unit.upgarde]);
     }
 
-    void Rotate(Vector3 dir, Unit unit)
+    IEnumerator Rotating(Vector3 dir, Unit unit)
     {
         float rotAngle = Vector3.Angle(unit.transform.forward, dir);
         float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
-
-        float rotateAmount = rotSpeed * Time.deltaTime;
-        if (rotAngle < rotateAmount) rotateAmount = rotAngle;
-        unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
+        while (rotAngle > 0.0f)
+        {
+            float rotateAmount = rotSpeed * Time.deltaTime;
+            if (rotAngle < rotateAmount) rotateAmount = rotAngle;
+            unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
+            rotAngle -= rotateAmount;
+            yield return null;
+        }
     }
 
-    public void Move(){
+    public void UnitMove(){
         if(myPath == null) myPath = new NavMeshPath();
         foreach(Unit unit in allUnitList){
             if(!unit.IsAttacking || unit.forceMove) 
@@ -153,8 +159,13 @@ public class UnitManager : MonoBehaviour
                             float moveDist = moveDir.magnitude;
                             moveDir.Normalize();
 
-                            Rotate(moveDir, unit);
-                
+                            float rotAngle = Vector3.Angle(unit.transform.forward, moveDir);
+                            float rotDir = Vector3.Dot(unit.transform.right, moveDir) < 0.0f ? -1.0f : 1.0f;
+
+                            float rotateAmount = rotSpeed * Time.deltaTime;
+                            if (rotAngle < rotateAmount) rotateAmount = rotAngle;
+                            unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
+
                             float moveAmount = moveSpeed * Time.deltaTime;
                             if(moveDist < moveAmount) moveAmount = moveDist;
                             unit.transform.Translate(moveDir * moveAmount, Space.World);
