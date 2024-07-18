@@ -33,10 +33,6 @@ public class BulletManager : MonoBehaviour
                             bullet.hitMonsterList.Add(monster);
                             monster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageRange);
                         }
-                        else
-                        {
-                            Destroy(bullet.gameObject);
-                        }
                     }
 
                     break;
