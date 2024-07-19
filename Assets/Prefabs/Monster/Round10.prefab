@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2935921454577977820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6360594943247976399}
+  - component: {fileID: 8321580867144358255}
+  m_Layer: 11
+  m_Name: Socket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6360594943247976399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2935921454577977820}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4752430700891008103}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8321580867144358255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2935921454577977820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f34c1c33b37d0346b55e0ea8370b833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7691311844662774141
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +77,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8817624745221116171}
+  - {fileID: 6360594943247976399}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &54488013970267915
@@ -47,12 +92,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc240165934fe6449acb3d9a952e421e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterKey: 
   monsterAnim: {fileID: 0}
   curWayPointIdx: 0
-  monsterStat:
+  monsterData:
+    round: 
     HP: 0
     Gold: 0
     Speed: 0
+  curHP: 0
 --- !u!114 &-3563500447889310118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,10 +138,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 2.2
+  m_Radius: 0.75
+  m_Height: 3.55
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.6, z: 0}
 --- !u!1001 &9067091309136983776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,7 +152,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8054c705cc2765546812121347bade95, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.78
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8054c705cc2765546812121347bade95, type: 3}
       propertyPath: m_LocalPosition.y
@@ -146,6 +194,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round10
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 8054c705cc2765546812121347bade95, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 837e1fc0b9a52bb4e952c13e84c36151, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

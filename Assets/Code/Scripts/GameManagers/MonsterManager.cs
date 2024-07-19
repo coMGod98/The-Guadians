@@ -85,7 +85,8 @@ public class MonsterManager : MonoBehaviour
     //스폰
     public void SpawnMonster()
     {
-        GameObject obj = Instantiate(monsterPrefabArray[GameWorld.Instance.curRound - 1], monsterSpawn);
+        //GameObject obj = Instantiate(monsterPrefabArray[GameWorld.Instance.curRound - 1], monsterSpawn);
+        GameObject obj = Instantiate(monsterPrefabArray[0], monsterSpawn);
         Monster monster = obj.GetComponent<Monster>();
 
         int index = monster.name.IndexOf("(Clone)");
