@@ -124,14 +124,14 @@ public class UnitManager : MonoBehaviour
 
     public void OnAttack(Unit unit){
         unit.attackElapsedTime = 0.0f;
-        unit.unitAnim.CrossFade("Attack", 0.1f);
         Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
         dir.Normalize();
 
         StopAllCoroutines();
         StartCoroutine(Rotating(dir, unit));
+        unit.unitAnim.CrossFade("Attack", 0.1f);
 
-        
+
         GameWorld.Instance.BulletManager.SpawnBullet(unit);
     }
 

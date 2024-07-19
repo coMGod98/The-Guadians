@@ -299,7 +299,7 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 1;
         bulletData.shootingType = BulletShootingType.Follow;
         bulletData.hitCheck = BulletHitCheck.Targeting;
-        bulletData.scale = 1.0f; // 생각
+        bulletData.scale = 5.0f; // 생각
         bulletData.damageCoefficient = 0.5f;
         bulletData.damageRange = 1.0f; // 생각
         bulletData.speed = 12.0f;
@@ -311,7 +311,7 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 2;
         bulletData.shootingType = BulletShootingType.Follow;
         bulletData.hitCheck = BulletHitCheck.Targeting;
-        bulletData.scale = 1.0f; // 생각
+        bulletData.scale = 5.0f; // 생각
         bulletData.damageCoefficient = 0.8f;
         bulletData.damageRange = 1.0f; // 생각
         bulletData.speed = 12.0f;
@@ -323,10 +323,10 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 3;
         bulletData.shootingType = BulletShootingType.Straight;
         bulletData.hitCheck = BulletHitCheck.Moving;
-        bulletData.scale = 1.0f; // 생각
+        bulletData.scale = 15.0f; // 생각
         bulletData.damageCoefficient = 0.8f;
-        bulletData.damageRange = 1.0f; // 생각
-        bulletData.speed = 9.0f;
+        bulletData.damageRange = 5.0f; // 생각
+        bulletData.speed = 15.0f;
         bulletData.attackableNumber = 3;
 
         bulletDic[bulletData.key] = bulletData;
@@ -335,10 +335,10 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 4;
         bulletData.shootingType = BulletShootingType.Straight;
         bulletData.hitCheck = BulletHitCheck.Moving;
-        bulletData.scale = 1.0f; // 생각
+        bulletData.scale = 15.0f; // 생각
         bulletData.damageCoefficient = 1.0f;
-        bulletData.damageRange = 1.0f; // 생각
-        bulletData.speed = 9.0f;
+        bulletData.damageRange = 5.0f; // 생각
+        bulletData.speed = 15.0f;
         bulletData.attackableNumber = 5;    
 
         bulletDic[bulletData.key] = bulletData;    
@@ -347,10 +347,10 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 5;
         bulletData.shootingType = BulletShootingType.Follow;
         bulletData.hitCheck = BulletHitCheck.Moving;
-        bulletData.scale = 1.0f; // 생각
+        bulletData.scale = 15.0f; // 생각
         bulletData.damageCoefficient = 1.0f;
-        bulletData.damageRange = 1.0f; // 생각
-        bulletData.speed = 12.0f;
+        bulletData.damageRange = 5.0f; // 생각
+        bulletData.speed = 15.0f;
         bulletData.attackableNumber = 20;       
 
         bulletDic[bulletData.key] = bulletData; 

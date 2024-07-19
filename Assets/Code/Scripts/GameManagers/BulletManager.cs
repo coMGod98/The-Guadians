@@ -20,9 +20,9 @@ public class BulletManager : MonoBehaviour
             {
                 case BulletHitCheck.Targeting:
                 {
-                    if(bullet.transform.position == bullet.targetMonster.transform.position)
+                    if(bullet.transform.position == bullet.targetMonster.GetComponentInChildren<Socket>().transform.position)
                     {
-                        bullet.targetMonster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageRange);
+                        bullet.targetMonster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
                         allBulletList.Remove(bullet);
                         Destroy(bullet.gameObject);
                     }
@@ -37,11 +37,11 @@ public class BulletManager : MonoBehaviour
                         if (!bullet.hitMonsterList.Contains(monster) && bullet.bulletData.attackableNumber > bullet.hitMonsterList.Count)
                         {
                             bullet.hitMonsterList.Add(monster);
-                            monster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageRange);
+                            monster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
                             Debug.Log("Hit");
                         }
                     }
-                    // 어느 정도 이동하면 삭제
+                    // 이동하다가 삭제
                     break;
                 }
             }
@@ -53,31 +53,34 @@ public class BulletManager : MonoBehaviour
     {
         foreach(Bullet bullet in allBulletList)
         {
-            switch (bullet.bulletData.shootingType)
+            if (bullet.targetMonster != null)
             {
-                case BulletShootingType.Follow:
+                switch (bullet.bulletData.shootingType)
                 {
-                    Vector3 dir = bullet.targetMonster.transform.position - bullet.transform.position;
-                    float dist = dir.magnitude;
-                    dir.Normalize();
+                    case BulletShootingType.Follow:
+                    {
+                        Vector3 dir = bullet.targetMonster.GetComponentInChildren<Socket>().transform.position - bullet.transform.position;
+                        float dist = dir.magnitude;
+                        dir.Normalize();
 
-                    float rotAngle = Vector3.Angle(bullet.transform.forward, dir);
-                    float rotDir = Vector3.Dot(bullet.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
+                        float rotAngle = Vector3.Angle(bullet.transform.forward, dir);
+                        float rotDir = Vector3.Dot(bullet.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
 
-                    float rotateAmount = _rotSpeed * Time.deltaTime;
-                    if (rotAngle < rotateAmount) rotateAmount = rotAngle;
-                    bullet.transform.Rotate(Vector3.up * rotDir * rotateAmount);
+                        float rotateAmount = _rotSpeed * Time.deltaTime;
+                        if (rotAngle < rotateAmount) rotateAmount = rotAngle;
+                        bullet.transform.Rotate(Vector3.up * rotDir * rotateAmount);
 
-                    float moveAmount = bullet.bulletData.speed * Time.deltaTime;
-                    if (dist < moveAmount) moveAmount = dist;
-                    bullet.transform.Translate(dir * moveAmount, Space.World);
+                        float moveAmount = bullet.bulletData.speed * Time.deltaTime;
+                        if (dist < moveAmount) moveAmount = dist;
+                        bullet.transform.Translate(dir * moveAmount, Space.World);
 
-                    break;
-                }
-                case BulletShootingType.Straight:
-                {
-                    bullet.transform.Translate(transform.forward * bullet.bulletData.speed * Time.deltaTime, Space.Self);
-                    break;
+                        break;
+                    }
+                    case BulletShootingType.Straight:
+                    {
+                        bullet.transform.Translate(transform.forward * bullet.bulletData.speed * Time.deltaTime, Space.Self);
+                        break;
+                    }
                 }
             }
         }
