@@ -225,6 +225,16 @@ public class UnitManager : MonoBehaviour
         return destinationList;
     }
 
+    public void InputTargeting(Monster monster)
+    {
+        foreach(Unit unit in selectedUnitList)
+        {
+            unit.targetMonster = monster;
+            unit.unitState = State.Combat;
+        }
+    }
+
+
     // 스폰
     public void SpawnUnit()
     {

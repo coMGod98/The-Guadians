@@ -16,6 +16,11 @@ public class BulletManager : MonoBehaviour
         for (int i = allBulletList.Count - 1; i >= 0; --i)
         {
             Bullet bullet = allBulletList[i];
+            if (bullet.targetMonster == null)
+            {
+                allBulletList.Remove(bullet);
+                Destroy(bullet.gameObject);
+            }
             switch (bullet.bulletData.hitCheck)
             {
                 case BulletHitCheck.Targeting:
@@ -38,7 +43,6 @@ public class BulletManager : MonoBehaviour
                         {
                             bullet.hitMonsterList.Add(monster);
                             monster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
-                            Debug.Log("Hit");
                         }
                     }
                     // 이동하다가 삭제

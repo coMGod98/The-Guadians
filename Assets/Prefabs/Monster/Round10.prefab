@@ -194,6 +194,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Round10
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 8054c705cc2765546812121347bade95, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 837e1fc0b9a52bb4e952c13e84c36151, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
