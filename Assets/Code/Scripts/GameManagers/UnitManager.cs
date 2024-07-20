@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -126,28 +125,15 @@ public class UnitManager : MonoBehaviour
         unit.attackElapsedTime = 0.0f;
         Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
         dir.Normalize();
+        float rotAngle = Vector3.Angle(unit.transform.forward, dir);
+        float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
+        unit.transform.Rotate(Vector3.up * rotDir * rotAngle);
 
-        StopAllCoroutines();
-        StartCoroutine(Rotating(dir, unit));
         unit.unitAnim.CrossFade("Attack", 0.1f);
-
 
         GameWorld.Instance.BulletManager.SpawnBullet(unit);
     }
 
-    IEnumerator Rotating(Vector3 dir, Unit unit)
-    {
-        float rotAngle = Vector3.Angle(unit.transform.forward, dir);
-        float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
-        while (rotAngle > 0.0f)
-        {
-            float rotateAmount = rotSpeed * Time.deltaTime;
-            if (rotAngle < rotateAmount) rotateAmount = rotAngle;
-            unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
-            rotAngle -= rotateAmount;
-            yield return null;
-        }
-    }
 
     public void UnitMove(){
         if(myPath == null) myPath = new NavMeshPath();

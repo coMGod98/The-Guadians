@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -33,10 +34,17 @@ public class MonsterManager : MonoBehaviour
             var monster = allMonsterList[i];
             if (monster.IsDead)
             {
-                allMonsterList.RemoveAt(i);
-                Destroy(monster.gameObject);
+                monster.monsterAnim.SetTrigger("TDead");
+                allMonsterList.Remove(monster);
+                StartCoroutine(DisApearing(monster));
             }
         }
+    }
+
+    IEnumerator DisApearing(Monster monster)
+    {
+        yield return new WaitForSeconds(2.0f);
+        Destroy(monster.gameObject);
     }
 
     // 무브
@@ -94,6 +102,7 @@ public class MonsterManager : MonoBehaviour
         monster.monsterData = GameWorld.Instance.BalanceManager.monsterDic[monster.monsterKey];
         
         monster.Init();
+        monster.curHP = 5.0f;
 
         allMonsterList.Add(monster);
     }

@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.AI;
 
 public class Unit : MonoBehaviour
 {
