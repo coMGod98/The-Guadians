@@ -27,6 +27,7 @@ public struct UnitData
     public float attackSpeed;
     public float attackRange;
     public float attackDuration;
+    public float bulletSpawnTime;
     public float attackCoolTime;
     public int salesGold;
     public int bulletKey;
@@ -49,7 +50,7 @@ public struct BulletData
     public BulletHitCheck hitCheck;
     public float scale;
     public float damageCoefficient;
-    public float damageRange;
+    public float hitRange;
     public float speed;
     public int attackableNumber;
 }
@@ -81,8 +82,9 @@ public class BalanceManager : MonoBehaviour
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
-        unitData.attackDuration = 1.0f;
-        unitData.attackCoolTime = 2.0f;
+        unitData.attackDuration = 1.5f;
+        unitData.bulletSpawnTime = 1.0f;
+        unitData.attackCoolTime = 3.0f;
         unitData.salesGold = 5;
         unitData.bulletKey = 1;
 
@@ -93,8 +95,9 @@ public class BalanceManager : MonoBehaviour
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
-        unitData.attackDuration = 1.0f;
-        unitData.attackCoolTime = 2.0f;
+        unitData.attackDuration = 1.5f;
+        unitData.bulletSpawnTime = 1.0f;
+        unitData.attackCoolTime = 3.0f;
         unitData.salesGold = 10;
         unitData.bulletKey = 2;
 
@@ -105,8 +108,9 @@ public class BalanceManager : MonoBehaviour
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
-        unitData.attackDuration = 1.0f;
-        unitData.attackCoolTime = 2.0f;
+        unitData.attackDuration = 1.5f;
+        unitData.bulletSpawnTime = 2.0f;
+        unitData.attackCoolTime = 3.0f;
         unitData.salesGold = 15;
         unitData.bulletKey = 3;
 
@@ -117,8 +121,9 @@ public class BalanceManager : MonoBehaviour
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 20.0f;
-        unitData.attackDuration = 1.0f;
-        unitData.attackCoolTime = 2.0f;
+        unitData.attackDuration = 1.5f;
+        unitData.bulletSpawnTime = 1.0f;
+        unitData.attackCoolTime = 3.0f;
         unitData.salesGold = 20;
         unitData.bulletKey = 4;
 
@@ -129,8 +134,9 @@ public class BalanceManager : MonoBehaviour
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 20.0f;
-        unitData.attackDuration = 1.0f;
-        unitData.attackCoolTime = 2.0f;
+        unitData.attackDuration = 1.5f;
+        unitData.bulletSpawnTime = 1.0f;
+        unitData.attackCoolTime = 3.0f;
         unitData.salesGold = 25;
         unitData.bulletKey = 5;
 
@@ -147,6 +153,7 @@ public class BalanceManager : MonoBehaviour
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 5.0f;
         unitData.attackDuration = 1.0f;
+        unitData.bulletSpawnTime = 0.5f;
         unitData.attackCoolTime = 2.0f;
         unitData.salesGold = 5;
         unitData.bulletKey = 1;
@@ -159,6 +166,7 @@ public class BalanceManager : MonoBehaviour
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 5.0f;
         unitData.attackDuration = 1.0f;
+        unitData.bulletSpawnTime = 0.5f;
         unitData.attackCoolTime = 2.0f;
         unitData.salesGold = 10;
         unitData.bulletKey = 2;
@@ -171,6 +179,7 @@ public class BalanceManager : MonoBehaviour
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 5.0f;
         unitData.attackDuration = 1.0f;
+        unitData.bulletSpawnTime = 0.5f;
         unitData.attackCoolTime = 2.0f;
         unitData.salesGold = 15;
         unitData.bulletKey = 3;
@@ -183,6 +192,7 @@ public class BalanceManager : MonoBehaviour
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 20.0f;
         unitData.attackDuration = 1.0f;
+        unitData.bulletSpawnTime = 0.5f;
         unitData.attackCoolTime = 2.0f;
         unitData.salesGold = 20;
         unitData.bulletKey = 4;
@@ -195,6 +205,7 @@ public class BalanceManager : MonoBehaviour
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 20.0f;
         unitData.attackDuration = 1.0f;
+        unitData.bulletSpawnTime = 0.5f;
         unitData.attackCoolTime = 2.0f;
         unitData.salesGold = 25;
         unitData.bulletKey = 5;
@@ -211,8 +222,9 @@ public class BalanceManager : MonoBehaviour
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 0.5f;
         unitData.attackRange = 5.0f;
-        unitData.attackDuration = 1.0f;
-        unitData.attackCoolTime = 2.0f;
+        unitData.attackDuration = 2.0f;
+        unitData.bulletSpawnTime = 1.5f;
+        unitData.attackCoolTime = 4.0f;
         unitData.salesGold = 5;
         unitData.bulletKey = 1;
 
@@ -223,8 +235,9 @@ public class BalanceManager : MonoBehaviour
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 0.5f;
         unitData.attackRange = 5.0f;
-        unitData.attackDuration = 1.0f;
-        unitData.attackCoolTime = 2.0f;
+        unitData.attackDuration = 2.0f;
+        unitData.bulletSpawnTime = 1.5f;
+        unitData.attackCoolTime = 4.0f;
         unitData.salesGold = 10;
         unitData.bulletKey = 2;
 
@@ -235,8 +248,9 @@ public class BalanceManager : MonoBehaviour
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 0.5f;
         unitData.attackRange = 5.0f;
-        unitData.attackDuration = 1.0f;
-        unitData.attackCoolTime = 2.0f;
+        unitData.attackDuration = 2.0f;
+        unitData.bulletSpawnTime = 1.5f;
+        unitData.attackCoolTime = 4.0f;
         unitData.salesGold = 15;
         unitData.bulletKey = 3;
 
@@ -247,8 +261,9 @@ public class BalanceManager : MonoBehaviour
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 0.5f;
         unitData.attackRange = 20.0f;
-        unitData.attackDuration = 1.0f;
-        unitData.attackCoolTime = 2.0f;
+        unitData.attackDuration = 2.0f;
+        unitData.bulletSpawnTime = 1.5f;
+        unitData.attackCoolTime = 4.0f;
         unitData.salesGold = 20;
         unitData.bulletKey = 4;
 
@@ -259,8 +274,9 @@ public class BalanceManager : MonoBehaviour
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 0.5f;
         unitData.attackRange = 20.0f;
-        unitData.attackDuration = 1.0f;
-        unitData.attackCoolTime = 2.0f;
+        unitData.attackDuration = 2.0f;
+        unitData.bulletSpawnTime = 1.5f;
+        unitData.attackCoolTime = 4.0f;
         unitData.salesGold = 25;
         unitData.bulletKey = 5;
 
@@ -299,9 +315,9 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 1;
         bulletData.shootingType = BulletShootingType.Follow;
         bulletData.hitCheck = BulletHitCheck.Targeting;
-        bulletData.scale = 5.0f; // 생각
+        bulletData.scale = 1.0f;
         bulletData.damageCoefficient = 0.5f;
-        bulletData.damageRange = 1.0f; // 생각
+        bulletData.hitRange = 1.0f; // 나중에 프리팹의 크기에 맞춰주기
         bulletData.speed = 12.0f;
         bulletData.attackableNumber = 1;
 
@@ -311,9 +327,9 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 2;
         bulletData.shootingType = BulletShootingType.Follow;
         bulletData.hitCheck = BulletHitCheck.Targeting;
-        bulletData.scale = 5.0f; // 생각
+        bulletData.scale = 1.0f; // 생각
         bulletData.damageCoefficient = 0.8f;
-        bulletData.damageRange = 1.0f; // 생각
+        bulletData.hitRange = 1.0f; // 나중에 프리팹의 크기에 맞춰주기
         bulletData.speed = 12.0f;
         bulletData.attackableNumber = 1;
 
@@ -323,9 +339,9 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 3;
         bulletData.shootingType = BulletShootingType.Straight;
         bulletData.hitCheck = BulletHitCheck.Moving;
-        bulletData.scale = 15.0f; // 생각
+        bulletData.scale = 5.0f;
         bulletData.damageCoefficient = 0.8f;
-        bulletData.damageRange = 5.0f; // 생각
+        bulletData.hitRange = 5.0f; // 나중에 프리팹의 크기에 맞춰주기
         bulletData.speed = 15.0f;
         bulletData.attackableNumber = 3;
 
@@ -335,9 +351,9 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 4;
         bulletData.shootingType = BulletShootingType.Straight;
         bulletData.hitCheck = BulletHitCheck.Moving;
-        bulletData.scale = 15.0f; // 생각
+        bulletData.scale = 5.0f; // 생각
         bulletData.damageCoefficient = 1.0f;
-        bulletData.damageRange = 5.0f; // 생각
+        bulletData.hitRange = 5.0f; // 나중에 프리팹의 크기에 맞춰주기
         bulletData.speed = 15.0f;
         bulletData.attackableNumber = 5;    
 
@@ -347,10 +363,10 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 5;
         bulletData.shootingType = BulletShootingType.Follow;
         bulletData.hitCheck = BulletHitCheck.Moving;
-        bulletData.scale = 15.0f; // 생각
+        bulletData.scale = 5.0f; // 생각
         bulletData.damageCoefficient = 1.0f;
-        bulletData.damageRange = 5.0f; // 생각
-        bulletData.speed = 15.0f;
+        bulletData.hitRange = 5.0f; // 나중에 프리팹의 크기에 맞춰주기
+        bulletData.speed = 5.0f;
         bulletData.attackableNumber = 20;       
 
         bulletDic[bulletData.key] = bulletData; 

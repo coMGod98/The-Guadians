@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class BulletManager : MonoBehaviour
     public LayerMask monsterMask;
     public GameObject[] bulletPrefabsArray;
     public List<Bullet> allBulletList = new List<Bullet>();
+    public Vector2 Range_x = new Vector2(-125, -75);
+    public Vector2 Range_z = new Vector2(-25, 25);
 
     private float _rotSpeed = 360.0f;
 
@@ -34,7 +37,7 @@ public class BulletManager : MonoBehaviour
                 }
                 case BulletHitCheck.Moving:
                 {
-                    Collider[] colliders = Physics.OverlapSphere(bullet.transform.position, bullet.bulletData.damageRange, monsterMask);
+                    Collider[] colliders = Physics.OverlapSphere(bullet.transform.position, bullet.bulletData.hitRange, monsterMask);
                     foreach(Collider col in colliders)
                     {
                         Monster monster = col.GetComponent<Monster>();
@@ -44,7 +47,12 @@ public class BulletManager : MonoBehaviour
                             monster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
                         }
                     }
-                    // 이동하다가 삭제
+                    if(bullet.transform.position.x < Range_x.x || bullet.transform.position.x > Range_z.y || 
+                    bullet.transform.position.z < Range_z.x || bullet.transform.position.z > Range_z.y)
+                    {
+                        allBulletList.Remove(bullet);
+                        Destroy(bullet.gameObject);
+                    }
                     break;
                 }
             }
@@ -99,6 +107,7 @@ public class BulletManager : MonoBehaviour
         bullet.targetMonster = unit.targetMonster;
 
         bullet.bulletData = GameWorld.Instance.BalanceManager.bulletDic[bullet.bulletKey];
+        bullet.transform.localScale = Vector3.one * bullet.bulletData.scale;
 
         allBulletList.Add(bullet);
     }

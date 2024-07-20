@@ -12,5 +12,4 @@ public class Bullet : MonoBehaviour
     
 
     public BulletData bulletData;
-    
 }
