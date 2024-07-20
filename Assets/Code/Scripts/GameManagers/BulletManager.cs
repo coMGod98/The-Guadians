@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class BulletManager : MonoBehaviour
@@ -25,6 +23,7 @@ public class BulletManager : MonoBehaviour
             {
                 case BulletHitCheck.Targeting:
                 {
+                    if(bullet.targetMonster == null) continue;
                     if(bullet.transform.position == bullet.targetMonster.GetComponentInChildren<Socket>().transform.position)
                     {
                         bullet.targetMonster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
