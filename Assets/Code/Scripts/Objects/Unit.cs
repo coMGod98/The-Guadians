@@ -28,6 +28,6 @@ public class Unit : MonoBehaviour
     }
 
     public bool IsAttacking => unitData.attackDuration > attackElapsedTime;
-    public bool IsAttackable => !IsAttacking && unitData.attackCoolTime <= attackElapsedTime;
+    public bool IsAttackReady => !IsAttacking && unitData.attackCoolTime <= attackElapsedTime;
     public float unitDamage => unitData.attackDamage[upgrade];
 }

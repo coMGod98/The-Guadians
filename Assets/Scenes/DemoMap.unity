@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: cbb5154e840161d48b6114a6802f4c6d, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1208,6 +1208,8 @@ MonoBehaviour:
   - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
   - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
   allBulletList: []
+  Range_x: {x: -125, y: -75}
+  Range_z: {x: -25, y: 25}
 --- !u!1 &130632625
 GameObject:
   m_ObjectHideFlags: 0

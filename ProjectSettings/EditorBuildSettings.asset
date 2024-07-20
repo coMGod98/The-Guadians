@@ -11,10 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DemoMap.unity
     guid: 51980486ac455474bb8afb0862b67fca
-  - enabled: 1
-    path: Assets/Scenes/Gameover.unity
-    guid: bad7167523a02bb46b910b42ba272f5f
-  - enabled: 1
-    path: Assets/Scenes/Victory.unity
-    guid: 42c4948e3ebcf0f40957751d86f7989c
   m_configObjects: {}

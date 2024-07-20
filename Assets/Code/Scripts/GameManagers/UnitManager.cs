@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public enum State
 {
-    Normal, Hold, Move, Combat
+    Normal, Hold, Combat
 }
 
 public class UnitManager : MonoBehaviour
@@ -27,7 +27,6 @@ public class UnitManager : MonoBehaviour
     private Dictionary<string, double> dicRank;
     double SumOfWeights;
 
-
     // 네브메쉬패스
     private NavMeshPath myPath;
 
@@ -37,11 +36,11 @@ public class UnitManager : MonoBehaviour
 
         dicRank = new Dictionary<string, double>()
         {
-            {"_Common", 25.0f},
-            {"_Uncommon", 25.0f},
-            {"_Rare", 25.4f},
-            {"_Epic", 25.4f},
-            {"_Legendary", 25.01f}
+            {"_Common", 30.0f},
+            {"_Uncommon", 0.1f},
+            {"_Rare", 1.4f},
+            {"_Epic", 20.0f},
+            {"_Legendary", 0.01f}
         };
 
         foreach(float value in dicRank.Values){
@@ -52,7 +51,8 @@ public class UnitManager : MonoBehaviour
     public void UnitAI(){
         foreach(Unit unit in allUnitList)
         {
-            unit.attackElapsedTime += Time.deltaTime;
+            if(!unit.IsAttacking && !unit.forceMove) unit.unitAnim.Update(Time.deltaTime);
+            unit.attackElapsedTime += Time.deltaTime * unit.unitData.attackSpeed;
             if(unit.forceMove)
             {
                 unit.targetMonster = null;
@@ -88,7 +88,7 @@ public class UnitManager : MonoBehaviour
                                 else
                                 {
                                     unit.destination = unit.transform.position;
-                                    if(unit.IsAttackable) OnAttack(unit);
+                                    if(unit.IsAttackReady) OnAttack(unit);
                                 }
                             }
                             break;
@@ -98,7 +98,7 @@ public class UnitManager : MonoBehaviour
                             unit.destination = unit.transform.position;
                             if(unit.targetMonster != null)
                             {
-                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) <= unit.unitData.attackRange && unit.IsAttackable) 
+                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) <= unit.unitData.attackRange && unit.IsAttackReady) 
                                 {
                                     OnAttack(unit);
                                 }
@@ -129,8 +129,8 @@ public class UnitManager : MonoBehaviour
         float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
         unit.transform.Rotate(Vector3.up * rotDir * rotAngle);
 
+        unit.unitAnim.Update(Time.deltaTime * unit.unitData.attackSpeed);
         unit.unitAnim.CrossFade("Attack", 0.1f);
-
         GameWorld.Instance.BulletManager.SpawnBullet(unit);
     }
 
@@ -145,6 +145,7 @@ public class UnitManager : MonoBehaviour
                         case NavMeshPathStatus.PathComplete:
                         case NavMeshPathStatus.PathPartial:
                         if(myPath.corners.Length > 1){
+                            unit.unitAnim.Update(Time.deltaTime);
                             unit.unitAnim.SetBool("IsMoving", true);
                             Vector3 moveDir = myPath.corners[1] - unit.transform.position;
                             float moveDist = moveDir.magnitude;
@@ -236,6 +237,8 @@ public class UnitManager : MonoBehaviour
         unit.unitData = GameWorld.Instance.BalanceManager.unitDic[unit.unitKey];
 
         unit.Init();
+        unit.unitAnim.enabled = false;
+        unit.unitAnim.Update(Time.deltaTime);
         switch(rank)
         {
             case "_Common":
