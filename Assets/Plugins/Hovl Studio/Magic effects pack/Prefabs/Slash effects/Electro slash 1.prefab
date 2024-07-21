@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1233010467109672509}
   - component: {fileID: 2929425121346758057}
   - component: {fileID: 8342335964613171125}
+  - component: {fileID: 7613496225924656647}
   m_Layer: 0
   m_Name: Electro slash 1
   m_TagString: Untagged
@@ -4897,3 +4898,28 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &7613496225924656647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171201465392465800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e5323bf65799e4e97bf76c9523f986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletKey: 0
+  bulletOwner: {fileID: 0}
+  targetMonster: {fileID: 0}
+  hitMonsterList: []
+  bulletData:
+    key: 0
+    shootingType: 0
+    hitCheck: 0
+    scale: 0
+    damageCoefficient: 0
+    hitRange: 0
+    speed: 0
+    attackableNumber: 0

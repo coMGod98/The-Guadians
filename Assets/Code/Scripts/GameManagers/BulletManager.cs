@@ -37,6 +37,7 @@ public class BulletManager : MonoBehaviour
                 }
                 case BulletHitCheck.Moving:
                 {
+                    if(bullet.targetMonster == null) continue;
                     Collider[] colliders = Physics.OverlapSphere(bullet.transform.position, bullet.bulletData.hitRange, monsterMask);
                     foreach(Collider col in colliders)
                     {

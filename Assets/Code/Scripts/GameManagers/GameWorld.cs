@@ -106,9 +106,13 @@ public class GameWorld : Singleton<GameWorld>
         }
         spawnDelay += Time.deltaTime;
 
+        _unitManager.UnitAnim();
+
         _unitManager.UnitAI();
         _monsterManager.MonsterAI();
         _bulletManager.BulletAI();
+
+        _unitManager.UnitAttack();
 
         _unitManager.UnitMove();
         _monsterManager.MonsterMove();

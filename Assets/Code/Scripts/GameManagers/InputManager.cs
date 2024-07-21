@@ -77,7 +77,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            GameWorld.Instance.UnitManager.OnHold();
+            GameWorld.Instance.UnitManager.InputHold();
         }
     }
 

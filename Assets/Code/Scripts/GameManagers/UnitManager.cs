@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public enum State
 {
-    Normal, Hold, Combat
+    Normal, Combat
 }
 
 public class UnitManager : MonoBehaviour
@@ -48,62 +48,79 @@ public class UnitManager : MonoBehaviour
         }
     }
 
+    public void UnitAnim()
+    {
+        foreach(Unit unit in allUnitList)
+        {
+            switch(unit.unitState)
+            {
+                case State.Normal:
+                {
+                    unit.unitAnim.Update(Time.deltaTime);
+                    break;
+                }
+                case State.Combat:
+                {
+                    if(unit.IsAttacking) unit.unitAnim.Update(Time.deltaTime * unit.unitData.attackSpeed);
+                    else unit.unitAnim.Update(Time.deltaTime);
+                    break;
+                }
+            }
+        }
+    }
+
     public void UnitAI(){
         foreach(Unit unit in allUnitList)
         {
-            if(!unit.IsAttacking && !unit.forceMove) unit.unitAnim.Update(Time.deltaTime);
+            unit.prevElapsedTime = unit.attackElapsedTime;
             unit.attackElapsedTime += Time.deltaTime * unit.unitData.attackSpeed;
             if(unit.forceMove)
             {
                 unit.targetMonster = null;
                 unit.unitState = State.Normal;
+                unit.forceHold = false;
+                unit.attackElapsedTime = 0.0f;
                 unit.unitAnim.SetBool("IsAttacking", false);
                 continue;
             }
+
             unit.unitAnim.SetBool("IsAttacking", unit.IsAttacking);
             if(unit.IsAttacking) continue;
 
             foreach(Monster monster in GameWorld.Instance.MonsterManager.allMonsterList)
             {
                 using (ListPool<Monster>.Get(out var rangedMonsters)){
-                    if(Vector3.Distance(unit.transform.position, monster.transform.position) <= unit.unitData.attackRange)
+                    if(Vector3.Distance(unit.transform.position, monster.transform.position) <= unit.unitData.attackRange) rangedMonsters.Add(monster);
+                    if (rangedMonsters.Count > 0) 
                     {
-                        rangedMonsters.Add(monster);
-                    }
-
-                    if (rangedMonsters.Count > 0 && unit.unitState != State.Combat) 
-                    {
-                        if (unit.unitState == State.Normal) unit.unitState = State.Combat;
-                        unit.targetMonster = rangedMonsters[0]; // 거리 정렬 후에 가까운 애 공격 (우선순위를 정하는 로직 필요)
-                    }
-
-                    switch (unit.unitState)
-                    {
-                        case State.Combat:
+                        switch (unit.unitState)
                         {
-                            if (unit.targetMonster != null) 
+                            case State.Normal:
                             {
-                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) > unit.unitData.attackRange)
-                                    unit.destination = unit.targetMonster.transform.position;
+                                unit.unitState = State.Combat;
+                                unit.targetMonster = rangedMonsters[0];
+                                break;
+                            }
+                            case State.Combat:
+                            {
+                                if (unit.forceHold) 
+                                {
+                                    unit.targetMonster = rangedMonsters[0];
+                                }
                                 else
                                 {
-                                    unit.destination = unit.transform.position;
-                                    if(unit.IsAttackReady) OnAttack(unit);
+                                    if (unit.targetMonster == null) unit.targetMonster = rangedMonsters[0];
+                                    if (Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) > unit.unitData.attackRange) 
+                                    {
+                                        unit.destination = unit.targetMonster.transform.position;
+                                    }
+                                    else
+                                    { 
+                                        unit.destination = unit.transform.position;
+                                    }
                                 }
+                                break;
                             }
-                            break;
-                        }
-                        case State.Hold:
-                        {
-                            unit.destination = unit.transform.position;
-                            if(unit.targetMonster != null)
-                            {
-                                if(Vector3.Distance(unit.transform.position, unit.targetMonster.transform.position) <= unit.unitData.attackRange && unit.IsAttackReady) 
-                                {
-                                    OnAttack(unit);
-                                }
-                            }
-                            break;
                         }
                     }
                 }
@@ -111,29 +128,29 @@ public class UnitManager : MonoBehaviour
         }
     }
 
-    public void OnHold()
+    public void UnitAttack()
     {
-        foreach (Unit unit in selectedUnitList)
+        foreach (Unit unit in allUnitList)
         {
-            unit.unitState = State.Hold;
-            unit.forceMove = false;
-            unit.destination = unit.transform.position;
+            if(unit.targetMonster != null)
+            {
+                Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
+                dir.Normalize();
+                float rotAngle = Vector3.Angle(unit.transform.forward, dir);
+                float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
+                unit.transform.Rotate(Vector3.up * rotDir * rotAngle);
+                if(unit.IsAttackable)
+                {
+                    unit.attackElapsedTime = 0.0f;
+                    unit.unitAnim.CrossFade("Attack", 0.1f);
+                }
+
+                if(unit.attackElapsedTime > unit.unitData.bulletSpawnTime && unit.prevElapsedTime < unit.unitData.bulletSpawnTime) GameWorld.Instance.BulletManager.SpawnBullet(unit);
+            }
+            
+            
         }
     }
-
-    public void OnAttack(Unit unit){
-        unit.attackElapsedTime = 0.0f;
-        Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
-        dir.Normalize();
-        float rotAngle = Vector3.Angle(unit.transform.forward, dir);
-        float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
-        unit.transform.Rotate(Vector3.up * rotDir * rotAngle);
-
-        unit.unitAnim.Update(Time.deltaTime * unit.unitData.attackSpeed);
-        unit.unitAnim.CrossFade("Attack", 0.1f);
-        GameWorld.Instance.BulletManager.SpawnBullet(unit);
-    }
-
 
     public void UnitMove(){
         if(myPath == null) myPath = new NavMeshPath();
@@ -145,7 +162,6 @@ public class UnitManager : MonoBehaviour
                         case NavMeshPathStatus.PathComplete:
                         case NavMeshPathStatus.PathPartial:
                         if(myPath.corners.Length > 1){
-                            unit.unitAnim.Update(Time.deltaTime);
                             unit.unitAnim.SetBool("IsMoving", true);
                             Vector3 moveDir = myPath.corners[1] - unit.transform.position;
                             float moveDist = moveDir.magnitude;
@@ -173,6 +189,15 @@ public class UnitManager : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public void InputHold()
+    {
+        foreach (Unit unit in selectedUnitList) 
+        {
+            unit.forceHold = true;
+            unit.destination = unit.transform.position;
         }
     }
 

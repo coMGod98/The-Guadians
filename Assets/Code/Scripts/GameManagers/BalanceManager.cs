@@ -223,7 +223,7 @@ public class BalanceManager : MonoBehaviour
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
         unitData.attackDuration = 2.0f;
-        unitData.bulletSpawnTime = 1.5f;
+        unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
         unitData.salesGold = 5;
         unitData.bulletKey = 1;
@@ -236,7 +236,7 @@ public class BalanceManager : MonoBehaviour
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
         unitData.attackDuration = 2.0f;
-        unitData.bulletSpawnTime = 1.5f;
+        unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
         unitData.salesGold = 10;
         unitData.bulletKey = 2;
@@ -249,7 +249,7 @@ public class BalanceManager : MonoBehaviour
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
         unitData.attackDuration = 2.0f;
-        unitData.bulletSpawnTime = 1.5f;
+        unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
         unitData.salesGold = 15;
         unitData.bulletKey = 3;
@@ -262,7 +262,7 @@ public class BalanceManager : MonoBehaviour
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 10.0f;
         unitData.attackDuration = 2.0f;
-        unitData.bulletSpawnTime = 1.5f;
+        unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
         unitData.salesGold = 20;
         unitData.bulletKey = 4;
@@ -275,7 +275,7 @@ public class BalanceManager : MonoBehaviour
         unitData.attackSpeed = 3.0f;
         unitData.attackRange = 20.0f;
         unitData.attackDuration = 2.0f;
-        unitData.bulletSpawnTime = 1.5f;
+        unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
         unitData.salesGold = 25;
         unitData.bulletKey = 5;
