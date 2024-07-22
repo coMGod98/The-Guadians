@@ -1202,7 +1202,7 @@ MonoBehaviour:
     m_Bits: 2048
   bulletPrefabsArray:
   - {fileID: 1171201465392465800, guid: ddff8836f56c54e4da69d1a98d7f2dde, type: 3}
-  - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
+  - {fileID: 9027514048236820045, guid: effb650189dc5714e9e9801b1cfb3991, type: 3}
   - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
   - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
   - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
