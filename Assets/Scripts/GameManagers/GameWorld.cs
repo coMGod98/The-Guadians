@@ -126,11 +126,11 @@ public class GameWorld : Singleton<GameWorld>
         {
             playerGolds -= amount;
         }
-        else
-        {
-            //Toast.Show("골드가 부족합니다. <size=25> \n" + (amount - playerGolds).ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Magenta,ToastPosition.MiddleCenter);
-        }
+        
         if (playerGolds < 0) playerGolds = 0;
+    }
+
+    public void AddGold(int amount) { 
     }
 
 }

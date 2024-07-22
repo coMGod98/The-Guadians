@@ -7,6 +7,7 @@ using EasyUI.Toast;
 
 public class UIManager : MonoBehaviour
 {
+    private int[] buttonClicks = new int[3];
 
     [Header("Info")]
     public TextMeshProUGUI timerText;
@@ -47,19 +48,44 @@ public class UIManager : MonoBehaviour
 
     public void Button1()
     {
-        GameWorld.Instance.TakeGold(10);
+        if (GameWorld.Instance.playerGolds >= buttonClicks[0] * 5)
+        {
+            buttonClicks[0]++;
+            GameWorld.Instance.TakeGold(buttonClicks[0] * 5);
+        }
+        else
+        {
+            int neededGold = (buttonClicks[0] * 5) - GameWorld.Instance.playerGolds;
+            Toast.Show("골드가 부족합니다. <size=25> \n" + neededGold.ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Magenta, ToastPosition.MiddleCenter);
+        }
     }
 
     public void Button2()
     {
-        float gold = 5;
-        GameWorld.Instance.TakeGold(gold);
-        Toast.Show("골드가 부족합니다. <size=25> \n" + (GameWorld.Instance.TakeGold(gold) - GameWorld.Instance.playerGolds).ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Magenta, ToastPosition.MiddleCenter);
+        if (GameWorld.Instance.playerGolds >= buttonClicks[1] * 5)
+        {
+            buttonClicks[1]++;
+            GameWorld.Instance.TakeGold(buttonClicks[1] * 5);
+        }
+        else
+        {
+            int neededGold = (buttonClicks[1] * 5) - GameWorld.Instance.playerGolds;
+            Toast.Show("골드가 부족합니다. <size=25> \n" + neededGold.ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Magenta, ToastPosition.MiddleCenter);
+        }
     }
 
     public void Button3()
     {
-        GameWorld.Instance.TakeGold(5);
+        if (GameWorld.Instance.playerGolds >= buttonClicks[2] * 5)
+        {
+            buttonClicks[2]++;
+            GameWorld.Instance.TakeGold(buttonClicks[2] * 5);
+        }
+        else
+        {
+            int neededGold = (buttonClicks[2] * 5) - GameWorld.Instance.playerGolds;
+            Toast.Show("골드가 부족합니다. <size=25> \n" + neededGold.ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Magenta, ToastPosition.MiddleCenter);
+        }
     }
 
     public void GameOver()
