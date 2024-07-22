@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using EasyUI.Toast;
 
 public class UIManager : MonoBehaviour
 {
@@ -44,9 +45,21 @@ public class UIManager : MonoBehaviour
         curGold.text = "" + GameWorld.Instance.playerGolds.ToString();
     }
 
-    public void OnButtonPress()
+    public void Button1()
     {
-        GameWorld.Instance.DeductGold(5);
+        GameWorld.Instance.TakeGold(10);
+    }
+
+    public void Button2()
+    {
+        float gold = 5;
+        GameWorld.Instance.TakeGold(gold);
+        Toast.Show("골드가 부족합니다. <size=25> \n" + (GameWorld.Instance.TakeGold(gold) - GameWorld.Instance.playerGolds).ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Magenta, ToastPosition.MiddleCenter);
+    }
+
+    public void Button3()
+    {
+        GameWorld.Instance.TakeGold(5);
     }
 
     public void GameOver()
@@ -59,3 +72,5 @@ public class UIManager : MonoBehaviour
         gameWin.SetActive(true);
     }
 }
+
+

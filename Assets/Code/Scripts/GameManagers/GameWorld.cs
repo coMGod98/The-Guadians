@@ -1,6 +1,8 @@
+using System;
 using TMPro.EditorUtilities;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using EasyUI.Toast;
 
 public class GameWorld : Singleton<GameWorld>
 {
@@ -118,9 +120,16 @@ public class GameWorld : Singleton<GameWorld>
         _monsterManager.MonsterMove();
         _bulletManager.BulletMove();
     }
-    public void DeductGold(int amount)
+    public void TakeGold(int amount)
     {
-        playerGolds -= amount;
+        if (playerGolds >= amount)
+        {
+            playerGolds -= amount;
+        }
+        else
+        {
+            Toast.Show("골드가 부족합니다. <size=25> \n" + (amount - playerGolds).ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Magenta,ToastPosition.MiddleCenter);
+        }
         if (playerGolds < 0) playerGolds = 0;
     }
 
