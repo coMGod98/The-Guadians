@@ -126,11 +126,13 @@ public class GameWorld : Singleton<GameWorld>
         {
             playerGolds -= amount;
         }
-        
+       
         if (playerGolds < 0) playerGolds = 0;
     }
 
-    public void AddGold(int amount) { 
+    public void AddGold(int amount) 
+    {
+        playerGolds += amount;
     }
 
 }

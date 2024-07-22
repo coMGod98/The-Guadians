@@ -46,46 +46,33 @@ public class UIManager : MonoBehaviour
         curGold.text = "" + GameWorld.Instance.playerGolds.ToString();
     }
 
-    public void Button1()
+    public void Buttons(int buttonIndex, int gold)
     {
-        if (GameWorld.Instance.playerGolds >= buttonClicks[0] * 5)
+        if (GameWorld.Instance.playerGolds >= buttonClicks[buttonIndex] * gold)
         {
-            buttonClicks[0]++;
-            GameWorld.Instance.TakeGold(buttonClicks[0] * 5);
+            buttonClicks[buttonIndex]++;
+            GameWorld.Instance.TakeGold(buttonClicks[buttonIndex] * gold);
         }
         else
         {
-            int neededGold = (buttonClicks[0] * 5) - GameWorld.Instance.playerGolds;
-            Toast.Show("골드가 부족합니다. <size=25> \n" + neededGold.ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Magenta, ToastPosition.MiddleCenter);
+            int neededGold = (buttonClicks[buttonIndex] * gold) - GameWorld.Instance.playerGolds;
+            Toast.Show("골드가 부족합니다. <size=25> \n" + neededGold.ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
         }
+    }
+
+    public void Button1()
+    {
+        Buttons(0, 5);
     }
 
     public void Button2()
     {
-        if (GameWorld.Instance.playerGolds >= buttonClicks[1] * 5)
-        {
-            buttonClicks[1]++;
-            GameWorld.Instance.TakeGold(buttonClicks[1] * 5);
-        }
-        else
-        {
-            int neededGold = (buttonClicks[1] * 5) - GameWorld.Instance.playerGolds;
-            Toast.Show("골드가 부족합니다. <size=25> \n" + neededGold.ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Magenta, ToastPosition.MiddleCenter);
-        }
+        Buttons(1, 10);
     }
 
     public void Button3()
     {
-        if (GameWorld.Instance.playerGolds >= buttonClicks[2] * 5)
-        {
-            buttonClicks[2]++;
-            GameWorld.Instance.TakeGold(buttonClicks[2] * 5);
-        }
-        else
-        {
-            int neededGold = (buttonClicks[2] * 5) - GameWorld.Instance.playerGolds;
-            Toast.Show("골드가 부족합니다. <size=25> \n" + neededGold.ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Magenta, ToastPosition.MiddleCenter);
-        }
+        Buttons(2, 15);
     }
 
     public void GameOver()
