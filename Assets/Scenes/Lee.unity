@@ -1732,7 +1732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   boundaryThickness: 10
-  panLimit: {x: 4, y: 7}
+  panLimit: {x: 4, y: 9}
 --- !u!4 &684990940
 Transform:
   m_ObjectHideFlags: 0
