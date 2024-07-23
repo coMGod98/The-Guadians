@@ -147,8 +147,6 @@ public class UnitManager : MonoBehaviour
 
                 if(unit.attackElapsedTime > unit.unitData.bulletSpawnTime && unit.prevElapsedTime < unit.unitData.bulletSpawnTime) GameWorld.Instance.BulletManager.SpawnBullet(unit);
             }
-            
-            
         }
     }
 
@@ -157,33 +155,38 @@ public class UnitManager : MonoBehaviour
         foreach(Unit unit in allUnitList){
             if(!unit.IsAttacking || unit.forceMove) 
             {
-                if(NavMesh.CalculatePath(unit.transform.position, unit.destination, NavMesh.AllAreas, myPath)){
+                if(NavMesh.CalculatePath(unit.transform.position, unit.destination, NavMesh.AllAreas, myPath))
+                {
                     switch(myPath.status){
                         case NavMeshPathStatus.PathComplete:
                         case NavMeshPathStatus.PathPartial:
-                        if(myPath.corners.Length > 1){
-                            unit.unitAnim.SetBool("IsMoving", true);
-                            Vector3 moveDir = myPath.corners[1] - unit.transform.position;
-                            float moveDist = moveDir.magnitude;
-                            moveDir.Normalize();
+                        {
+                            if (myPath.corners.Length > 1)
+                            {
+                                unit.unitAnim.SetBool("IsMoving", true);
+                                Vector3 moveDir = myPath.corners[1] - unit.transform.position;
+                                float moveDist = moveDir.magnitude;
+                                moveDir.Normalize();
 
-                            float rotAngle = Vector3.Angle(unit.transform.forward, moveDir);
-                            float rotDir = Vector3.Dot(unit.transform.right, moveDir) < 0.0f ? -1.0f : 1.0f;
+                                float rotAngle = Vector3.Angle(unit.transform.forward, moveDir);
+                                float rotDir = Vector3.Dot(unit.transform.right, moveDir) < 0.0f ? -1.0f : 1.0f;
 
-                            float rotateAmount = rotSpeed * Time.deltaTime;
-                            if (rotAngle < rotateAmount) rotateAmount = rotAngle;
-                            unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
+                                float rotateAmount = rotSpeed * Time.deltaTime;
+                                if (rotAngle < rotateAmount) rotateAmount = rotAngle;
+                                unit.transform.Rotate(Vector3.up * rotDir * rotateAmount);
 
-                            float moveAmount = moveSpeed * Time.deltaTime;
-                            if(moveDist < moveAmount) moveAmount = moveDist;
-                            unit.transform.Translate(moveDir * moveAmount, Space.World);
-                        }
-                        else{
-                            unit.destination = unit.transform.position;
-                            unit.unitAnim.SetBool("IsMoving", false);
-                            unit.forceMove = false;
-                        }
+                                float moveAmount = moveSpeed * Time.deltaTime;
+                                if (moveDist < moveAmount) moveAmount = moveDist;
+                                unit.transform.Translate(moveDir * moveAmount, Space.World);
+                            }
+                            else
+                            {
+                                unit.destination = unit.transform.position;
+                                unit.unitAnim.SetBool("IsMoving", false);
+                                unit.forceMove = false;
+                            }
                             break;
+                        }
                         case NavMeshPathStatus.PathInvalid:
                             break;
                     }
@@ -197,8 +200,21 @@ public class UnitManager : MonoBehaviour
         foreach (Unit unit in selectedUnitList) 
         {
             unit.forceHold = true;
-            unit.forceMove = false;
+            if (unit.forceMove)
+            {
+                unit.forceMove = false;
+                unit.unitAnim.SetBool("IsMoving", false);
+            }
+
             unit.destination = unit.transform.position;
+        }
+    }
+    public void InputTargeting(Monster monster)
+    {
+        foreach (Unit unit in selectedUnitList)
+        {
+            unit.targetMonster = monster;
+            unit.unitState = State.Combat;
         }
     }
 
@@ -238,16 +254,6 @@ public class UnitManager : MonoBehaviour
         return destinationList;
     }
 
-    public void InputTargeting(Monster monster)
-    {
-        foreach(Unit unit in selectedUnitList)
-        {
-            unit.targetMonster = monster;
-            unit.unitState = State.Combat;
-        }
-    }
-
-
     // 스폰
     public void SpawnUnit()
     {
@@ -259,6 +265,7 @@ public class UnitManager : MonoBehaviour
 
         string rank = GetRandomPick();
         int index = unit.name.IndexOf("(Clone)");
+       
         unit.unitKey = (UnitType)System.Enum.Parse(typeof(UnitType) ,unit.name.Substring(0, index) + rank);
         unit.unitData = GameWorld.Instance.BalanceManager.unitDic[unit.unitKey];
 

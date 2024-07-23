@@ -9,6 +9,11 @@ public enum UnitType
     Wizard_Common = 20, Wizard_Uncommon, Wizard_Rare, Wizard_Epic, Wizard_Legendary
 }
 
+public enum UnitJob
+{
+    Warrior, Archer, Wizard
+}
+
 public enum BulletShootingType
 {
     Follow, Straight
@@ -23,6 +28,7 @@ public enum BulletHitCheck
 public struct UnitData
 {
     public UnitType type;
+    public UnitJob job;
     public List<float> attackDamage;
     public float attackSpeed;
     public float attackRange;
@@ -79,6 +85,7 @@ public class BalanceManager : MonoBehaviour
         
         // Common
         unitData.type = UnitType.Warrior_Common;
+        unitData.job = UnitJob.Warrior;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
@@ -92,6 +99,7 @@ public class BalanceManager : MonoBehaviour
 
         // Uncommon
         unitData.type = UnitType.Warrior_Uncommon;
+        unitData.job = UnitJob.Warrior;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
@@ -105,6 +113,7 @@ public class BalanceManager : MonoBehaviour
 
         // Rare
         unitData.type = UnitType.Warrior_Rare;
+        unitData.job = UnitJob.Warrior;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
@@ -118,6 +127,7 @@ public class BalanceManager : MonoBehaviour
 
         // Epic
         unitData.type = UnitType.Warrior_Epic;
+        unitData.job = UnitJob.Warrior;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 10.0f;
@@ -131,6 +141,7 @@ public class BalanceManager : MonoBehaviour
 
         // Legendary
         unitData.type = UnitType.Warrior_Legendary;
+        unitData.job = UnitJob.Warrior;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 3.0f;
         unitData.attackRange = 20.0f;
@@ -149,6 +160,7 @@ public class BalanceManager : MonoBehaviour
 
         // Common
         unitData.type = UnitType.Archer_Common;
+        unitData.job = UnitJob.Archer;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
@@ -162,6 +174,7 @@ public class BalanceManager : MonoBehaviour
         
         // Uncommon
         unitData.type = UnitType.Archer_Uncommon;
+        unitData.job = UnitJob.Archer;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
@@ -175,6 +188,7 @@ public class BalanceManager : MonoBehaviour
 
         // Rare
         unitData.type = UnitType.Archer_Rare;
+        unitData.job = UnitJob.Archer;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
@@ -188,6 +202,7 @@ public class BalanceManager : MonoBehaviour
 
         // Epic
         unitData.type = UnitType.Archer_Epic;
+        unitData.job = UnitJob.Archer;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 10.0f;
@@ -201,6 +216,7 @@ public class BalanceManager : MonoBehaviour
 
         // Legendary
         unitData.type = UnitType.Archer_Legendary;
+        unitData.job = UnitJob.Archer;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 3.0f;
         unitData.attackRange = 20.0f;
@@ -219,6 +235,7 @@ public class BalanceManager : MonoBehaviour
         
         // Common
         unitData.type = UnitType.Wizard_Common;
+        unitData.job = UnitJob.Wizard;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
@@ -232,6 +249,7 @@ public class BalanceManager : MonoBehaviour
 
         // Uncommon
         unitData.type = UnitType.Wizard_Uncommon;
+        unitData.job = UnitJob.Wizard;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
@@ -245,6 +263,7 @@ public class BalanceManager : MonoBehaviour
 
         // Rare
         unitData.type = UnitType.Wizard_Rare;
+        unitData.job = UnitJob.Wizard;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 5.0f;
@@ -258,6 +277,7 @@ public class BalanceManager : MonoBehaviour
         
         // Epic
         unitData.type = UnitType.Wizard_Epic;
+        unitData.job = UnitJob.Wizard;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 10.0f;
@@ -271,6 +291,7 @@ public class BalanceManager : MonoBehaviour
 
         // Legendary
         unitData.type = UnitType.Wizard_Legendary;
+        unitData.job = UnitJob.Wizard;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 3.0f;
         unitData.attackRange = 20.0f;
@@ -339,9 +360,9 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 3;
         bulletData.shootingType = BulletShootingType.Straight;
         bulletData.hitCheck = BulletHitCheck.Moving;
-        bulletData.scale = 5.0f;
+        bulletData.scale = 3.0f;
         bulletData.damageCoefficient = 0.8f;
-        bulletData.hitRange = 5.0f; // 나중에 프리팹의 크기에 맞춰주기
+        bulletData.hitRange = 4.0f; // 나중에 프리팹의 크기에 맞춰주기
         bulletData.speed = 15.0f;
         bulletData.attackableNumber = 3;
 
@@ -351,9 +372,9 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 4;
         bulletData.shootingType = BulletShootingType.Straight;
         bulletData.hitCheck = BulletHitCheck.Moving;
-        bulletData.scale = 5.0f; // 생각
+        bulletData.scale = 3.0f; // 생각
         bulletData.damageCoefficient = 1.0f;
-        bulletData.hitRange = 5.0f; // 나중에 프리팹의 크기에 맞춰주기
+        bulletData.hitRange = 4.0f; // 나중에 프리팹의 크기에 맞춰주기
         bulletData.speed = 15.0f;
         bulletData.attackableNumber = 5;    
 
@@ -363,9 +384,9 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 5;
         bulletData.shootingType = BulletShootingType.Follow;
         bulletData.hitCheck = BulletHitCheck.Moving;
-        bulletData.scale = 5.0f; // 생각
+        bulletData.scale = 3.0f; // 생각
         bulletData.damageCoefficient = 1.0f;
-        bulletData.hitRange = 5.0f; // 나중에 프리팹의 크기에 맞춰주기
+        bulletData.hitRange = 4.0f; // 나중에 프리팹의 크기에 맞춰주기
         bulletData.speed = 15.0f;
         bulletData.attackableNumber = 20;       
 

@@ -102,7 +102,9 @@ public class BulletManager : MonoBehaviour
     {
         Transform socket = unit.GetComponentInChildren<Socket>().transform;
 
-        GameObject obj = Instantiate(bulletPrefabsArray[unit.unitData.bulletKey - 1], socket.position, socket.rotation);
+        int bulletIdx = (int)unit.unitData.job; 
+
+        GameObject obj = Instantiate(bulletPrefabsArray[bulletIdx], socket.position, socket.rotation);
         Bullet bullet = obj.GetComponent<Bullet>();
         bullet.bulletOwner = unit;
         bullet.bulletKey = unit.unitData.bulletKey;
