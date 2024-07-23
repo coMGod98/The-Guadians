@@ -60,19 +60,39 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void Button1()
+    public void LButton1()
     {
         Buttons(0, 5);
     }
 
-    public void Button2()
+    public void LButton2()
     {
         Buttons(1, 10);
     }
 
-    public void Button3()
+    public void LButton3()
     {
         Buttons(2, 15);
+    }
+
+    public void RButton1()
+    {
+
+    }
+
+    public void RButton2()
+    {
+
+    }
+
+    public void RButton3()
+    {
+
+    }
+
+    public void addButton1()
+    {
+        GameWorld.Instance.AddGold(100);
     }
 
     public void GameOver()
