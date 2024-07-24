@@ -14,6 +14,7 @@ public class GameWorld : Singleton<GameWorld>
     [SerializeField] private FXManager _fxManager;
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private SoundManager _soundManager;
+    [SerializeField] private AoeManager _aoeManager;
 
     public BalanceManager BalanceManager => _balanceManager;
     public UnitManager UnitManager => _unitManager;
@@ -23,6 +24,7 @@ public class GameWorld : Singleton<GameWorld>
     public FXManager FXManager => _fxManager;
     public UIManager UIManager => _uiManager;
     public SoundManager SoundManager => _soundManager;
+    public AoeManager AoeManager => _aoeManager;
 
 
     private float spawnDelay;
@@ -134,5 +136,4 @@ public class GameWorld : Singleton<GameWorld>
     {
         playerGolds += amount;
     }
-
 }
