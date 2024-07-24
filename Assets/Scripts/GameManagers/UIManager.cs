@@ -46,6 +46,11 @@ public class UIManager : MonoBehaviour
         curGold.text = "" + GameWorld.Instance.playerGolds.ToString();
     }
 
+    public void ShowDetails()
+    {
+
+    }
+
     public void Buttons(int buttonIndex, int gold)
     {
         if (GameWorld.Instance.playerGolds >= buttonClicks[buttonIndex] * gold)

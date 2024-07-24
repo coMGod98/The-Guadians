@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    public Sprite portrait;
     public UnitType unitKey;
 
     public GameObject unitMarker;
