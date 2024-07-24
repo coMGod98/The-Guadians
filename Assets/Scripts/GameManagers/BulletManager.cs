@@ -6,6 +6,7 @@ public class BulletManager : MonoBehaviour
 {
     public LayerMask monsterMask;
     public GameObject[] bulletPrefabsArray;
+    public GameObject[] hitPrefabsArray;
     public List<Bullet> allBulletList = new List<Bullet>();
     public Vector2 Range_x = new Vector2(-125, -75);
     public Vector2 Range_z = new Vector2(-25, 25);
@@ -26,10 +27,12 @@ public class BulletManager : MonoBehaviour
             {
                 case BulletHitCheck.Targeting:
                 {
-                    if(bullet.targetMonster == null) continue;
-                    if(bullet.transform.position == bullet.targetMonster.GetComponentInChildren<Socket>().transform.position)
+                    Socket socket = bullet.targetMonster.GetComponentInChildren<Socket>();
+                    if (bullet.targetMonster == null) continue;
+                    if(bullet.transform.position == socket.transform.position)
                     {
                         bullet.targetMonster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
+                        Instantiate(hitPrefabsArray[bullet.hitArrayIdx], socket.transform);
                         allBulletList.Remove(bullet);
                         Destroy(bullet.gameObject);
                     }
@@ -42,10 +45,12 @@ public class BulletManager : MonoBehaviour
                     foreach(Collider col in colliders)
                     {
                         Monster monster = col.GetComponent<Monster>();
+                        Socket socket = monster.GetComponentInChildren<Socket>();
                         if (!bullet.hitMonsterList.Contains(monster) && bullet.bulletData.attackableNumber > bullet.hitMonsterList.Count)
                         {
                             bullet.hitMonsterList.Add(monster);
                             monster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
+                            Instantiate(hitPrefabsArray[bullet.hitArrayIdx], socket.transform);
                         }
                     }
                     if(bullet.transform.position.x < Range_x.x || bullet.transform.position.x > Range_z.y || 
@@ -106,6 +111,7 @@ public class BulletManager : MonoBehaviour
 
         GameObject obj = Instantiate(bulletPrefabsArray[bulletIdx], socket.position, socket.rotation);
         Bullet bullet = obj.GetComponent<Bullet>();
+        bullet.hitArrayIdx = bulletIdx;
         bullet.bulletOwner = unit;
         bullet.bulletKey = unit.unitData.bulletKey;
         bullet.targetMonster = unit.targetMonster;
