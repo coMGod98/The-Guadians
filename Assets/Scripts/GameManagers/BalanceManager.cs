@@ -88,7 +88,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Warrior;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 5.0f;
+        unitData.attackRange = 6.0f;
         unitData.attackDuration = 1.5f;
         unitData.bulletSpawnTime = 0.7f;
         unitData.attackCoolTime = 3.0f;
@@ -102,7 +102,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Warrior;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 5.0f;
+        unitData.attackRange = 6.0f;
         unitData.attackDuration = 1.5f;
         unitData.bulletSpawnTime = 0.7f;
         unitData.attackCoolTime = 3.0f;
@@ -116,7 +116,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Warrior;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 5.0f;
+        unitData.attackRange = 6.0f;
         unitData.attackDuration = 1.5f;
         unitData.bulletSpawnTime = 0.7f;
         unitData.attackCoolTime = 3.0f;
@@ -130,7 +130,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Warrior;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 2.0f;
-        unitData.attackRange = 10.0f;
+        unitData.attackRange = 12.0f;
         unitData.attackDuration = 1.5f;
         unitData.bulletSpawnTime = 0.7f;
         unitData.attackCoolTime = 3.0f;
@@ -163,7 +163,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Archer;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 5.0f;
+        unitData.attackRange = 6.0f;
         unitData.attackDuration = 1.0f;
         unitData.bulletSpawnTime = 0.6f;
         unitData.attackCoolTime = 2.0f;
@@ -177,7 +177,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Archer;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 5.0f;
+        unitData.attackRange = 6.0f;
         unitData.attackDuration = 1.0f;
         unitData.bulletSpawnTime = 0.6f;
         unitData.attackCoolTime = 2.0f;
@@ -191,7 +191,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Archer;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 5.0f;
+        unitData.attackRange = 6.0f;
         unitData.attackDuration = 1.0f;
         unitData.bulletSpawnTime = 0.6f;
         unitData.attackCoolTime = 2.0f;
@@ -205,7 +205,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Archer;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 2.0f;
-        unitData.attackRange = 10.0f;
+        unitData.attackRange = 12.0f;
         unitData.attackDuration = 1.0f;
         unitData.bulletSpawnTime = 0.6f;
         unitData.attackCoolTime = 2.0f;
@@ -238,7 +238,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Wizard;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 5.0f;
+        unitData.attackRange = 6.0f;
         unitData.attackDuration = 2.0f;
         unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
@@ -252,7 +252,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Wizard;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 5.0f;
+        unitData.attackRange = 6.0f;
         unitData.attackDuration = 2.0f;
         unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
@@ -266,7 +266,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Wizard;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 5.0f;
+        unitData.attackRange = 6.0f;
         unitData.attackDuration = 2.0f;
         unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
@@ -280,7 +280,7 @@ public class BalanceManager : MonoBehaviour
         unitData.job = UnitJob.Wizard;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 2.0f;
-        unitData.attackRange = 10.0f;
+        unitData.attackRange = 12.0f;
         unitData.attackDuration = 2.0f;
         unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
