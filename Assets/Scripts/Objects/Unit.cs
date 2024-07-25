@@ -10,8 +10,6 @@ public class Unit : MonoBehaviour
     public Animator unitAnim;
     public Outline outline;
 
-    public int upgrade;
-
     public State unitState;
     public Vector3 destination;
     public Monster targetMonster;
@@ -33,5 +31,19 @@ public class Unit : MonoBehaviour
     public bool IsAttacking => unitData.attackDuration > attackElapsedTime;
     public bool IsCoolTimeDone => !IsAttacking && unitData.attackCoolTime <= attackElapsedTime;
     public bool IsAttackable => IsCoolTimeDone && Vector3.Distance(transform.position, targetMonster.transform.position) <= unitData.attackRange;
-    public float unitDamage => unitData.attackDamage[upgrade];
+    public float unitDamage {
+        get
+        {
+            switch (unitData.job)
+            {
+                case UnitJob.Warrior:
+                return unitData.attackDamage[GameWorld.Instance.UnitManager.warriorUpgrade];
+                case UnitJob.Archer:
+                return unitData.attackDamage[GameWorld.Instance.UnitManager.archerUpgrade];
+                case UnitJob.Wizard:
+                return unitData.attackDamage[GameWorld.Instance.UnitManager.wizardUpgrade];
+            }
+            return default;
+        }
+    }
 }

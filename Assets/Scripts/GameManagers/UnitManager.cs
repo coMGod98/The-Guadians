@@ -22,6 +22,11 @@ public class UnitManager : MonoBehaviour
     [Header("Move"), Tooltip("유닛 속도제어")]
     public float moveSpeed = 5.0f;
     public float rotSpeed = 360.0f;
+    [Header("UnitUpgrade"), Tooltip("유닛 업그레이드")]
+    public int warriorUpgrade = 0;
+    public int archerUpgrade = 0;
+    public int wizardUpgrade = 0;
+
 
     //유닛 랜덤
     private Dictionary<string, double> dicRank;

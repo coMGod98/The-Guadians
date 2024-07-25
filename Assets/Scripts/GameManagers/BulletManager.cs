@@ -27,14 +27,18 @@ public class BulletManager : MonoBehaviour
             {
                 case BulletHitCheck.Targeting:
                 {
-                    Socket socket = bullet.targetMonster.GetComponentInChildren<Socket>();
+                    
                     if (bullet.targetMonster == null) continue;
-                    if(bullet.transform.position == socket.transform.position)
+                    else
                     {
-                        bullet.targetMonster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
-                        Instantiate(hitPrefabsArray[bullet.hitArrayIdx], socket.transform);
-                        allBulletList.Remove(bullet);
-                        Destroy(bullet.gameObject);
+                        Socket socket = bullet.targetMonster.GetComponentInChildren<Socket>();
+                        if(bullet.transform.position == socket.transform.position)
+                        {
+                            bullet.targetMonster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
+                            Instantiate(hitPrefabsArray[bullet.hitArrayIdx], socket.transform);
+                            allBulletList.Remove(bullet);
+                            Destroy(bullet.gameObject);
+                        }
                     }
                     break;
                 }
