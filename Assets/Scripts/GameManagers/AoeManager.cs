@@ -1,6 +1,9 @@
+// https://notyu.tistory.com/59 파티클 
+
 using EasyUI.Toast;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class AoeManager : MonoBehaviour
 {
@@ -15,17 +18,26 @@ public class AoeManager : MonoBehaviour
     private GameObject curRangeCheckX;
 
     private bool isPlacingAOE = false;
-    private int aoeIndex = 0; 
+    private int aoeIndex = 0;
+
+    //AOE 설치
+    private int placeableMask;
+    private int unplaceableMask;
+
+    public event Action AoePlaced;
 
     void Start()
     {
+        placeableMask = LayerMask.GetMask("Ground");
+        unplaceableMask = LayerMask.GetMask("AOE") | LayerMask.GetMask("UI") | LayerMask.GetMask("Grounds");
+
     }
 
     public void Update()
     {
         if (isPlacingAOE)
         {
-            Range();
+            RangeofAOE();
             if (Input.GetMouseButtonDown(0))
             {
                 PlaceAOE();
@@ -48,13 +60,13 @@ public class AoeManager : MonoBehaviour
         curRangeCheckX.SetActive(false);
     }
 
-    public void Range()
+    public void RangeofAOE()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        int placeableMask = LayerMask.GetMask("AOE");
-        int unplaceableMask = LayerMask.GetMask("AOE") | LayerMask.GetMask("Ground") | LayerMask.GetMask("Water");
+        //int placeableMask = LayerMask.GetMask("Ground");
+        //int unplaceableMask = LayerMask.GetMask("AOE") | LayerMask.GetMask("Water");
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, placeableMask))
         {
@@ -77,8 +89,8 @@ public class AoeManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        int placeableMask = LayerMask.GetMask("AOE");
-        int unplaceableMask = LayerMask.GetMask("AOE") | LayerMask.GetMask("Ground") | LayerMask.GetMask("Water");
+        //int placeableMask = LayerMask.GetMask("Ground");
+        //int unplaceableMask = LayerMask.GetMask("AOE") | LayerMask.GetMask("Water");
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, placeableMask))
         {
@@ -87,6 +99,7 @@ public class AoeManager : MonoBehaviour
             isPlacingAOE = false;
             curRangeCheck.SetActive(false);
             curRangeCheckX.SetActive(false);
+            AoePlaced?.Invoke();
         }
         else if (Physics.Raycast(ray, out hit, Mathf.Infinity, unplaceableMask))
         {
@@ -94,7 +107,7 @@ public class AoeManager : MonoBehaviour
         }
     }
 
-    public void SelectedAOE(int index) 
+    public void SelectedAOE(int index)
     {
         if (index >= 0 && index < aoePrefabs.Length)
         {
@@ -102,11 +115,9 @@ public class AoeManager : MonoBehaviour
         }
     }
 
-    public void OnAoeButtonClicked(int index)
+    public void ButtonClick(int index)
     {
-        SelectedAOE(index); 
-        ButtonClicked();    
+        SelectedAOE(index);
+        ButtonClicked();
     }
-
 }
-

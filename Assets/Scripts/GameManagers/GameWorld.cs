@@ -12,8 +12,6 @@ public class GameWorld : Singleton<GameWorld>
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private BulletManager _bulletManager;
     [SerializeField] private UIManager _uiManager;
-
-
     [SerializeField] private AoeManager _aoeManager;
 
 
