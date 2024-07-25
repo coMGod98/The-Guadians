@@ -61,7 +61,7 @@ public class InputManager : MonoBehaviour
             start = end = Vector2.zero;
             DrawDragRectangle();
 
-            GameWorld.Instance.UIManager.ShowDetails();
+            //GameWorld.Instance.UIManager.ShowDetails();
         }
 
         if (Input.GetMouseButtonDown(1)) {

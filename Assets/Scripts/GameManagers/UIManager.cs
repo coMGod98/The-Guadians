@@ -1,41 +1,16 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using EasyUI.Toast;
 using System;
-using UnityEngine.UI;
-using UnityEngine.Pool;
 
 public class UIManager : MonoBehaviour
 {
-    private int[] LbuttonClicks = new int[3];
-    private int[] RButtonClicks = new int[3];
+    private int[] LbuttonClicks = new int[3] { 1, 2, 3 };
+    private int[] RButtonClicks = new int[3] { 1, 2, 3 };
     private bool isButtonLocked = false;
-
-    [Header("PortraitList")]
-    public Sprite[] unitPortraitList;
-    public Sprite[] monsterPortraitList;
-
-    [Header("UnitDetail")]
-    public GameObject showSelectedUnits;
-    public GameObject showUnitDetails;
-    public Image unitPortrait;
-    public TextMeshProUGUI jobText;
-    public TextMeshProUGUI rankText;
-    public TextMeshProUGUI attackSpeedText;
-    public TextMeshProUGUI attackRangeText;
-    public TextMeshProUGUI attackDamageText;
-
-    public Transform portraitParent;
-    public GameObject portraitSlot;
-
-    [Header("MonsterDetail")]
-    public GameObject showMonsterDetails;
-    public Image monsterPortrait;
-    public Slider monsterHPSlider;
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI hpText;
-
 
     [Header("Info")]
     public TextMeshProUGUI timerText;
@@ -52,119 +27,13 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
     {
         UpdateUI();
     }
-
-    public void ShowDetails()
-    {
-        List<Unit> selectedUnits = GameWorld.Instance.UnitManager.selectedUnitList;
-        Monster selectedMonster = GameWorld.Instance.MonsterManager.selectedMonster;
-
-        if(selectedMonster != null)
-        {
-            showMonsterDetails.SetActive(true);
-            monsterHPSlider.value = selectedMonster.curHP / selectedMonster.monsterData.HP;
-            nameText.text = selectedMonster.monsterKey;
-            hpText.text = $"{selectedMonster.curHP} / {selectedMonster.monsterData.HP}";
-        }
-        else
-        {
-            showMonsterDetails.SetActive(false);
-        }
-
-        if (selectedUnits.Count < 1)
-        {
-            showSelectedUnits.SetActive(false);
-            showUnitDetails.SetActive(false);
-            DestroyChild();
-        }
-        else if (selectedUnits.Count == 1)
-        {
-            showSelectedUnits.SetActive(false);
-            showUnitDetails.SetActive(true);
-            DestroyChild();
-
-            Unit unit = selectedUnits[0];
-            jobText.text = unit.unitData.job.ToString();
-            rankText.text = unit.unitData.rank.ToString();
-            switch(unit.unitData.job)
-            {
-                case UnitJob.Warrior:
-                attackSpeedText.text = "보통";
-                unitPortrait.sprite = unitPortraitList[0];
-                break;
-                case UnitJob.Archer:
-                attackSpeedText.text = "빠름";
-                unitPortrait.sprite = unitPortraitList[1];
-                break;
-                case UnitJob.Wizard:
-                attackSpeedText.text = "느림";
-                unitPortrait.sprite = unitPortraitList[2];
-                break;
-            }
-            switch(unit.unitData.rank)
-            {
-                case UnitRank.Common:
-                case UnitRank.Uncommon:
-                case UnitRank.Rare:
-                attackRangeText.text = "짧음";
-                break;
-                case UnitRank.Epic:
-                attackRangeText.text = "보통";
-                break;
-                case UnitRank.Legendary:
-                attackRangeText.text = "넓음";
-                break;
-            }
-            attackDamageText.text = $"{unit.unitDamage}(+{unit.upgrade})";
-        }
-        else
-        {
-            showSelectedUnits.SetActive(true);
-            showUnitDetails.SetActive(false);
-            DestroyChild();
-
-            foreach (Unit unit in selectedUnits)
-            {
-                GameObject obj = Instantiate(portraitSlot, portraitParent);
-                Image[] portrait = obj.GetComponentsInChildren<Image>();
-                switch (unit.unitData.job)
-                {
-                    case UnitJob.Warrior:
-                    portrait[1].sprite = unitPortraitList[0];
-                    break;
-                    case UnitJob.Archer:
-                    portrait[1].sprite = unitPortraitList[1];
-                    break;
-                    case UnitJob.Wizard:
-                    portrait[1].sprite = unitPortraitList[2];
-                    break;
-                }
-            }
-        }
-    }
-
-    public void DestroyChild()
-    {
-        Transform[] portraitChild = portraitParent.GetComponentsInChildren<Transform>();
-        if (portraitChild != null)
-        {
-            for (int i = 1; i < portraitChild.Length; i++)
-            {
-                Destroy(portraitChild[i].gameObject);
-            }
-        }
-    }
-
-
-
-
-
 
     private void UpdateUI()
     {
@@ -200,7 +69,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
     private void LockButtons()
     {
         isButtonLocked = true;
@@ -211,6 +79,7 @@ public class UIManager : MonoBehaviour
         isButtonLocked = false;
         GameWorld.Instance.AoeManager.AoePlaced -= UnlockButtons;
     }
+
 
 
 
@@ -232,6 +101,7 @@ public class UIManager : MonoBehaviour
     public void RButton1() => RButtons(0, 5, 0);
     public void RButton2() => RButtons(1, 10, 1);
     public void RButton3() => RButtons(2, 15, 2);
+    public void RButton4() => RButtons(3, 20, 3);
 
     public void GameState(bool isState)
     {
