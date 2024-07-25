@@ -11,7 +11,6 @@ public class GameWorld : Singleton<GameWorld>
     [SerializeField] private MonsterManager _monsterManager;
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private BulletManager _bulletManager;
-    [SerializeField] private FXManager _fxManager;
     [SerializeField] private UIManager _uiManager;
 
 
@@ -23,7 +22,6 @@ public class GameWorld : Singleton<GameWorld>
     public MonsterManager MonsterManager => _monsterManager;
     public InputManager InputManager => _inputManager;
     public BulletManager BulletManager => _bulletManager;
-    public FXManager FXManager => _fxManager;
     public UIManager UIManager => _uiManager;
     public AoeManager AoeManager => _aoeManager;
 

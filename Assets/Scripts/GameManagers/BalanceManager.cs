@@ -14,6 +14,11 @@ public enum UnitJob
     Warrior, Archer, Wizard
 }
 
+public enum UnitRank
+{
+    Common, Uncommon, Rare, Epic, Legendary
+}
+
 public enum BulletShootingType
 {
     Follow, Straight
@@ -29,6 +34,7 @@ public struct UnitData
 {
     public UnitType type;
     public UnitJob job;
+    public UnitRank rank;
     public List<float> attackDamage;
     public float attackSpeed;
     public float attackRange;
@@ -86,6 +92,7 @@ public class BalanceManager : MonoBehaviour
         // Common
         unitData.type = UnitType.Warrior_Common;
         unitData.job = UnitJob.Warrior;
+        unitData.rank = UnitRank.Common;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 6.0f;
@@ -100,6 +107,7 @@ public class BalanceManager : MonoBehaviour
         // Uncommon
         unitData.type = UnitType.Warrior_Uncommon;
         unitData.job = UnitJob.Warrior;
+        unitData.rank = UnitRank.Uncommon;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 6.0f;
@@ -114,6 +122,7 @@ public class BalanceManager : MonoBehaviour
         // Rare
         unitData.type = UnitType.Warrior_Rare;
         unitData.job = UnitJob.Warrior;
+        unitData.rank = UnitRank.Rare;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 6.0f;
@@ -128,6 +137,7 @@ public class BalanceManager : MonoBehaviour
         // Epic
         unitData.type = UnitType.Warrior_Epic;
         unitData.job = UnitJob.Warrior;
+        unitData.rank = UnitRank.Epic;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 12.0f;
@@ -142,6 +152,7 @@ public class BalanceManager : MonoBehaviour
         // Legendary
         unitData.type = UnitType.Warrior_Legendary;
         unitData.job = UnitJob.Warrior;
+        unitData.rank = UnitRank.Legendary;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 3.0f;
         unitData.attackRange = 20.0f;
@@ -161,6 +172,7 @@ public class BalanceManager : MonoBehaviour
         // Common
         unitData.type = UnitType.Archer_Common;
         unitData.job = UnitJob.Archer;
+        unitData.rank = UnitRank.Common;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 6.0f;
@@ -175,6 +187,7 @@ public class BalanceManager : MonoBehaviour
         // Uncommon
         unitData.type = UnitType.Archer_Uncommon;
         unitData.job = UnitJob.Archer;
+        unitData.rank = UnitRank.Uncommon;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 6.0f;
@@ -189,6 +202,7 @@ public class BalanceManager : MonoBehaviour
         // Rare
         unitData.type = UnitType.Archer_Rare;
         unitData.job = UnitJob.Archer;
+        unitData.rank = UnitRank.Rare;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 6.0f;
@@ -203,6 +217,7 @@ public class BalanceManager : MonoBehaviour
         // Epic
         unitData.type = UnitType.Archer_Epic;
         unitData.job = UnitJob.Archer;
+        unitData.rank = UnitRank.Epic;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 12.0f;
@@ -217,6 +232,7 @@ public class BalanceManager : MonoBehaviour
         // Legendary
         unitData.type = UnitType.Archer_Legendary;
         unitData.job = UnitJob.Archer;
+        unitData.rank = UnitRank.Legendary;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 3.0f;
         unitData.attackRange = 20.0f;
@@ -236,6 +252,7 @@ public class BalanceManager : MonoBehaviour
         // Common
         unitData.type = UnitType.Wizard_Common;
         unitData.job = UnitJob.Wizard;
+        unitData.rank = UnitRank.Common;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 6.0f;
@@ -250,6 +267,7 @@ public class BalanceManager : MonoBehaviour
         // Uncommon
         unitData.type = UnitType.Wizard_Uncommon;
         unitData.job = UnitJob.Wizard;
+        unitData.rank = UnitRank.Uncommon;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 6.0f;
@@ -264,6 +282,7 @@ public class BalanceManager : MonoBehaviour
         // Rare
         unitData.type = UnitType.Wizard_Rare;
         unitData.job = UnitJob.Wizard;
+        unitData.rank = UnitRank.Rare;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
         unitData.attackRange = 6.0f;
@@ -278,6 +297,7 @@ public class BalanceManager : MonoBehaviour
         // Epic
         unitData.type = UnitType.Wizard_Epic;
         unitData.job = UnitJob.Wizard;
+        unitData.rank = UnitRank.Epic;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 2.0f;
         unitData.attackRange = 12.0f;
@@ -292,6 +312,7 @@ public class BalanceManager : MonoBehaviour
         // Legendary
         unitData.type = UnitType.Wizard_Legendary;
         unitData.job = UnitJob.Wizard;
+        unitData.rank = UnitRank.Legendary;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 3.0f;
         unitData.attackRange = 20.0f;

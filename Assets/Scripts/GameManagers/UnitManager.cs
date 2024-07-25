@@ -271,7 +271,7 @@ public class UnitManager : MonoBehaviour
 
         unit.Init();
         unit.unitAnim.enabled = false;
-        unit.unitAnim.Update(Time.deltaTime);
+        //unit.unitAnim.Update(Time.deltaTime);
         switch(rank)
         {
             case "_Common":
@@ -299,7 +299,7 @@ public class UnitManager : MonoBehaviour
         float angle = Random.Range(0.0f, 360.0f);
         float x = radius * Mathf.Sin(angle);
         float z = radius * Mathf.Cos(angle);
-        Vector3 randomVector = new Vector3(x, 0.55f, z);
+        Vector3 randomVector = new Vector3(x, 0.0f, z);
         Vector3 randomPosition = unitSpawn.transform.position + randomVector;
         return randomPosition;
     }
