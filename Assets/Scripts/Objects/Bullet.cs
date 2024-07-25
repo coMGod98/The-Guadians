@@ -11,6 +11,5 @@ public class Bullet : MonoBehaviour
     public Monster targetMonster;
     public List<Monster> hitMonsterList;
     
-
     public BulletData bulletData;
 }

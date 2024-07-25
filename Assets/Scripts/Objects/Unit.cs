@@ -1,12 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
-    public Sprite portrait;
     public UnitType unitKey;
+    public UnitData unitData;
 
     public GameObject unitMarker;
-    public UnitData unitData;
     public Animator unitAnim;
     public Outline outline;
 
@@ -20,7 +20,8 @@ public class Unit : MonoBehaviour
     public bool forceMove = false;
     public bool forceHold = false;
 
-    public void Init(){
+    public void Init()
+    {
 
         unitState = State.Normal;
         unitAnim = GetComponentInChildren<Animator>();

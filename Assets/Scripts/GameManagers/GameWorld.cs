@@ -100,6 +100,7 @@ public class GameWorld : Singleton<GameWorld>
         }*/
 
         _inputManager.AdvanceInput();
+
         if (spawnDelay > spawnInterval)
         {
             _monsterManager.SpawnMonster();

@@ -133,9 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ae4cc57fa9ee04b91b0509c329a752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portrait: {fileID: 21300000, guid: f049b8f6e6c70664abce7e9de8fc5a5c, type: 3}
+  portrait: {fileID: 0}
   unitKey: 0
-  unitMarker: {fileID: 4746434387238546338}
   unitData:
     type: 0
     job: 0
@@ -148,6 +147,7 @@ MonoBehaviour:
     attackCoolTime: 0
     salesGold: 0
     bulletKey: 0
+  unitMarker: {fileID: 4746434387238546338}
   unitAnim: {fileID: 0}
   outline: {fileID: 0}
   upgrade: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    public Sprite portrait;
     public string monsterKey;
 
     public Animator monsterAnim;
