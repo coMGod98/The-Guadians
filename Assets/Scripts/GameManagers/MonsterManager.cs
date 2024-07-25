@@ -102,7 +102,6 @@ public class MonsterManager : MonoBehaviour
         monster.monsterData = GameWorld.Instance.BalanceManager.monsterDic[monster.monsterKey];
         
         monster.Init();
-        monster.curHP = 5.0f;
 
         allMonsterList.Add(monster);
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using EasyUI.Toast;
 using System;
 
@@ -12,8 +12,6 @@ public class UIManager : MonoBehaviour
     private int[] RButtonClicks = new int[3] { 1, 2, 3 };
     private bool isButtonLocked = false;
 
-<<<<<<< Updated upstream
-=======
     [Header("PortraitList")]
     public Sprite[] unitPortraitList;
     public Sprite[] monsterPortraitList;
@@ -41,7 +39,6 @@ public class UIManager : MonoBehaviour
 
 
 
->>>>>>> Stashed changes
     [Header("Info")]
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI roundText;
@@ -65,24 +62,9 @@ public class UIManager : MonoBehaviour
         UpdateUI();
     }
 
-<<<<<<< Updated upstream
-=======
-    public void ShowDetails()
+    public void ShowUnitsDetails()
     {
         List<Unit> selectedUnits = GameWorld.Instance.UnitManager.selectedUnitList;
-        Monster selectedMonster = GameWorld.Instance.MonsterManager.selectedMonster;
-
-        if(selectedMonster != null)
-        {
-            showMonsterDetails.SetActive(true);
-            monsterHPSlider.value = selectedMonster.curHP / selectedMonster.monsterData.HP;
-            nameText.text = selectedMonster.monsterKey;
-            hpText.text = $"{selectedMonster.curHP} / {selectedMonster.monsterData.HP}";
-        }
-        else
-        {
-            showMonsterDetails.SetActive(false);
-        }
 
         if (selectedUnits.Count < 1)
         {
@@ -102,19 +84,19 @@ public class UIManager : MonoBehaviour
             switch(unit.unitData.job)
             {
                 case UnitJob.Warrior:
-                attackSpeedText.text = "º¸Åë";
+                attackSpeedText.text = "ï¿½ï¿½ï¿½ï¿½";
                 unitPortrait.sprite = unitPortraitList[0];
-                attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.warriorUpgrade}°­)";
+                attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.warriorUpgrade}ï¿½ï¿½)";
                 break;
                 case UnitJob.Archer:
-                attackSpeedText.text = "ºü¸§";
+                attackSpeedText.text = "ï¿½ï¿½ï¿½ï¿½";
                 unitPortrait.sprite = unitPortraitList[1];
-                attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.archerUpgrade}°­)";
+                attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.archerUpgrade}ï¿½ï¿½)";
                 break;
                 case UnitJob.Wizard:
-                attackSpeedText.text = "´À¸²";
+                attackSpeedText.text = "ï¿½ï¿½ï¿½ï¿½";
                 unitPortrait.sprite = unitPortraitList[2];
-                attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.wizardUpgrade}°­)";
+                attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.wizardUpgrade}ï¿½ï¿½)";
                 break;
             }
             switch(unit.unitData.rank)
@@ -122,13 +104,13 @@ public class UIManager : MonoBehaviour
                 case UnitRank.Common:
                 case UnitRank.Uncommon:
                 case UnitRank.Rare:
-                attackRangeText.text = "ÂªÀ½";
+                attackRangeText.text = "Âªï¿½ï¿½";
                 break;
                 case UnitRank.Epic:
-                attackRangeText.text = "º¸Åë";
+                attackRangeText.text = "ï¿½ï¿½ï¿½ï¿½";
                 break;
                 case UnitRank.Legendary:
-                attackRangeText.text = "³ÐÀ½";
+                attackRangeText.text = "ï¿½ï¿½ï¿½ï¿½";
                 break;
             }
         }
@@ -170,26 +152,38 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ShowMonsterDetails()
+    {
+        Monster selectedMonster = GameWorld.Instance.MonsterManager.selectedMonster;
+        if(selectedMonster != null)
+        {
+            showMonsterDetails.SetActive(true);
+            monsterHPSlider.value = selectedMonster.curHP / selectedMonster.monsterData.HP;
+            nameText.text = selectedMonster.monsterKey;
+            hpText.text = $"{selectedMonster.curHP} / {selectedMonster.monsterData.HP}";
+        }
+        else
+        {
+            showMonsterDetails.SetActive(false);
+        }
+    }
+
     public void UpgradeWarrior()
     {
-        GameWorld.Instance.playerGolds -= 5;
         GameWorld.Instance.UnitManager.warriorUpgrade++;
     }
     public void UpgradeArcher()
     {
-        GameWorld.Instance.playerGolds -= 5;
         GameWorld.Instance.UnitManager.archerUpgrade++;
     }
     public void UpgradeWizard()
     {
-        GameWorld.Instance.playerGolds -= 5;
         GameWorld.Instance.UnitManager.wizardUpgrade++;
     }
 
 
 
 
->>>>>>> Stashed changes
     private void UpdateUI()
     {
         timerText.text = (GameWorld.Instance.remainTime < 10 ? GameWorld.Instance.remainTime.ToString("F1") : GameWorld.Instance.remainTime.ToString("F0"));
@@ -202,7 +196,7 @@ public class UIManager : MonoBehaviour
     {
         if (isButtonLocked)
         {
-            Toast.Show("½ºÅ³ÀÌ »ç¿ëµÇÁö ¾Ê¾Ò½À´Ï´Ù", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+            Toast.Show("ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
             return;
         }
 
@@ -220,7 +214,7 @@ public class UIManager : MonoBehaviour
         else
         {
             int neededGold = (buttonClicks[buttonIndex] * gold) - GameWorld.Instance.playerGolds;
-            Toast.Show($"°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù. <size=25> \n{neededGold} °ñµå°¡ ´õ ÇÊ¿äÇÕ´Ï´Ù </size>", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+            Toast.Show($"ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. <size=25> \n{neededGold} ï¿½ï¿½å°¡ ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Õ´Ï´ï¿½ </size>", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
         }
     }
 
@@ -248,7 +242,7 @@ public class UIManager : MonoBehaviour
         Buttons(index, gold, aoe, false);
     }
 
-    // (¹öÆ°, °ñµå·®, AOE)
+    // (ï¿½ï¿½Æ°, ï¿½ï¿½å·®, AOE)
     public void LButton1() => LButtons(0, 5);
     public void LButton2() => LButtons(1, 10);
     public void LButton3() => LButtons(2, 15);

@@ -271,7 +271,7 @@ public class UnitManager : MonoBehaviour
         string rank = GetRandomPick();
         int index = unit.name.IndexOf("(Clone)");
        
-        unit.unitKey = (UnitType)System.Enum.Parse(typeof(UnitType) ,unit.name.Substring(0, index) + rank);
+        unit.unitKey = (UnitType)System.Enum.Parse(typeof(UnitType), unit.name.Substring(0, index) + rank);
         unit.unitData = GameWorld.Instance.BalanceManager.unitDic[unit.unitKey];
 
         unit.Init();
