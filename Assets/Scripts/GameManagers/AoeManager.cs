@@ -1,5 +1,3 @@
-// https://notyu.tistory.com/59 ÆÄÆ¼Å¬ 
-
 using EasyUI.Toast;
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,8 +63,6 @@ public class AoeManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        //int placeableMask = LayerMask.GetMask("Ground");
-        //int unplaceableMask = LayerMask.GetMask("AOE") | LayerMask.GetMask("Water");
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, placeableMask))
         {
@@ -88,9 +84,6 @@ public class AoeManager : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
-        //int placeableMask = LayerMask.GetMask("Ground");
-        //int unplaceableMask = LayerMask.GetMask("AOE") | LayerMask.GetMask("Water");
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, placeableMask))
         {

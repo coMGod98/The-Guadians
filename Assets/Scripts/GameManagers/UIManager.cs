@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using EasyUI.Toast;
 using System;
+using System.Linq;
 
 public class UIManager : MonoBehaviour
 {
-    private int[] LbuttonClicks = new int[3] { 1, 2, 3 };
-    private int[] RButtonClicks = new int[3] { 1, 2, 3 };
+    private int[] LbuttonClicks = new int[3] { 1, 1, 1 };
+    private int[] RButtonClicks = new int[4] { 1, 1, 1, 1 };
     private bool isButtonLocked = false;
 
     [Header("PortraitList")]
@@ -36,9 +37,6 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI hpText;
 
-
-
-
     [Header("Info")]
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI roundText;
@@ -51,15 +49,21 @@ public class UIManager : MonoBehaviour
     [Header("Gold")]
     public TextMeshProUGUI curGold;
 
-
     private void Start()
     {
-
     }
 
     private void Update()
     {
         UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        timerText.text = (GameWorld.Instance.remainTime < 10 ? GameWorld.Instance.remainTime.ToString("F1") : GameWorld.Instance.remainTime.ToString("F0"));
+        roundText.text = $"{GameWorld.Instance.curRound.ToString()}/{GameWorld.Instance.totalRounds.ToString()}";
+        monsterCountText.text = "" + GameWorld.Instance.MonsterManager.allMonsterList.Count;
+        curGold.text = "" + GameWorld.Instance.playerGolds.ToString();
     }
 
     public void ShowUnitsDetails()
@@ -81,37 +85,37 @@ public class UIManager : MonoBehaviour
             Unit unit = selectedUnits[0];
             jobText.text = unit.unitData.job.ToString();
             rankText.text = unit.unitData.rank.ToString();
-            switch(unit.unitData.job)
+            switch (unit.unitData.job)
             {
                 case UnitJob.Warrior:
-                attackSpeedText.text = "����";
-                unitPortrait.sprite = unitPortraitList[0];
-                attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.warriorUpgrade}��)";
-                break;
+                    attackSpeedText.text = "";
+                    unitPortrait.sprite = unitPortraitList[0];
+                    attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.warriorUpgrade}강)";
+                    break;
                 case UnitJob.Archer:
-                attackSpeedText.text = "����";
-                unitPortrait.sprite = unitPortraitList[1];
-                attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.archerUpgrade}��)";
-                break;
+                    attackSpeedText.text = "";
+                    unitPortrait.sprite = unitPortraitList[1];
+                    attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.archerUpgrade}강)";
+                    break;
                 case UnitJob.Wizard:
-                attackSpeedText.text = "����";
-                unitPortrait.sprite = unitPortraitList[2];
-                attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.wizardUpgrade}��)";
-                break;
+                    attackSpeedText.text = "";
+                    unitPortrait.sprite = unitPortraitList[2];
+                    attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.wizardUpgrade}강)";
+                    break;
             }
-            switch(unit.unitData.rank)
+            switch (unit.unitData.rank)
             {
                 case UnitRank.Common:
                 case UnitRank.Uncommon:
                 case UnitRank.Rare:
-                attackRangeText.text = "ª��";
-                break;
+                    attackRangeText.text = "";
+                    break;
                 case UnitRank.Epic:
-                attackRangeText.text = "����";
-                break;
+                    attackRangeText.text = "";
+                    break;
                 case UnitRank.Legendary:
-                attackRangeText.text = "����";
-                break;
+                    attackRangeText.text = "";
+                    break;
             }
         }
         else
@@ -127,14 +131,14 @@ public class UIManager : MonoBehaviour
                 switch (unit.unitData.job)
                 {
                     case UnitJob.Warrior:
-                    portrait[1].sprite = unitPortraitList[0];
-                    break;
+                        portrait[1].sprite = unitPortraitList[0];
+                        break;
                     case UnitJob.Archer:
-                    portrait[1].sprite = unitPortraitList[1];
-                    break;
+                        portrait[1].sprite = unitPortraitList[1];
+                        break;
                     case UnitJob.Wizard:
-                    portrait[1].sprite = unitPortraitList[2];
-                    break;
+                        portrait[1].sprite = unitPortraitList[2];
+                        break;
                 }
             }
         }
@@ -155,7 +159,7 @@ public class UIManager : MonoBehaviour
     public void ShowMonsterDetails()
     {
         Monster selectedMonster = GameWorld.Instance.MonsterManager.selectedMonster;
-        if(selectedMonster != null)
+        if (selectedMonster != null)
         {
             showMonsterDetails.SetActive(true);
             monsterHPSlider.value = selectedMonster.curHP / selectedMonster.monsterData.HP;
@@ -168,53 +172,48 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpgradeWarrior()
-    {
-        GameWorld.Instance.UnitManager.warriorUpgrade++;
-    }
-    public void UpgradeArcher()
-    {
-        GameWorld.Instance.UnitManager.archerUpgrade++;
-    }
-    public void UpgradeWizard()
-    {
-        GameWorld.Instance.UnitManager.wizardUpgrade++;
-    }
-
-
-
-
-    private void UpdateUI()
-    {
-        timerText.text = (GameWorld.Instance.remainTime < 10 ? GameWorld.Instance.remainTime.ToString("F1") : GameWorld.Instance.remainTime.ToString("F0"));
-        roundText.text = $"{GameWorld.Instance.curRound.ToString()}/{GameWorld.Instance.totalRounds.ToString()}";
-        monsterCountText.text = "" + GameWorld.Instance.MonsterManager.allMonsterList.Count;
-        curGold.text = "" + GameWorld.Instance.playerGolds.ToString();
-    }
-
-    private void Buttons(int buttonIndex, int gold, int aoe, bool isLeftButton)
+    private void Buttons(int buttonIndex, int gold, int aoe, bool isLeftButton, Func<bool> canUpgrade, Action upgradeAction)
     {
         if (isButtonLocked)
         {
-            Toast.Show("��ų�� ������ �ʾҽ��ϴ�", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+            Toast.Show("Skill Not Used Yet", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+            return;
+        }
+
+        if (isLeftButton && !canUpgrade())
+        {
+            Toast.Show("No Units Available to Upgrade", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
             return;
         }
 
         int[] buttonClicks = isLeftButton ? LbuttonClicks : RButtonClicks;
         Action<int> onButtonClick = isLeftButton ? (Action<int>)null : GameWorld.Instance.AoeManager.ButtonClick;
-
-        if (GameWorld.Instance.playerGolds >= buttonClicks[buttonIndex] * gold)
+        int requiredGold = buttonClicks[buttonIndex] * gold;
+        if (GameWorld.Instance.playerGolds >= requiredGold)
         {
+            GameWorld.Instance.TakeGold(requiredGold);
             buttonClicks[buttonIndex]++;
-            GameWorld.Instance.TakeGold(buttonClicks[buttonIndex] * gold);
             LockButtons();
             onButtonClick?.Invoke(aoe);
-            GameWorld.Instance.AoeManager.AoePlaced += UnlockButtons;
+
+            if (isLeftButton)
+            {
+                upgradeAction?.Invoke();
+            }
+
+            if (isLeftButton)
+            {
+                isButtonLocked = false;
+            }
+            else
+            {
+                GameWorld.Instance.AoeManager.AoePlaced += UnlockButtons;
+            }
         }
         else
         {
-            int neededGold = (buttonClicks[buttonIndex] * gold) - GameWorld.Instance.playerGolds;
-            Toast.Show($"��尡 �����մϴ�. <size=25> \n{neededGold} ��尡 �� �ʿ��մϴ� </size>", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+            int neededGold = requiredGold - GameWorld.Instance.playerGolds;
+            Toast.Show($"Not Enough Gold. <size=25> \n{neededGold} Needed gold : </size>", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
         }
     }
 
@@ -229,23 +228,19 @@ public class UIManager : MonoBehaviour
         GameWorld.Instance.AoeManager.AoePlaced -= UnlockButtons;
     }
 
-
-
-
-    public void LButtons(int index, int gold)
+    public void LButtons(int index, int gold, Func<bool> canUpgrade, Action upgradeAction)
     {
-        Buttons(index, gold, 0, true);
+        Buttons(index, gold, 0, true, canUpgrade, upgradeAction);
     }
 
     public void RButtons(int index, int gold, int aoe)
     {
-        Buttons(index, gold, aoe, false);
+        Buttons(index, gold, aoe, false, null, null);
     }
 
-    // (��ư, ��差, AOE)
-    public void LButton1() => LButtons(0, 5);
-    public void LButton2() => LButtons(1, 10);
-    public void LButton3() => LButtons(2, 15);
+    public void LButton1() => LButtons(0, 5, () => GameWorld.Instance.UnitManager.allUnitList.Any(unit => unit.unitData.job == UnitJob.Warrior), () => GameWorld.Instance.UnitManager.warriorUpgrade++);
+    public void LButton2() => LButtons(1, 10, () => GameWorld.Instance.UnitManager.allUnitList.Any(unit => unit.unitData.job == UnitJob.Archer), () => GameWorld.Instance.UnitManager.archerUpgrade++);
+    public void LButton3() => LButtons(2, 15, () => GameWorld.Instance.UnitManager.allUnitList.Any(unit => unit.unitData.job == UnitJob.Wizard), () => GameWorld.Instance.UnitManager.wizardUpgrade++);
 
     public void RButton1() => RButtons(0, 5, 0);
     public void RButton2() => RButtons(1, 10, 1);
@@ -258,8 +253,8 @@ public class UIManager : MonoBehaviour
         gameLost.SetActive(!isState);
     }
 
-    /*public void addGold()
+    public void addGold()
     {
         GameWorld.Instance.AddGold(100);
-    }*/
+    }
 }
