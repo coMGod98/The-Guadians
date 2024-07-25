@@ -1207,6 +1207,7 @@ MonoBehaviour:
   - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
   - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
   - {fileID: 6832079743754989998, guid: 8d3c46414632a9a4799b9bc8dc4d9fce, type: 3}
+  hitPrefabsArray: []
   allBulletList: []
   Range_x: {x: -125, y: -75}
   Range_z: {x: -25, y: 25}
@@ -2012,7 +2013,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3353,7 +3354,7 @@ MonoBehaviour:
   _bulletManager: {fileID: 129776943}
   _fxManager: {fileID: 1126644348}
   _uiManager: {fileID: 1696669178}
-  _soundManager: {fileID: 1389065434}
+  _aoeManager: {fileID: 1326694707}
   normalRoundTime: 0
   bossRoundTime: 0
   roundElapsedTime: 0
@@ -8887,7 +8888,7 @@ GameObject:
   - component: {fileID: 1326694706}
   - component: {fileID: 1326694707}
   m_Layer: 0
-  m_Name: TestAOE
+  m_Name: AoeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8917,13 +8918,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1326694705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff7c1da03144b3e4a8f6a7fc9709a53a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fe3be0cb5c2cd34a88fed7740bbb4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aoePrefab: {fileID: 8246718917889119162, guid: 50ef1ad10dca8c544a09a77e3736b845, type: 3}
+  aoePrefabs:
+  - {fileID: 8378648546881499446, guid: 867c572a5be680d42a042d2349f10143, type: 3}
+  - {fileID: 7957833072274404953, guid: 3355f6bfa6db8b24281b827de929694c, type: 3}
+  - {fileID: 7478731271839673279, guid: 4d3c8045dd8857a4b8d34c2361c61045, type: 3}
+  - {fileID: 161766660727748596, guid: 05ce920d629922a4eb4795ef7494ce5c, type: 3}
   rangePrefab: {fileID: 1381929272925288, guid: 9b7df76de2396504c854483e2079a8fd, type: 3}
   rangePrefabX: {fileID: 8246718917889119162, guid: 9e134f42b6561eb4d999923a21007a44, type: 3}
-  Button: {fileID: 329331616}
 --- !u!1 &1336746801
 GameObject:
   m_ObjectHideFlags: 0

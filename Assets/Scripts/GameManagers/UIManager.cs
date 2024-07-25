@@ -23,17 +23,14 @@ public class UIManager : MonoBehaviour
     [Header("Gold")]
     public TextMeshProUGUI curGold;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         UpdateUI();
-        GoldUI();
     }
 
     private void UpdateUI()
@@ -41,73 +38,47 @@ public class UIManager : MonoBehaviour
         timerText.text = (GameWorld.Instance.remainTime < 10 ? GameWorld.Instance.remainTime.ToString("F1") : GameWorld.Instance.remainTime.ToString("F0"));
         roundText.text = $"{GameWorld.Instance.curRound.ToString()}/{GameWorld.Instance.totalRounds.ToString()}";
         monsterCountText.text = "" + GameWorld.Instance.MonsterManager.allMonsterList.Count;
-    }
-
-    private void GoldUI()
-    {
         curGold.text = "" + GameWorld.Instance.playerGolds.ToString();
     }
 
-    public void LButtons(int LbuttonIndex, int gold)
+    private void Buttons(int buttonIndex, int gold, int aoe, bool isLeftButton)
     {
-        if (GameWorld.Instance.playerGolds >= LbuttonClicks[LbuttonIndex] * gold)
+        int[] buttonClicks = isLeftButton ? LbuttonClicks : RButtonClicks;
+        Action<int> onButtonClick = isLeftButton ? (Action<int>)null : GameWorld.Instance.AoeManager.OnAoeButtonClicked;
+
+        if (GameWorld.Instance.playerGolds >= buttonClicks[buttonIndex] * gold)
         {
-            LbuttonClicks[LbuttonIndex]++;
-            GameWorld.Instance.TakeGold(LbuttonClicks[LbuttonIndex] * gold);
+            buttonClicks[buttonIndex]++;
+            GameWorld.Instance.TakeGold(buttonClicks[buttonIndex] * gold);
+            onButtonClick?.Invoke(aoe);
         }
         else
         {
-            int neededGold = (LbuttonClicks[LbuttonIndex] * gold) - GameWorld.Instance.playerGolds;
-            Toast.Show("골드가 부족합니다. <size=25> \n" + neededGold.ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+            int neededGold = (buttonClicks[buttonIndex] * gold) - GameWorld.Instance.playerGolds;
+            Toast.Show($"골드가 부족합니다. <size=25> \n{neededGold} 골드가 더 필요합니다 </size>", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
         }
     }
 
-    public void RButtons(int RbuttonIndex, int gold, int aoe)
+    public void LButtons(int index, int gold)
     {
-        if (GameWorld.Instance.playerGolds >= RButtonClicks[RbuttonIndex] * gold)
-        {
-            RButtonClicks[RbuttonIndex]++;
-            GameWorld.Instance.TakeGold(RButtonClicks[RbuttonIndex] * gold);
-            GameWorld.Instance.AoeManager.OnAoeButtonClicked(aoe);
-        }
-        else
-        {
-            int neededGold = (RButtonClicks[RbuttonIndex] * gold) - GameWorld.Instance.playerGolds;
-            Toast.Show("골드가 부족합니다. <size=25> \n" + neededGold.ToString() + " 골드가 더 필요합니다 </size> ", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
-        }
+        Buttons(index, gold, 0, true);
     }
 
-    public void LButton1()
+    public void RButtons(int index, int gold, int aoe)
     {
-        LButtons(0, 5);
+        Buttons(index, gold, aoe, false);
     }
 
-    public void LButton2()
-    {
-        LButtons(1, 10);
-    }
+    // (버튼, 골드량, AOE)
+    public void LButton1() => LButtons(0, 5);
+    public void LButton2() => LButtons(1, 10);
+    public void LButton3() => LButtons(2, 15);
 
-    public void LButton3()
-    {
-        LButtons(2, 15);
-    }
+    public void RButton1() => RButtons(0, 5, 1);
+    public void RButton2() => RButtons(1, 10, 2);
+    public void RButton3() => RButtons(2, 15, 3);
 
-    public void RButton1()
-    {
-        RButtons(0, 5, 1);
-    }
-
-    public void RButton2()
-    {
-        RButtons(1, 10, 2);
-    }
-
-    public void RButton3()
-    {
-        RButtons(2, 15, 3);
-    }
-
-    public void addButton1()
+    public void addGold()
     {
         GameWorld.Instance.AddGold(100);
     }
