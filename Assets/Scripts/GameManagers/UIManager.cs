@@ -41,13 +41,11 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI monsterCountText;
+    public TextMeshProUGUI curGold;
 
     [Header("Panel")]
     public GameObject gameWin;
     public GameObject gameLost;
-
-    [Header("Gold")]
-    public TextMeshProUGUI curGold;
 
     private void Start()
     {
@@ -176,13 +174,13 @@ public class UIManager : MonoBehaviour
     {
         if (isButtonLocked)
         {
-            Toast.Show("Skill Not Used Yet", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+            Toast.Show("Skill Not Used Yet", 2f, ToastColor.Black, ToastPosition.MiddleCenter); // 버튼 누르고 스킬 사용 안했을떄 나오는 토스트 메시지
             return;
         }
 
         if (isLeftButton && !canUpgrade())
         {
-            Toast.Show("No Units Available to Upgrade", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+            Toast.Show("No Units Available to Upgrade", 2f, ToastColor.Black, ToastPosition.MiddleCenter); // 업그레이드 할 유닛이 없을때 나오는 토스트 메시지
             return;
         }
 
@@ -213,7 +211,7 @@ public class UIManager : MonoBehaviour
         else
         {
             int neededGold = requiredGold - GameWorld.Instance.playerGolds;
-            Toast.Show($"Not Enough Gold. <size=25> \n{neededGold} Needed gold : </size>", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+            Toast.Show($"Not Enough Gold. <size=25> \n{neededGold} Needed gold : </size>", 2f, ToastColor.Black, ToastPosition.MiddleCenter); // 골드가 부족할때 나오는 토스트 메시지
         }
     }
 

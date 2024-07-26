@@ -17,8 +17,6 @@ public class AoeManager : MonoBehaviour
 
     private bool isPlacingAOE = false;
     private int aoeIndex = 0;
-
-    //AOE 설치
     private int placeableMask;
     private int unplaceableMask;
 
@@ -27,8 +25,7 @@ public class AoeManager : MonoBehaviour
     void Start()
     {
         placeableMask = LayerMask.GetMask("Ground");
-        unplaceableMask = LayerMask.GetMask("AOE") | LayerMask.GetMask("UI") | LayerMask.GetMask("Grounds");
-
+        unplaceableMask = LayerMask.GetMask("Water") | LayerMask.GetMask("Grounds") ;
     }
 
     public void Update()
@@ -96,7 +93,7 @@ public class AoeManager : MonoBehaviour
         }
         else if (Physics.Raycast(ray, out hit, Mathf.Infinity, unplaceableMask))
         {
-            Toast.Show("설치 불가능", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+            Toast.Show("설치 불가능", 2f, ToastColor.Black, ToastPosition.MiddleCenter); // 설치가 불가능 할때 나오는 토스트 메시지
         }
     }
 
