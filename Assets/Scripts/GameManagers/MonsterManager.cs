@@ -100,8 +100,10 @@ public class MonsterManager : MonoBehaviour
         int index = monster.name.IndexOf("(Clone)");
         monster.monsterKey = monster.name.Substring(0, index);
         monster.monsterData = GameWorld.Instance.BalanceManager.monsterDic[monster.monsterKey];
-        
+
         monster.Init();
+
+        monster.curHP = 10.0f;
 
         allMonsterList.Add(monster);
     }

@@ -104,7 +104,7 @@ public class GameWorld : Singleton<GameWorld>
 
         if (spawnDelay > spawnInterval)
         {
-            _monsterManager.SpawnMonster();
+            //_monsterManager.SpawnMonster();
             spawnCount++;
             spawnDelay = 0.0f;
         }

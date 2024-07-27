@@ -19,9 +19,11 @@ public class UnitManager : MonoBehaviour
     public GameObject[] unitPrefabArray;
     [Header("Spawn"), Tooltip("유닛 스폰지")]
     public Transform unitSpawn;
-    [Header("Move"), Tooltip("유닛 속도제어")]
+    [Header("Move"), Tooltip("유닛 제어")]
     public float moveSpeed = 5.0f;
     public float rotSpeed = 360.0f;
+    public Vector2 posX = new Vector2(-108.0f, -91.0f);
+    public Vector2 posZ = new Vector2(-9.0f, 8.5f);
     [Header("UnitUpgrade"), Tooltip("유닛 업그레이드")]
     public int warriorUpgrade = 0;
     public int archerUpgrade = 0;
@@ -77,14 +79,15 @@ public class UnitManager : MonoBehaviour
     public void UnitAI(){
         foreach(Unit unit in allUnitList)
         {
-            unit.prevElapsedTime = unit.attackElapsedTime;
-            unit.attackElapsedTime += Time.deltaTime * unit.unitData.attackSpeed;
-            if(unit.forceMove)
+            unit.destination.x = Mathf.Clamp(unit.destination.x, posX.x, posX.y);
+            unit.destination.y = 0.7f;
+            unit.destination.z = Mathf.Clamp(unit.destination.z, posZ.x, posZ.y);
+            if (unit.forceMove)
             {
                 unit.targetMonster = null;
                 unit.unitState = State.Normal;
                 unit.forceHold = false;
-                unit.attackElapsedTime = 0.0f;
+                //unit.attackElapsedTime = 0.0f;
                 unit.unitAnim.SetBool("IsAttacking", false);
                 continue;
             }
@@ -137,20 +140,27 @@ public class UnitManager : MonoBehaviour
     {
         foreach (Unit unit in allUnitList)
         {
-            if(unit.targetMonster != null)
+            unit.prevElapsedTime = unit.attackElapsedTime;
+            unit.attackElapsedTime += Time.deltaTime * unit.unitData.attackSpeed;
+
+            if (unit.targetMonster != null)
             {
                 Vector3 dir = unit.targetMonster.transform.position - unit.transform.position;
                 dir.Normalize();
                 float rotAngle = Vector3.Angle(unit.transform.forward, dir);
                 float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
                 unit.transform.Rotate(Vector3.up * rotDir * rotAngle);
-                if(unit.IsAttackable)
+
+
+
+                if (unit.IsAttackable)
                 {
                     unit.attackElapsedTime = 0.0f;
                     unit.unitAnim.CrossFade("Attack", 0.1f);
                 }
 
-                if(unit.attackElapsedTime > unit.unitData.bulletSpawnTime && unit.prevElapsedTime < unit.unitData.bulletSpawnTime) GameWorld.Instance.BulletManager.SpawnBullet(unit);
+                if (unit.attackElapsedTime > unit.unitData.bulletSpawnTime && unit.prevElapsedTime < unit.unitData.bulletSpawnTime)
+                    GameWorld.Instance.BulletManager.SpawnBullet(unit); // 여기가 문제
             }
         }
     }
@@ -205,6 +215,7 @@ public class UnitManager : MonoBehaviour
         foreach (Unit unit in selectedUnitList) 
         {
             unit.forceHold = true;
+
             if (unit.forceMove)
             {
                 unit.forceMove = false;
@@ -218,6 +229,8 @@ public class UnitManager : MonoBehaviour
     {
         foreach (Unit unit in selectedUnitList)
         {
+            unit.forceMove = false;
+            unit.forceHold = false;
             unit.targetMonster = monster;
             unit.unitState = State.Combat;
         }
@@ -276,7 +289,7 @@ public class UnitManager : MonoBehaviour
 
         unit.Init();
         unit.unitAnim.enabled = false;
-        //unit.unitAnim.Update(Time.deltaTime);
+
         switch(rank)
         {
             case "_Common":
