@@ -86,17 +86,17 @@ public class UIManager : MonoBehaviour
             switch (unit.unitData.job)
             {
                 case UnitJob.Warrior:
-                    attackSpeedText.text = "";
+                    attackSpeedText.text = "Normal";
                     unitPortrait.sprite = unitPortraitList[0];
                     attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.warriorUpgrade}강)";
                     break;
                 case UnitJob.Archer:
-                    attackSpeedText.text = "";
+                    attackSpeedText.text = "Fast";
                     unitPortrait.sprite = unitPortraitList[1];
                     attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.archerUpgrade}강)";
                     break;
                 case UnitJob.Wizard:
-                    attackSpeedText.text = "";
+                    attackSpeedText.text = "Slow";
                     unitPortrait.sprite = unitPortraitList[2];
                     attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.wizardUpgrade}강)";
                     break;
@@ -106,13 +106,13 @@ public class UIManager : MonoBehaviour
                 case UnitRank.Common:
                 case UnitRank.Uncommon:
                 case UnitRank.Rare:
-                    attackRangeText.text = "";
+                    attackRangeText.text = "Short";
                     break;
                 case UnitRank.Epic:
-                    attackRangeText.text = "";
+                    attackRangeText.text = "Long";
                     break;
                 case UnitRank.Legendary:
-                    attackRangeText.text = "";
+                    attackRangeText.text = "High";
                     break;
             }
         }

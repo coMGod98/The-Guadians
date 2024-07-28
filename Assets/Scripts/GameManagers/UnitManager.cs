@@ -22,13 +22,14 @@ public class UnitManager : MonoBehaviour
     [Header("Move"), Tooltip("유닛 제어")]
     public float moveSpeed = 5.0f;
     public float rotSpeed = 360.0f;
-    public Vector2 posX = new Vector2(-108.0f, -91.0f);
-    public Vector2 posZ = new Vector2(-9.0f, 8.5f);
     [Header("UnitUpgrade"), Tooltip("유닛 업그레이드")]
     public int warriorUpgrade = 0;
     public int archerUpgrade = 0;
     public int wizardUpgrade = 0;
 
+    private Vector2 walkableRangeX = new Vector2(-108.2f, -91.0f);
+    private float walkableY = 0.7f;
+    private Vector2 walkableRangeZ = new Vector2(-8.5f, 8.5f);
 
     //유닛 랜덤
     private Dictionary<string, double> dicRank;
@@ -79,27 +80,24 @@ public class UnitManager : MonoBehaviour
     public void UnitAI(){
         foreach(Unit unit in allUnitList)
         {
-            unit.destination.x = Mathf.Clamp(unit.destination.x, posX.x, posX.y);
-            unit.destination.y = 0.7f;
-            unit.destination.z = Mathf.Clamp(unit.destination.z, posZ.x, posZ.y);
+            var newDest = new Vector3(Mathf.Clamp(unit.destination.x, walkableRangeX.x, walkableRangeX.y), walkableY, Mathf.Clamp(unit.destination.z, walkableRangeZ.x, walkableRangeZ.y));
+            unit.destination = newDest;
             if (unit.forceMove)
             {
                 unit.targetMonster = null;
                 unit.unitState = State.Normal;
                 unit.forceHold = false;
-                //unit.attackElapsedTime = 0.0f;
                 unit.unitAnim.SetBool("IsAttacking", false);
                 continue;
             }
 
             unit.unitAnim.SetBool("IsAttacking", unit.IsAttacking);
-            if(unit.IsAttacking) continue;
 
             foreach(Monster monster in GameWorld.Instance.MonsterManager.allMonsterList)
             {
                 using (ListPool<Monster>.Get(out var rangedMonsters)){
                     if(Vector3.Distance(unit.transform.position, monster.transform.position) <= unit.unitData.attackRange) rangedMonsters.Add(monster);
-                    if (rangedMonsters.Count > 0) 
+                    if (rangedMonsters.Count > 0 || unit.targetMonster != null) 
                     {
                         switch (unit.unitState)
                         {
@@ -170,6 +168,14 @@ public class UnitManager : MonoBehaviour
         foreach(Unit unit in allUnitList){
             if(!unit.IsAttacking || unit.forceMove) 
             {
+                if(Vector3.Distance(unit.transform.position, unit.destination) < 0.1f)
+                {
+                    unit.destination = unit.transform.position;
+                    unit.unitAnim.SetBool("IsMoving", false);
+                    unit.forceMove = false;
+                    continue;
+                }
+
                 if(NavMesh.CalculatePath(unit.transform.position, unit.destination, NavMesh.AllAreas, myPath))
                 {
                     switch(myPath.status){
@@ -203,7 +209,12 @@ public class UnitManager : MonoBehaviour
                             break;
                         }
                         case NavMeshPathStatus.PathInvalid:
+                        {
+                            unit.destination = unit.transform.position;
+                            unit.unitAnim.SetBool("IsMoving", false);
+                            unit.forceMove = false;
                             break;
+                        }
                     }
                 }
             }
