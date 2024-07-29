@@ -17,6 +17,7 @@ public class InGameMenu : MonoBehaviour
             if (optionsMenu.activeSelf)
             {
                 optionsMenu.SetActive(false);
+                
             }
             else
             {
