@@ -100,7 +100,6 @@ public class GameWorld : Singleton<GameWorld>
         }*/
 
         _inputManager.AdvanceInput();
-        _uiManager.ShowMonsterDetails();
 
         if (spawnDelay > spawnInterval)
         {

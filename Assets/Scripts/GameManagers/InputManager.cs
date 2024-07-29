@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
@@ -27,56 +28,56 @@ public class InputManager : MonoBehaviour
 
     public void AdvanceInput()
     {
-        if (Input.GetMouseButtonDown(0)) {
-            start = Input.mousePosition;
-            dragRect = new Rect();
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, unitMask)) {
-                if (hit.transform.GetComponent<Unit>() == null) return;
-                if (Input.GetKey(KeyCode.LeftControl)) MulSelectUnit(hit.transform.GetComponent<Unit>());
-                else OneSelectUnit(hit.transform.GetComponent<Unit>());
-            }
-            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, monsterMask)) {
-                if (hit.transform.GetComponent<Monster>() == null) return;
-                SelectMonster(hit.transform.GetComponent<Monster>());
-            }
-            else
-            {
-                DeselectAll();
-            }
-        }
-
-        if (Input.GetMouseButton(0))
+        if(EventSystem.current.IsPointerOverGameObject() == false)
         {
-            end = Input.mousePosition;
-            DrawDragRectangle();
-        }
+            if (Input.GetMouseButtonDown(0)) {
+                start = Input.mousePosition;
+                dragRect = new Rect();
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            CalculateDragRect();
-            DragUnit();
-
-            start = end = Vector2.zero;
-            DrawDragRectangle();
-
-            GameWorld.Instance.UIManager.ShowUnitsDetails();
-        }
-
-        if (Input.GetMouseButtonDown(1)) {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);            
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, monsterMask)) {
-                Monster monster = hit.transform.GetComponent<Monster>();
-                GameWorld.Instance.UnitManager.InputTargeting(monster);
-                SelectMonster(monster);
+                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, unitMask)) {
+                    if (hit.transform.GetComponent<Unit>() == null) return;
+                    if (Input.GetKey(KeyCode.LeftControl)) MulSelectUnit(hit.transform.GetComponent<Unit>());
+                    else OneSelectUnit(hit.transform.GetComponent<Unit>());
+                }
+                else if (Physics.Raycast(ray, out hit, Mathf.Infinity, monsterMask)) {
+                    if (hit.transform.GetComponent<Monster>() == null) return;
+                    SelectMonster(hit.transform.GetComponent<Monster>());
+                }
+                else
+                {
+                    DeselectAll();
+                }
             }
-            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
+
+            if (Input.GetMouseButton(0))
             {
-                GameWorld.Instance.UnitManager.InputDestination(hit.point);
+                end = Input.mousePosition;
+                DrawDragRectangle();
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                CalculateDragRect();
+                DragUnit();
+
+                start = end = Vector2.zero;
+                DrawDragRectangle();
+            }
+
+            if (Input.GetMouseButtonDown(1)) {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);            
+                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, monsterMask)) {
+                    Monster monster = hit.transform.GetComponent<Monster>();
+                    GameWorld.Instance.UnitManager.InputTargeting(monster);
+                }
+                else if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
+                {
+                    GameWorld.Instance.UnitManager.InputDestination(hit.point);
+                }
             }
         }
-
+        
         if (Input.GetKeyDown(KeyCode.H))
         {
             GameWorld.Instance.UnitManager.InputHold();
@@ -100,13 +101,14 @@ public class InputManager : MonoBehaviour
     }
 
     private void DeselectMonster() {
-        if (GameWorld.Instance.MonsterManager.selectedMonster != null) {
-            GameWorld.Instance.MonsterManager.selectedMonster.GetComponent<Outline>().enabled = false;
-            GameWorld.Instance.MonsterManager.selectedMonster = null;
+        foreach(Monster monster in GameWorld.Instance.MonsterManager.allMonsterList)
+        {
+            monster.GetComponent<Outline>().enabled = false;
         }
+        GameWorld.Instance.MonsterManager.selectedMonster = null;
     }
 
-    private void DeselectAll() {
+    public void DeselectAll() {
         foreach (Unit unit in GameWorld.Instance.UnitManager.selectedUnitList)
         {
             unit.unitMarker.SetActive(false);

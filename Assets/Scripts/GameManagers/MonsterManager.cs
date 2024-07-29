@@ -103,8 +103,6 @@ public class MonsterManager : MonoBehaviour
 
         monster.Init();
 
-        monster.curHP = 10.0f;
-
         allMonsterList.Add(monster);
     }
 }

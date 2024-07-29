@@ -615,7 +615,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 81027122}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 456761294}
+        m_TargetAssemblyTypeName: ShowDetails, Assembly-CSharp
+        m_MethodName: SellUnits
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &81027122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2793,6 +2805,80 @@ RectTransform:
   m_AnchoredPosition: {x: -150, y: 0}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &456761293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 456761295}
+  - component: {fileID: 456761294}
+  m_Layer: 0
+  m_Name: ShowDetails
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &456761294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456761293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee46e5b161a144d09c74adc46629ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portraitParent: {fileID: 139407423}
+  portraitSlot: {fileID: 35894435810377192, guid: 88241adf4e85c5543b97278522a722e3, type: 3}
+  portraitSlotList: []
+  unitPortraitList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  monsterPortraitList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  showSelectedUnits: {fileID: 1294684632}
+  showUnitDetails: {fileID: 1495954567}
+  unitPortrait: {fileID: 919484734}
+  jobText: {fileID: 1585244596}
+  rankText: {fileID: 526841654}
+  attackSpeedText: {fileID: 172733624}
+  attackRangeText: {fileID: 1996532954}
+  attackDamageText: {fileID: 1384711351}
+  showMonsterDetails: {fileID: 282739670}
+  monsterPortrait: {fileID: 974378216}
+  monsterHPSlider: {fileID: 900700398}
+  nameText: {fileID: 561716133}
+  hpText: {fileID: 195444003}
+--- !u!4 &456761295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456761293}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1696669177}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &462322382
 GameObject:
   m_ObjectHideFlags: 0
@@ -4631,7 +4717,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 783868228}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 456761294}
+        m_TargetAssemblyTypeName: ShowDetails, Assembly-CSharp
+        m_MethodName: SellUnits
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &783868228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8927,7 +9025,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1495954568
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9703,7 +9801,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 456761295}
   m_Father: {fileID: 598639056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1696669178
@@ -9718,36 +9817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a09bc0a2d907f49a7e206c1b2a6043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitPortraitList:
-  - {fileID: 21300000, guid: 325136f9c6b971444868b9e61adc46b9, type: 3}
-  - {fileID: 21300000, guid: f049b8f6e6c70664abce7e9de8fc5a5c, type: 3}
-  - {fileID: 21300000, guid: c0280fafa88fc374899c40a7f7982b39, type: 3}
-  monsterPortraitList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  showSelectedUnits: {fileID: 1294684632}
-  showUnitDetails: {fileID: 1495954567}
-  unitPortrait: {fileID: 919484734}
-  jobText: {fileID: 1585244596}
-  rankText: {fileID: 526841654}
-  attackSpeedText: {fileID: 172733624}
-  attackRangeText: {fileID: 1996532954}
-  attackDamageText: {fileID: 1384711351}
-  portraitParent: {fileID: 139407423}
-  portraitSlot: {fileID: 35894435810377192, guid: 88241adf4e85c5543b97278522a722e3, type: 3}
-  showMonsterDetails: {fileID: 282739670}
-  monsterPortrait: {fileID: 974378216}
-  monsterHPSlider: {fileID: 900700398}
-  nameText: {fileID: 561716133}
-  hpText: {fileID: 195444003}
+  _showDetails: {fileID: 456761294}
   timerText: {fileID: 1465655823}
   roundText: {fileID: 674134329}
   monsterCountText: {fileID: 63725007}

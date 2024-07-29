@@ -27,9 +27,9 @@ public class UnitManager : MonoBehaviour
     public int archerUpgrade = 0;
     public int wizardUpgrade = 0;
 
-    private Vector2 walkableRangeX = new Vector2(-108.2f, -91.0f);
+    private Vector2 walkableRangeX = new Vector2(-108.5f, -91.0f);
     private float walkableY = 0.7f;
-    private Vector2 walkableRangeZ = new Vector2(-8.5f, 8.5f);
+    private Vector2 walkableRangeZ = new Vector2(-9.0f, 8.8f);
 
     //유닛 랜덤
     private Dictionary<string, double> dicRank;
@@ -78,8 +78,9 @@ public class UnitManager : MonoBehaviour
     }
 
     public void UnitAI(){
-        foreach(Unit unit in allUnitList)
+        for(int i = allUnitList.Count - 1; i >= 0; --i)
         {
+            Unit unit = allUnitList[i];
             var newDest = new Vector3(Mathf.Clamp(unit.destination.x, walkableRangeX.x, walkableRangeX.y), walkableY, Mathf.Clamp(unit.destination.z, walkableRangeZ.x, walkableRangeZ.y));
             unit.destination = newDest;
             if (unit.forceMove)
@@ -109,7 +110,7 @@ public class UnitManager : MonoBehaviour
                             }
                             case State.Combat:
                             {
-                                if (unit.forceHold) 
+                                if (unit.forceHold && rangedMonsters.Count > 0) 
                                 {
                                     unit.targetMonster = rangedMonsters[0];
                                 }
@@ -238,6 +239,7 @@ public class UnitManager : MonoBehaviour
     }
     public void InputTargeting(Monster monster)
     {
+        monster.GetComponent<Outline>().enabled = true;
         foreach (Unit unit in selectedUnitList)
         {
             unit.forceMove = false;

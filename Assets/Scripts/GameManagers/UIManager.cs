@@ -9,33 +9,15 @@ using System.Linq;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] ShowDetails _showDetails;
+    //[SerializeField] 
+    public ShowDetails ShowDetails => _showDetails;
+
+
     private int[] LbuttonClicks = new int[3] { 1, 1, 1 };
     private int[] RButtonClicks = new int[4] { 1, 1, 1, 1 };
     private bool isButtonLocked = false;
 
-    [Header("PortraitList")]
-    public Sprite[] unitPortraitList;
-    public Sprite[] monsterPortraitList;
-
-    [Header("UnitDetail")]
-    public GameObject showSelectedUnits;
-    public GameObject showUnitDetails;
-    public Image unitPortrait;
-    public TextMeshProUGUI jobText;
-    public TextMeshProUGUI rankText;
-    public TextMeshProUGUI attackSpeedText;
-    public TextMeshProUGUI attackRangeText;
-    public TextMeshProUGUI attackDamageText;
-
-    public Transform portraitParent;
-    public GameObject portraitSlot;
-
-    [Header("MonsterDetail")]
-    public GameObject showMonsterDetails;
-    public Image monsterPortrait;
-    public Slider monsterHPSlider;
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI hpText;
 
     [Header("Info")]
     public TextMeshProUGUI timerText;
@@ -54,6 +36,8 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         UpdateUI();
+        _showDetails.ShowUnitsDetails();
+        _showDetails.ShowMonsterDetails();
     }
 
     private void UpdateUI()
@@ -64,111 +48,7 @@ public class UIManager : MonoBehaviour
         curGold.text = "" + GameWorld.Instance.playerGolds.ToString();
     }
 
-    public void ShowUnitsDetails()
-    {
-        List<Unit> selectedUnits = GameWorld.Instance.UnitManager.selectedUnitList;
 
-        if (selectedUnits.Count < 1)
-        {
-            showSelectedUnits.SetActive(false);
-            showUnitDetails.SetActive(false);
-            DestroyChild();
-        }
-        else if (selectedUnits.Count == 1)
-        {
-            showSelectedUnits.SetActive(false);
-            showUnitDetails.SetActive(true);
-            DestroyChild();
-
-            Unit unit = selectedUnits[0];
-            jobText.text = unit.unitData.job.ToString();
-            rankText.text = unit.unitData.rank.ToString();
-            switch (unit.unitData.job)
-            {
-                case UnitJob.Warrior:
-                    attackSpeedText.text = "Normal";
-                    unitPortrait.sprite = unitPortraitList[0];
-                    attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.warriorUpgrade}강)";
-                    break;
-                case UnitJob.Archer:
-                    attackSpeedText.text = "Fast";
-                    unitPortrait.sprite = unitPortraitList[1];
-                    attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.archerUpgrade}강)";
-                    break;
-                case UnitJob.Wizard:
-                    attackSpeedText.text = "Slow";
-                    unitPortrait.sprite = unitPortraitList[2];
-                    attackDamageText.text = $"{unit.unitDamage}(+{GameWorld.Instance.UnitManager.wizardUpgrade}강)";
-                    break;
-            }
-            switch (unit.unitData.rank)
-            {
-                case UnitRank.Common:
-                case UnitRank.Uncommon:
-                case UnitRank.Rare:
-                    attackRangeText.text = "Short";
-                    break;
-                case UnitRank.Epic:
-                    attackRangeText.text = "Long";
-                    break;
-                case UnitRank.Legendary:
-                    attackRangeText.text = "High";
-                    break;
-            }
-        }
-        else
-        {
-            showSelectedUnits.SetActive(true);
-            showUnitDetails.SetActive(false);
-            DestroyChild();
-
-            foreach (Unit unit in selectedUnits)
-            {
-                GameObject obj = Instantiate(portraitSlot, portraitParent);
-                Image[] portrait = obj.GetComponentsInChildren<Image>();
-                switch (unit.unitData.job)
-                {
-                    case UnitJob.Warrior:
-                        portrait[1].sprite = unitPortraitList[0];
-                        break;
-                    case UnitJob.Archer:
-                        portrait[1].sprite = unitPortraitList[1];
-                        break;
-                    case UnitJob.Wizard:
-                        portrait[1].sprite = unitPortraitList[2];
-                        break;
-                }
-            }
-        }
-    }
-
-    public void DestroyChild()
-    {
-        Transform[] portraitChild = portraitParent.GetComponentsInChildren<Transform>();
-        if (portraitChild != null)
-        {
-            for (int i = 1; i < portraitChild.Length; i++)
-            {
-                Destroy(portraitChild[i].gameObject);
-            }
-        }
-    }
-
-    public void ShowMonsterDetails()
-    {
-        Monster selectedMonster = GameWorld.Instance.MonsterManager.selectedMonster;
-        if (selectedMonster != null)
-        {
-            showMonsterDetails.SetActive(true);
-            monsterHPSlider.value = selectedMonster.curHP / selectedMonster.monsterData.HP;
-            nameText.text = selectedMonster.monsterKey;
-            hpText.text = $"{selectedMonster.curHP} / {selectedMonster.monsterData.HP}";
-        }
-        else
-        {
-            showMonsterDetails.SetActive(false);
-        }
-    }
 
     private void Buttons(int buttonIndex, int gold, int aoe, bool isLeftButton, Func<bool> canUpgrade, Action upgradeAction)
     {

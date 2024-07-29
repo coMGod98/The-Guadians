@@ -95,7 +95,7 @@ public class BalanceManager : MonoBehaviour
         unitData.rank = UnitRank.Common;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 6.0f;
+        unitData.attackRange = 7.0f;
         unitData.attackDuration = 1.5f;
         unitData.bulletSpawnTime = 0.7f;
         unitData.attackCoolTime = 3.0f;
@@ -110,7 +110,7 @@ public class BalanceManager : MonoBehaviour
         unitData.rank = UnitRank.Uncommon;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 6.0f;
+        unitData.attackRange = 7.0f;
         unitData.attackDuration = 1.5f;
         unitData.bulletSpawnTime = 0.7f;
         unitData.attackCoolTime = 3.0f;
@@ -125,7 +125,7 @@ public class BalanceManager : MonoBehaviour
         unitData.rank = UnitRank.Rare;
         unitData.attackDamage = warriorAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 6.0f;
+        unitData.attackRange = 7.0f;
         unitData.attackDuration = 1.5f;
         unitData.bulletSpawnTime = 0.7f;
         unitData.attackCoolTime = 3.0f;
@@ -175,7 +175,7 @@ public class BalanceManager : MonoBehaviour
         unitData.rank = UnitRank.Common;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 6.0f;
+        unitData.attackRange = 7.0f;
         unitData.attackDuration = 1.0f;
         unitData.bulletSpawnTime = 0.6f;
         unitData.attackCoolTime = 2.0f;
@@ -190,7 +190,7 @@ public class BalanceManager : MonoBehaviour
         unitData.rank = UnitRank.Uncommon;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 6.0f;
+        unitData.attackRange = 7.0f;
         unitData.attackDuration = 1.0f;
         unitData.bulletSpawnTime = 0.6f;
         unitData.attackCoolTime = 2.0f;
@@ -205,7 +205,7 @@ public class BalanceManager : MonoBehaviour
         unitData.rank = UnitRank.Rare;
         unitData.attackDamage = archerAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 6.0f;
+        unitData.attackRange = 7.0f;
         unitData.attackDuration = 1.0f;
         unitData.bulletSpawnTime = 0.6f;
         unitData.attackCoolTime = 2.0f;
@@ -255,7 +255,7 @@ public class BalanceManager : MonoBehaviour
         unitData.rank = UnitRank.Common;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 6.0f;
+        unitData.attackRange = 7.0f;
         unitData.attackDuration = 2.0f;
         unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
@@ -270,7 +270,7 @@ public class BalanceManager : MonoBehaviour
         unitData.rank = UnitRank.Uncommon;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 6.0f;
+        unitData.attackRange = 7.0f;
         unitData.attackDuration = 2.0f;
         unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
@@ -285,7 +285,7 @@ public class BalanceManager : MonoBehaviour
         unitData.rank = UnitRank.Rare;
         unitData.attackDamage = wizardAttackDamageList;
         unitData.attackSpeed = 1.0f;
-        unitData.attackRange = 6.0f;
+        unitData.attackRange = 7.0f;
         unitData.attackDuration = 2.0f;
         unitData.bulletSpawnTime = 1.2f;
         unitData.attackCoolTime = 4.0f;
