@@ -45,7 +45,7 @@ public class SceneLoader : MonoBehaviour
 
         while (true)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.anyKeyDown)
             {
                 ao.allowSceneActivation = true;
                 yield break;
