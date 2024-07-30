@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mySlider: {fileID: 239921857}
+  Message: {fileID: 419197132}
 --- !u!4 &16137194
 Transform:
   m_ObjectHideFlags: 0
@@ -273,7 +274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &419197133
 RectTransform:
   m_ObjectHideFlags: 0
