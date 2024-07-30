@@ -63,6 +63,8 @@ public class InputManager : MonoBehaviour
 
                 start = end = Vector2.zero;
                 DrawDragRectangle();
+
+                GameWorld.Instance.UIManager.ShowDetails.UnitDetails();
             }
 
             if (Input.GetMouseButtonDown(1)) {
@@ -84,7 +86,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void SelectUnit(Unit newUnit) {
+    public void SelectUnit(Unit newUnit) {
         newUnit.unitMarker.SetActive(true);
         GameWorld.Instance.UnitManager.selectedUnitList.Add(newUnit);
     }

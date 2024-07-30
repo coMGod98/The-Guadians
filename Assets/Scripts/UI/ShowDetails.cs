@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine.Analytics;
 
 public class ShowDetails : MonoBehaviour
 {
     [Header("Portrait")]
     public Transform portraitParent;
     public GameObject portraitSlot;
-
-    public List<PortraitSlot> portraitSlotList;
-
     public Sprite[] unitPortraitList;
     public Sprite[] monsterPortraitList;
 
@@ -32,12 +31,51 @@ public class ShowDetails : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI hpText;
 
-    void Awake()
+    [Header("BossDetail")]
+    public GameObject showBossDetails;
+    public Slider bossHPSlider;
+
+    public void MonsterDetails()
     {
-        portraitSlotList = new List<PortraitSlot>();
+        Monster selectedMonster = GameWorld.Instance.MonsterManager.selectedMonster;
+        if(selectedMonster != null)
+        {
+            showMonsterDetails.SetActive(true);
+            monsterHPSlider.value = selectedMonster.curHP / selectedMonster.monsterData.HP;
+            nameText.text = selectedMonster.monsterKey;
+            hpText.text = $"{selectedMonster.curHP} / {selectedMonster.monsterData.HP}";
+        }
+        else
+        {
+            showMonsterDetails.SetActive(false);
+        }
     }
 
-    public void ShowUnitsDetails()
+    public void BossDetails()
+    {
+        List<Monster> allMonsterList = GameWorld.Instance.MonsterManager.allMonsterList;
+        Monster boss = null;
+
+        foreach(Monster monster in allMonsterList)
+        {
+            if (monster.monsterType == MonsterType.Boss)
+            {
+                boss = monster;
+            }
+        }
+        if (boss != null)
+        {
+            showBossDetails.SetActive(true);
+            bossHPSlider.value = boss.curHP / boss.monsterData.HP;
+        }
+        else
+        {
+            showBossDetails.SetActive(false);
+        }
+
+    }
+    
+    public void UnitDetails()
     {
         List<Unit> selectedUnits = GameWorld.Instance.UnitManager.selectedUnitList;
 
@@ -57,19 +95,21 @@ public class ShowDetails : MonoBehaviour
                     PortraitSlot slot = obj.GetComponent<PortraitSlot>();
                     slot.likedUnit = unit;
                     slot.idx = count;
-                    portraitSlotList.Add(slot);
                     
-                    Image[] portrait = obj.GetComponentsInChildren<Image>();
+                    Button button = obj.GetComponent<Button>();
+                    button.onClick.AddListener(() => ShowClickedUnitsDetails(slot.idx));
+
+                    Image portrait = obj.GetComponent<Image>();
                     switch (unit.unitData.job)
                     {
                         case UnitJob.Warrior:
-                            portrait[1].sprite = unitPortraitList[0];
+                            portrait.sprite = unitPortraitList[0];
                             break;
                         case UnitJob.Archer:
-                            portrait[1].sprite = unitPortraitList[1];
+                            portrait.sprite = unitPortraitList[1];
                             break;
                         case UnitJob.Wizard:
-                            portrait[1].sprite = unitPortraitList[2];
+                            portrait.sprite = unitPortraitList[2];
                             break;
                     }
                 }
@@ -135,31 +175,25 @@ public class ShowDetails : MonoBehaviour
             {
                 Destroy(portraitChild[i].gameObject);
             }
-            portraitSlotList.Clear();
         }
     }
 
-    public void ShowMonsterDetails()
-    {
-        Monster selectedMonster = GameWorld.Instance.MonsterManager.selectedMonster;
-        if (selectedMonster != null)
-        {
-            showMonsterDetails.SetActive(true);
-            monsterHPSlider.value = selectedMonster.curHP / selectedMonster.monsterData.HP;
-            nameText.text = selectedMonster.monsterKey;
-            hpText.text = $"{selectedMonster.curHP} / {selectedMonster.monsterData.HP}";
-        }
-        else
-        {
-            showMonsterDetails.SetActive(false);
-        }
-    }
-
-    public void ShowClickedUnitsDetails()
+    public void ShowClickedUnitsDetails(int index)
     {
         GameWorld.Instance.InputManager.DeselectAll();
-        Unit clickedUnit = this.GetComponent<PortraitSlot>().likedUnit;
-        GameWorld.Instance.UnitManager.selectedUnitList.Add(clickedUnit);
+
+        PortraitSlot[] portraitSlots = portraitParent.GetComponentsInChildren<PortraitSlot>();
+        foreach(PortraitSlot portraitSlot in portraitSlots)
+        {
+            if (portraitSlot.idx == index)
+            {
+                Unit clickedUnit = portraitSlot.likedUnit;
+                GameWorld.Instance.InputManager.SelectUnit(clickedUnit);
+                break;
+            }
+        }
+
+        UnitDetails();
     }
 
     public void SellUnits()

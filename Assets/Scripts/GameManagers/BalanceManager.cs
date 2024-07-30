@@ -2,6 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MonsterType
+{
+    Normal, Boss
+}
+
 public enum UnitType
 {
     Warrior_Common = 0, Warrior_Uncommon, Warrior_Rare, Warrior_Epic, Warrior_Legendary,

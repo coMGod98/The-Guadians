@@ -36,8 +36,8 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         UpdateUI();
-        _showDetails.ShowUnitsDetails();
-        _showDetails.ShowMonsterDetails();
+        _showDetails.MonsterDetails();
+        _showDetails.BossDetails();
     }
 
     private void UpdateUI()

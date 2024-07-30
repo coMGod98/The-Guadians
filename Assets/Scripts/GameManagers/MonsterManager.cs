@@ -93,11 +93,12 @@ public class MonsterManager : MonoBehaviour
     //스폰
     public void SpawnMonster()
     {
-        //GameObject obj = Instantiate(monsterPrefabArray[GameWorld.Instance.curRound - 1], monsterSpawn);
-        GameObject obj = Instantiate(monsterPrefabArray[0], monsterSpawn);
+        GameObject obj = Instantiate(monsterPrefabArray[GameWorld.Instance.curRound - 1], monsterSpawn);
+        //GameObject obj = Instantiate(monsterPrefabArray[0], monsterSpawn);
         Monster monster = obj.GetComponent<Monster>();
 
         int index = monster.name.IndexOf("(Clone)");
+        monster.monsterType = GameWorld.Instance.curRound % 5 == 0 && GameWorld.Instance.curRound != 0 ? MonsterType.Boss : MonsterType.Normal;
         monster.monsterKey = monster.name.Substring(0, index);
         monster.monsterData = GameWorld.Instance.BalanceManager.monsterDic[monster.monsterKey];
 

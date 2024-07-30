@@ -65,7 +65,7 @@ public class GameWorld : Singleton<GameWorld>
 
     private void Update()
     {
-/*        if (curRound < totalRounds)
+        if (curRound < totalRounds)
         {
             float curRoundTime = (curRound % 5 == 0 && curRound != 0) ? bossRoundTime : normalRoundTime;
             int spawnMax = (curRound % 5 == 0 && curRound != 0) ? 1 : 5;
@@ -88,25 +88,26 @@ public class GameWorld : Singleton<GameWorld>
                 remainTime = 0.0f;
                 spawnCount = 0;
             }
-*//*            if (curRound >= totalRounds)
+
+            if (curRound >= totalRounds)
             {
-                _uiManager.GameVictory();
+                //_uiManager.GameVictory();
             }
 
             if (_monsterManager.allMonsterList.Count >= 4)
             {
-                _uiManager.GameOver();
-            }*//*
-        }*/
+                //_uiManager.GameOver();
+            }
+        }
 
         _inputManager.AdvanceInput();
 
-        if (spawnDelay > spawnInterval)
-        {
-            _monsterManager.SpawnMonster();
-            spawnCount++;
-            spawnDelay = 0.0f;
-        }
+        // if (spawnDelay > spawnInterval)
+        // {
+        //     _monsterManager.SpawnMonster();
+        //     spawnCount++;
+        //     spawnDelay = 0.0f;
+        // }
         spawnDelay += Time.deltaTime;
 
         _unitManager.UnitAnim();
