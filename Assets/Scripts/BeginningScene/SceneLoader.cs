@@ -8,6 +8,7 @@ public class SceneLoader : MonoBehaviour
 {
     public static int targetScene;
     public Slider mySlider;
+    public GameObject Message;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +18,9 @@ public class SceneLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Space))
+        if (mySlider.value==1.0f)
         {
-            //SceneManager.LoadScene(targetScene);
-            //SceneManager.LoadSceneAsync(targetScene);
+            Message.SetActive(true);
         }
     }
 
@@ -63,4 +63,6 @@ public class SceneLoader : MonoBehaviour
         }
         mySlider.value = v;
     }
+    
+    
 }
