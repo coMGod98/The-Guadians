@@ -9,6 +9,7 @@ public class SceneLoader : MonoBehaviour
     public static int targetScene;
     public Slider mySlider;
     public GameObject Message;
+    
     // Start is called before the first frame update
     void Start()
     {

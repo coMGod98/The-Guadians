@@ -10,8 +10,9 @@ using System.Linq;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] ShowDetails _showDetails;
-    //[SerializeField] 
+    [SerializeField] GameMenu _gameMenu;
     public ShowDetails ShowDetails => _showDetails;
+    public GameMenu GameMenu => _gameMenu;
 
 
     private int[] LbuttonClicks = new int[3] { 1, 1, 1 };

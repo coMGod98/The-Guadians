@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.Analytics;
 
 public class ShowDetails : MonoBehaviour
 {
@@ -207,5 +204,7 @@ public class ShowDetails : MonoBehaviour
             Destroy(unit.gameObject);
         }
         selectedUnits.Clear();
+
+        UnitDetails();
     }
 }

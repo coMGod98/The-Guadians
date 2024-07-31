@@ -84,6 +84,26 @@ public class InputManager : MonoBehaviour
         {
             GameWorld.Instance.UnitManager.InputHold();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameWorld.Instance.UIManager.GameMenu.optionsMenu.activeSelf)
+            {
+                GameWorld.Instance.UIManager.GameMenu.optionsMenu.SetActive(false);                
+            }
+            else
+            {
+                GameWorld.Instance.UIManager.GameMenu.gameMenu.SetActive(!GameWorld.Instance.UIManager.GameMenu.gameMenu.activeSelf);
+                if (GameWorld.Instance.UIManager.GameMenu.gameMenu.activeSelf)
+                {
+                    Time.timeScale = 0;
+                }
+                else
+                {
+                    Time.timeScale = 1.0f;
+                }
+            }
+        }
     }
 
     public void SelectUnit(Unit newUnit) {
