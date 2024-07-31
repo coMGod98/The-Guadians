@@ -110,9 +110,9 @@ public class UnitManager : MonoBehaviour
                             }
                             case State.Combat:
                             {
-                                if (unit.forceHold && rangedMonsters.Count > 0) 
+                                if (unit.forceHold) 
                                 {
-                                    unit.targetMonster = rangedMonsters[0];
+                                    if(rangedMonsters.Count > 0) unit.targetMonster = rangedMonsters[0];
                                 }
                                 else
                                 {

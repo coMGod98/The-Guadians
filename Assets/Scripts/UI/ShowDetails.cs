@@ -200,7 +200,7 @@ public class ShowDetails : MonoBehaviour
         {
             Unit unit = selectedUnits[i];
             GameWorld.Instance.UnitManager.allUnitList.Remove(unit);
-            GameWorld.Instance.playerGolds += unit.unitData.salesGold;
+            GameWorld.Instance.AddGold(unit.unitData.salesGold);
             Destroy(unit.gameObject);
         }
         selectedUnits.Clear();

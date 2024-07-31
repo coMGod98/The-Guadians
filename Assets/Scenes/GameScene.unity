@@ -937,7 +937,7 @@ GameObject:
   m_Component:
   - component: {fileID: 107417996}
   m_Layer: 5
-  m_Name: Upgrade
+  m_Name: UpgradeBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1158,6 +1158,51 @@ MonoBehaviour:
   allBulletList: []
   Range_x: {x: -125, y: -75}
   Range_z: {x: -25, y: 25}
+--- !u!1 &137923596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 137923597}
+  - component: {fileID: 137923598}
+  m_Layer: 0
+  m_Name: SpawnUnitsBtn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &137923597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137923596}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1696669177}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &137923598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137923596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b11f66d007048b0a10a82dcd569e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 0
 --- !u!1 &139407422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,8 +1376,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1696669178}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 708204189}
+        m_TargetAssemblyTypeName: AoeBtn, Assembly-CSharp
         m_MethodName: RButton2
         m_Mode: 1
         m_Arguments:
@@ -2103,7 +2148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 221939671}
   m_Layer: 5
-  m_Name: SubWeapon
+  m_Name: AoeBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2424,8 +2469,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1696669178}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 708204189}
+        m_TargetAssemblyTypeName: AoeBtn, Assembly-CSharp
         m_MethodName: RButton4
         m_Mode: 1
         m_Arguments:
@@ -2474,6 +2519,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254653933}
   m_CullTransparentMesh: 1
+--- !u!1 &261562503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 261562505}
+  - component: {fileID: 261562504}
+  m_Layer: 0
+  m_Name: UpgradeUnitsBtn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &261562504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261562503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ababaa5595a43c98d23750d3a8497a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  costWarriorUpgrade: 
+  costArcherUpgrade: 
+  costWizardUpgrade: 
+--- !u!4 &261562505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261562503}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1696669177}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &281147274
 GameObject:
   m_ObjectHideFlags: 0
@@ -3212,7 +3304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 414840495}
   m_Layer: 5
-  m_Name: LButton2
+  m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3321,9 +3413,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1696669178}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: LButton2
+      - m_Target: {fileID: 261562504}
+        m_TargetAssemblyTypeName: UpgradeUnits, Assembly-CSharp
+        m_MethodName: ArcherUpgradeBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3381,7 +3473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 449886884}
   m_Layer: 5
-  m_Name: LButton1
+  m_Name: Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4856,8 +4948,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1696669178}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 708204189}
+        m_TargetAssemblyTypeName: AoeBtn, Assembly-CSharp
         m_MethodName: RButton1
         m_Mode: 1
         m_Arguments:
@@ -5256,9 +5348,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1696669178}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: LButton1
+      - m_Target: {fileID: 261562504}
+        m_TargetAssemblyTypeName: UpgradeUnits, Assembly-CSharp
+        m_MethodName: WarriorUpgradeBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5410,6 +5502,51 @@ Transform:
   - {fileID: 334150058}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &708204187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 708204188}
+  - component: {fileID: 708204189}
+  m_Layer: 0
+  m_Name: AoeBtn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &708204188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708204187}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1696669177}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &708204189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708204187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f755237f9aef40518859e37253476d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 20
 --- !u!1 &725093224
 GameObject:
   m_ObjectHideFlags: 0
@@ -6609,7 +6746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 918330085}
   m_Layer: 5
-  m_Name: LButton3
+  m_Name: Wizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6711,54 +6848,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919484732}
   m_CullTransparentMesh: 1
---- !u!1 &927531771
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 927531772}
-  - component: {fileID: 927531773}
-  m_Layer: 5
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &927531772
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927531771}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1042611956}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &927531773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927531771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9caf9230bdad5d1458451269fa7f06c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &945591030
 GameObject:
   m_ObjectHideFlags: 0
@@ -7414,8 +7503,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1696669178}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 708204189}
+        m_TargetAssemblyTypeName: AoeBtn, Assembly-CSharp
         m_MethodName: RButton3
         m_Mode: 1
         m_Arguments:
@@ -7724,7 +7813,6 @@ RectTransform:
   - {fileID: 1890782795}
   - {fileID: 2106084905}
   - {fileID: 63625053}
-  - {fileID: 927531772}
   m_Father: {fileID: 962986618}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7852,9 +7940,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1696669178}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: LButton3
+      - m_Target: {fileID: 261562504}
+        m_TargetAssemblyTypeName: UpgradeUnits, Assembly-CSharp
+        m_MethodName: WizardUpgradeBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8383,8 +8471,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1061386834}
-        m_TargetAssemblyTypeName: UnitManager, Assembly-CSharp
+      - m_Target: {fileID: 137923598}
+        m_TargetAssemblyTypeName: SpawnUnitsBtn, Assembly-CSharp
         m_MethodName: SpawnUnit
         m_Mode: 1
         m_Arguments:
@@ -8716,54 +8804,6 @@ Transform:
   - {fileID: 1206373957}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1231583414
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1231583415}
-  - component: {fileID: 1231583416}
-  m_Layer: 5
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1231583415
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231583414}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1904281184}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1231583416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231583414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9caf9230bdad5d1458451269fa7f06c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1237275114
 GameObject:
   m_ObjectHideFlags: 0
@@ -11817,6 +11857,9 @@ Transform:
   m_Children:
   - {fileID: 456761295}
   - {fileID: 486286779}
+  - {fileID: 708204188}
+  - {fileID: 261562505}
+  - {fileID: 137923597}
   m_Father: {fileID: 598639056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1696669178
@@ -11833,6 +11876,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showDetails: {fileID: 456761294}
   _gameMenu: {fileID: 486286780}
+  _aodeBtn: {fileID: 708204189}
+  _upgradeUnitsBtn: {fileID: 261562504}
+  _spawnUnitsBtn: {fileID: 137923598}
+  isButtonLocked: 0
   timerText: {fileID: 1465655823}
   roundText: {fileID: 674134329}
   monsterCountText: {fileID: 63725007}
@@ -12685,7 +12732,6 @@ RectTransform:
   - {fileID: 725093225}
   - {fileID: 348363126}
   - {fileID: 853911984}
-  - {fileID: 1231583415}
   m_Father: {fileID: 962986618}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

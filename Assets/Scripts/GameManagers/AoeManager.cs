@@ -2,6 +2,7 @@ using EasyUI.Toast;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
 
 public class AoeManager : MonoBehaviour
 {
@@ -27,7 +28,6 @@ public class AoeManager : MonoBehaviour
         placeableMask = LayerMask.GetMask("Ground");
         unplaceableMask = LayerMask.GetMask("Water") | LayerMask.GetMask("Grounds") ;
     }
-
     public void Update()
     {
         if (isPlacingAOE)
@@ -61,7 +61,7 @@ public class AoeManager : MonoBehaviour
         RaycastHit hit;
 
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, placeableMask))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, placeableMask) && EventSystem.current.IsPointerOverGameObject() == false)
         {
             Vector3 indicatorPosition = hit.point;
             curRangeCheck.transform.position = indicatorPosition;
@@ -82,7 +82,7 @@ public class AoeManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, placeableMask))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, placeableMask) && EventSystem.current.IsPointerOverGameObject() == false)
         {
             Vector3 towerPosition = hit.point;
             Instantiate(aoePrefabs[aoeIndex], towerPosition, Quaternion.identity);
@@ -90,10 +90,11 @@ public class AoeManager : MonoBehaviour
             curRangeCheck.SetActive(false);
             curRangeCheckX.SetActive(false);
             AoePlaced?.Invoke();
+            GameWorld.Instance.UIManager.isButtonLocked = false;
         }
         else if (Physics.Raycast(ray, out hit, Mathf.Infinity, unplaceableMask))
         {
-            Toast.Show("¼³Ä¡ ºÒ°¡´É", 2f, ToastColor.Black, ToastPosition.MiddleCenter); // ¼³Ä¡°¡ ºÒ°¡´É ÇÒ¶§ ³ª¿À´Â Åä½ºÆ® ¸Þ½ÃÁö
+            Toast.Show("ï¿½ï¿½Ä¡ ï¿½Ò°ï¿½ï¿½ï¿½", 2f, ToastColor.Black, ToastPosition.MiddleCenter); // ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ä½ºÆ® ï¿½Þ½ï¿½ï¿½ï¿½
         }
     }
 

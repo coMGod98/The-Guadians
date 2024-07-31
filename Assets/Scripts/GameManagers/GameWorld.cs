@@ -102,12 +102,6 @@ public class GameWorld : Singleton<GameWorld>
 
         _inputManager.AdvanceInput();
 
-        // if (spawnDelay > spawnInterval)
-        // {
-        //     _monsterManager.SpawnMonster();
-        //     spawnCount++;
-        //     spawnDelay = 0.0f;
-        // }
         spawnDelay += Time.deltaTime;
 
         _unitManager.UnitAnim();
@@ -122,6 +116,7 @@ public class GameWorld : Singleton<GameWorld>
         _monsterManager.MonsterMove();
         _bulletManager.BulletMove();
     }
+    
     public void TakeGold(int amount)
     {
         if (playerGolds >= amount)
