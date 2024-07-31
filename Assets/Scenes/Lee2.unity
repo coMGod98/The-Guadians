@@ -3640,7 +3640,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portraitParent: {fileID: 139407423}
   portraitSlot: {fileID: 35894435810377192, guid: 88241adf4e85c5543b97278522a722e3, type: 3}
-  portraitSlotList: []
   unitPortraitList:
   - {fileID: 0}
   - {fileID: 0}
@@ -3668,6 +3667,8 @@ MonoBehaviour:
   monsterHPSlider: {fileID: 900700398}
   nameText: {fileID: 561716133}
   hpText: {fileID: 195444003}
+  showBossDetails: {fileID: 0}
+  bossHPSlider: {fileID: 0}
 --- !u!4 &456761295
 Transform:
   m_ObjectHideFlags: 0
@@ -4650,7 +4651,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &598639056
 Transform:
   m_ObjectHideFlags: 0

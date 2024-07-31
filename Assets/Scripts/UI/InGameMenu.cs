@@ -54,7 +54,7 @@ public class InGameMenu : MonoBehaviour
     public void GoToMainMenu()
     {
         //메인메뉴
-        SceneManager.LoadScene("BeginingScene");
+        SceneLoader.LoadScene(1);
         Time.timeScale = 1.0f;
     }
     public void QuitGame()
