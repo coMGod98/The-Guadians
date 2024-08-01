@@ -44,11 +44,11 @@ public class UnitManager : MonoBehaviour
 
         dicRank = new Dictionary<string, double>()
         {
-            {"_Common", 30.0f},
-            {"_Uncommon", 0.1f},
-            {"_Rare", 1.4f},
-            {"_Epic", 20.0f},
-            {"_Legendary", 0.01f}
+            {"_Common", 54.0f},
+            {"_Uncommon", 30.0f},
+            {"_Rare", 12.4f},
+            {"_Epic", 3.5f},
+            {"_Legendary", 0.1f}
         };
 
         foreach(float value in dicRank.Values){

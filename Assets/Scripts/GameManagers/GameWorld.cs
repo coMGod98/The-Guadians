@@ -42,14 +42,14 @@ public class GameWorld : Singleton<GameWorld>
 
     private void Awake()
     {
-        playerGolds = 100;
+        playerGolds = 50;
 
         spawnDelay = 0.0f;
         spawnInterval = 1.0f;
         spawnCount = 0;
 
-        normalRoundTime = 15.0f;
-        bossRoundTime = 20.0f;
+        normalRoundTime = 60.0f;
+        bossRoundTime = 120.0f;
         roundElapsedTime = 0.0f;
         remainTime = 0.0f;
 
@@ -68,7 +68,8 @@ public class GameWorld : Singleton<GameWorld>
         if (curRound < totalRounds)
         {
             float curRoundTime = (curRound % 5 == 0 && curRound != 0) ? bossRoundTime : normalRoundTime;
-            int spawnMax = (curRound % 5 == 0 && curRound != 0) ? 1 : 20;
+            curRoundTime = (curRound == 0) ? 20 : curRoundTime;
+            int spawnMax = (curRound % 5 == 0 && curRound != 0) ? 1 : 30;
             if (curRound != 0 && spawnCount < spawnMax)
             {
                 if (spawnDelay > spawnInterval)

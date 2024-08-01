@@ -32,7 +32,7 @@ public class BulletManager : MonoBehaviour
                     else
                     {
                         Socket socket = bullet.targetMonster.GetComponentInChildren<Socket>();
-                        if(bullet.transform.position == socket.transform.position)
+                        if(Vector3.Distance(bullet.transform.position, socket.transform.position) < 0.1f)
                         {
                             bullet.targetMonster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
                             Instantiate(hitPrefabsArray[bullet.hitArrayIdx], socket.transform);

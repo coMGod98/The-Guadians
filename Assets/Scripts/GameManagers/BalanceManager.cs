@@ -346,8 +346,8 @@ public class BalanceManager : MonoBehaviour
         for(int i = 1; i < GameWorld.Instance.totalRounds; i++)
         {
             monsterData.round = "Round" + i;
-            monsterData.HP = (i % 5 == 0) ? 500 * i : 100 * i;
-            monsterData.Gold = (i % 5 == 0) ? 100 * i : 2 * i;
+            monsterData.HP = (i % 5 == 0) ? 1000 * i : 100 * i;
+            monsterData.Gold = (i % 5 == 0) ? 200 * i : 2 * i;
             monsterData.Speed = (i % 5 == 0) ? 3.0f : 6.0f;
             monsterDic[monsterData.round] = monsterData;
         }
