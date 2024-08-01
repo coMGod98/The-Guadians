@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EasyUI.Toast;
+using UnityEngine.UI;
 public class UpgradeUnitsBtn : MonoBehaviour
 {
     public List<int> costWarriorUpgrade;

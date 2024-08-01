@@ -12,12 +12,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] AoeBtn _aodeBtn;
     [SerializeField] UpgradeUnitsBtn _upgradeUnitsBtn;
     [SerializeField] SpawnUnitsBtn _spawnUnitsBtn;
+    [SerializeField] Tooltip _tooltip;
     
     public ShowDetails ShowDetails => _showDetails;
     public GameMenu GameMenu => _gameMenu;
     public AoeBtn AoeBtn => _aodeBtn;
-    public UpgradeUnitsBtn UpgradeUnits => _upgradeUnitsBtn;
+    public UpgradeUnitsBtn UpgradeUnitsBtn => _upgradeUnitsBtn;
     public SpawnUnitsBtn SpawnUnitsBtn => _spawnUnitsBtn;
+    public Tooltip Tooltip => _tooltip;
     
     public bool isButtonLocked = false;
 
@@ -37,6 +39,7 @@ public class UIManager : MonoBehaviour
         UpdateUI();
         _showDetails.MonsterDetails();
         _showDetails.BossDetails();
+        _tooltip.TooltipUpdate();
     }
 
     private void UpdateUI()
