@@ -36,6 +36,8 @@ public class MonsterManager : MonoBehaviour
             {
                 monster.monsterAnim.SetTrigger("TDead");
                 GameWorld.Instance.AddGold(monster.monsterData.Gold);
+                GameWorld.Instance.UIManager.FloatingGetGold.FloatGold(monster);
+
                 allMonsterList.Remove(monster);
                 StartCoroutine(DisApearing(monster));
             }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UpgradeTooltipController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Tooltip tooltip;
+    public UpgradeTooltip tooltip;
     public void OnPointerEnter(PointerEventData eventData)
     {
         tooltip.tooltipUI.SetActive(true);
@@ -19,7 +19,7 @@ public class TooltipController : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void ChangeTooltip()
     {
-        UnitJob job = (UnitJob)System.Enum.Parse(typeof(UnitJob), GetComponent<TooltipController>().gameObject.name);
+        UnitJob job = (UnitJob)System.Enum.Parse(typeof(UnitJob), GetComponent<UpgradeTooltipController>().gameObject.name);
         switch(job)
         {
             case UnitJob.Warrior:

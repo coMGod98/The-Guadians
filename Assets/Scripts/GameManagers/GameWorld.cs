@@ -68,7 +68,7 @@ public class GameWorld : Singleton<GameWorld>
         if (curRound < totalRounds)
         {
             float curRoundTime = (curRound % 5 == 0 && curRound != 0) ? bossRoundTime : normalRoundTime;
-            int spawnMax = (curRound % 5 == 0 && curRound != 0) ? 1 : 5;
+            int spawnMax = (curRound % 5 == 0 && curRound != 0) ? 1 : 20;
             if (curRound != 0 && spawnCount < spawnMax)
             {
                 if (spawnDelay > spawnInterval)
