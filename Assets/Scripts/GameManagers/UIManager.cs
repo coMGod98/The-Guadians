@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
 
     public void Alert(int cost, int playerGold)
     {
-        int neededGold = cost - GameWorld.Instance.playerGolds;
+        int neededGold = cost - playerGold;
         Toast.Show($"Not Enough Gold. <size=25> \n{neededGold} Needed gold : </size>", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
     }
 

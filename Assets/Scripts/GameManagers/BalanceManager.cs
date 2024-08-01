@@ -410,9 +410,9 @@ public class BalanceManager : MonoBehaviour
         bulletData.key = 5;
         bulletData.shootingType = BulletShootingType.Follow;
         bulletData.hitCheck = BulletHitCheck.Moving;
-        bulletData.scale = 3.0f; // 생각
-        bulletData.damageCoefficient = 1.0f;
-        bulletData.hitRange = 4.0f; // 나중에 프리팹의 크기에 맞춰주기
+        bulletData.scale = 4.0f;
+        bulletData.damageCoefficient = 1.2f;
+        bulletData.hitRange = 5.0f;
         bulletData.speed = 15.0f;
         bulletData.attackableNumber = 20;       
 

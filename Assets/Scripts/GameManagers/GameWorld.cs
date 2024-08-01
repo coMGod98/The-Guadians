@@ -37,30 +37,30 @@ public class GameWorld : Singleton<GameWorld>
     public int curRound;
     public int totalRounds;
 
-    public int playerGolds = 100;
+    public int playerGolds;
     
 
     private void Awake()
     {
-        playerGolds = 50;
+        playerGolds = 100;
 
         spawnDelay = 0.0f;
         spawnInterval = 1.0f;
         spawnCount = 0;
 
-        normalRoundTime = 60.0f;
-        bossRoundTime = 120.0f;
+        normalRoundTime = 30.0f;
+        bossRoundTime = 60.0f;
         roundElapsedTime = 0.0f;
         remainTime = 0.0f;
 
         curRound = 0;
-        totalRounds = _monsterManager.monsterPrefabArray.Length;
+        //totalRounds = _monsterManager.monsterPrefabArray.Length;
+        totalRounds = 5;
     }
 
     private void Start()
     {
         _balanceManager.Init();
-
     }
 
     private void Update()
@@ -92,12 +92,12 @@ public class GameWorld : Singleton<GameWorld>
 
             if (curRound >= totalRounds)
             {
-                //_uiManager.GameVictory();
+                _uiManager.gameWin.SetActive(true);
             }
 
-            if (_monsterManager.allMonsterList.Count >= 4)
+            if (_monsterManager.allMonsterList.Count >= 100)
             {
-                //_uiManager.GameOver();
+                _uiManager.gameLost.SetActive(true);
             }
         }
 
@@ -109,7 +109,7 @@ public class GameWorld : Singleton<GameWorld>
 
         _unitManager.UnitAI();
         _monsterManager.MonsterAI();
-        _bulletManager.BulletAI();
+        _bulletManager.BulletAttack();
 
         _unitManager.UnitAttack();
 

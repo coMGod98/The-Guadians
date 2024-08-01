@@ -13,7 +13,7 @@ public class BulletManager : MonoBehaviour
 
     private float _rotSpeed = 360.0f;
 
-    public void BulletAI()
+    public void BulletAttack()
     {
         for (int i = allBulletList.Count - 1; i >= 0; --i)
         {
@@ -55,6 +55,15 @@ public class BulletManager : MonoBehaviour
                             bullet.hitMonsterList.Add(monster);
                             monster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
                             Instantiate(hitPrefabsArray[bullet.hitArrayIdx], socket.transform);
+                        }
+                    }
+                    if(bullet.bulletData.shootingType == BulletShootingType.Follow)
+                    {
+                        Socket socket = bullet.targetMonster.GetComponentInChildren<Socket>();
+                        if(Vector3.Distance(bullet.transform.position, socket.transform.position) < 0.1f)
+                        {
+                            allBulletList.Remove(bullet);
+                            Destroy(bullet.gameObject);
                         }
                     }
                     if(bullet.transform.position.x < Range_x.x || bullet.transform.position.x > Range_z.y || 
