@@ -50,8 +50,7 @@ public class GameWorld : Singleton<GameWorld>
         remainTime = 0.0f;
 
         curRound = 0;
-        //totalRounds = _monsterManager.monsterPrefabArray.Length;
-        totalRounds = 5;
+        totalRounds = _monsterManager.monsterPrefabArray.Length;
     }
 
     private void Start()
@@ -86,14 +85,18 @@ public class GameWorld : Singleton<GameWorld>
                 spawnCount = 0;
             }
 
-            if (curRound >= totalRounds)
+            if (curRound >= totalRounds && _monsterManager.allMonsterList.Count == 0)
             {
                 _uiManager.gameWin.SetActive(true);
+                Time.timeScale = 0.0f;
+                
             }
 
-            if (_monsterManager.allMonsterList.Count >= 100)
+            if (_monsterManager.allMonsterList.Count >= 100 || (curRound >= totalRounds && _monsterManager.allMonsterList.Count > 0))
             {
                 _uiManager.gameLost.SetActive(true);
+                Time.timeScale = 0.0f;
+                
             }
         }
 

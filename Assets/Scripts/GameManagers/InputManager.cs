@@ -17,6 +17,10 @@ public class InputManager : MonoBehaviour
     Rect dragRect;
     Camera mainCamera;
 
+    public float m_DoubleClickSecond = 0.2f;
+    private bool m_IsOneCkick = false;
+    private double m_Timer = 0;
+
 
     private void Awake() {
         mainCamera = Camera.main;
@@ -27,23 +31,50 @@ public class InputManager : MonoBehaviour
     {
         if(EventSystem.current.IsPointerOverGameObject() == false)
         {
-            if (Input.GetMouseButtonDown(0)) {
+            if (m_IsOneCkick && ((Time.time - m_Timer) > m_DoubleClickSecond))
+            {
+                m_IsOneCkick = false;
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
                 start = Input.mousePosition;
                 dragRect = new Rect();
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, unitMask)) {
-                    if (hit.transform.GetComponent<Unit>() == null) return;
-                    if (Input.GetKey(KeyCode.LeftControl)) MulSelectUnit(hit.transform.GetComponent<Unit>());
-                    else OneSelectUnit(hit.transform.GetComponent<Unit>());
-                }
-                else if (Physics.Raycast(ray, out hit, Mathf.Infinity, monsterMask)) {
-                    if (hit.transform.GetComponent<Monster>() == null) return;
-                    SelectMonster(hit.transform.GetComponent<Monster>());
-                }
-                else
+                if (!m_IsOneCkick)
                 {
-                    DeselectAll();
+                    m_Timer = Time.time;
+                    m_IsOneCkick = true;
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, unitMask)) {
+                        if (hit.transform.GetComponent<Unit>() == null) return;
+                        if (Input.GetKey(KeyCode.LeftControl)) MulSelectUnit(hit.transform.GetComponent<Unit>());
+                        else OneSelectUnit(hit.transform.GetComponent<Unit>());
+                    }
+                    else if (Physics.Raycast(ray, out hit, Mathf.Infinity, monsterMask)) {
+                        if (hit.transform.GetComponent<Monster>() == null) return;
+                        SelectMonster(hit.transform.GetComponent<Monster>());
+                    }
+                    else
+                    {
+                        DeselectAll();
+                    }
+                }
+                else if (m_IsOneCkick && ((Time.time - m_Timer) < m_DoubleClickSecond))
+                {
+                    m_IsOneCkick = false;
+
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, unitMask))
+                    {
+                        if (hit.transform.GetComponent<Unit>() == null) return;
+                        DoubleSelectUnit(hit.transform.GetComponent<Unit>());
+                    }
+                    else
+                    {
+                        DeselectAll();
+                    }
                 }
             }
 
@@ -101,6 +132,21 @@ public class InputManager : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, unitMask))
+            {
+                if (hit.transform.GetComponent<Unit>() == null) return;
+                SameJobRankSelctUnit(hit.transform.GetComponent<Unit>());
+            }
+            else
+            {
+                DeselectAll();
+            }
+            GameWorld.Instance.UIManager.ShowDetails.UnitDetails();
+        }
     }
 
     public void SelectUnit(Unit newUnit) {
@@ -152,8 +198,32 @@ public class InputManager : MonoBehaviour
             if (dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)))
             {
                 if (!GameWorld.Instance.UnitManager.selectedUnitList.Contains(newUnit)) {
-                    SelectUnit(newUnit);
+                    SelectUnit(unit);
                 }
+            }
+        }
+    }
+
+    private void SameJobRankSelctUnit(Unit newUnit)
+    {
+        DeselectAll();
+        foreach(Unit unit in GameWorld.Instance.UnitManager.allUnitList)
+        {
+            if(newUnit.unitData.job == unit.unitData.job && newUnit.unitData.rank == unit.unitData.rank)
+            {
+                SelectUnit(unit);
+            }
+        }
+    }
+
+    private void DoubleSelectUnit(Unit newUnit)
+    {
+        DeselectAll();
+        foreach(Unit unit in GameWorld.Instance.UnitManager.allUnitList)
+        {
+            if(newUnit.unitData.job == unit.unitData.job)
+            {
+                SelectUnit(unit);
             }
         }
     }
