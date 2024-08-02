@@ -1,6 +1,5 @@
 using EasyUI.Toast;
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 using UnityEngine.EventSystems;
 

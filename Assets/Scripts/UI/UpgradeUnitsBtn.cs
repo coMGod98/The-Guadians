@@ -13,7 +13,7 @@ public class UpgradeUnitsBtn : MonoBehaviour
         costWarriorUpgrade = new List<int>();
         costArcherUpgrade = new List<int>();
         costWizardUpgrade = new List<int>();
-        for(int i = 0; i < 20; i++)
+        for(int i = 0; i < 21; i++)
         {
             costWarriorUpgrade.Add(5 + 5 * i);
             costArcherUpgrade.Add(5 + 5 * i);
@@ -36,22 +36,46 @@ public class UpgradeUnitsBtn : MonoBehaviour
             }
             else
             {
-                GameWorld.Instance.TakeGold(cost);
                 switch(job)
                 {
                     case UnitJob.Warrior:
                     {
-                        GameWorld.Instance.UnitManager.warriorUpgrade++;
+
+                        if(GameWorld.Instance.UnitManager.warriorUpgrade > 18)
+                        {
+                            Toast.Show("Max Warrior enhance = 19", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+                        }
+                        else
+                        {
+                            GameWorld.Instance.UnitManager.warriorUpgrade++;
+                            GameWorld.Instance.TakeGold(cost);
+                        }
                         break;
                     }
                     case UnitJob.Archer:
                     {
-                        GameWorld.Instance.UnitManager.archerUpgrade++;
+                        if(GameWorld.Instance.UnitManager.archerUpgrade > 18)
+                        {
+                            Toast.Show("Max Archer enhance = 20", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+                        }
+                        else
+                        {
+                            GameWorld.Instance.UnitManager.archerUpgrade++;
+                            GameWorld.Instance.TakeGold(cost);
+                        }
                         break;
                     }
                     case UnitJob.Wizard:
                     {
-                        GameWorld.Instance.UnitManager.wizardUpgrade++;
+                        if(GameWorld.Instance.UnitManager.wizardUpgrade > 18)
+                        {
+                            Toast.Show("Max Wizard enhance = 20", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+                        }
+                        else
+                        {
+                            GameWorld.Instance.UnitManager.wizardUpgrade++;
+                            GameWorld.Instance.TakeGold(cost);
+                        }
                         break;
                     }
                 }        

@@ -23,17 +23,44 @@ public class UpgradeTooltipController : MonoBehaviour, IPointerEnterHandler, IPo
         switch(job)
         {
             case UnitJob.Warrior:
-                tooltip.SetUpTooltip(job.ToString(), GameWorld.Instance.UnitManager.warriorUpgrade, 
-                GameWorld.Instance.UIManager.UpgradeUnitsBtn.costWarriorUpgrade[GameWorld.Instance.UnitManager.warriorUpgrade]);
-                break;
+                {
+                    if(GameWorld.Instance.UnitManager.warriorUpgrade > 18)
+                    {
+                        tooltip.SetUpTooltip(job.ToString());
+                    }
+                    else
+                    {
+                        tooltip.SetUpTooltip(job.ToString(), GameWorld.Instance.UnitManager.warriorUpgrade, 
+                        GameWorld.Instance.UIManager.UpgradeUnitsBtn.costWarriorUpgrade[GameWorld.Instance.UnitManager.warriorUpgrade]);
+                    }
+                    break;
+                }
             case UnitJob.Archer:
-                tooltip.SetUpTooltip(job.ToString(), GameWorld.Instance.UnitManager.archerUpgrade, 
-                GameWorld.Instance.UIManager.UpgradeUnitsBtn.costArcherUpgrade[GameWorld.Instance.UnitManager.archerUpgrade]);
+            {
+                if(GameWorld.Instance.UnitManager.archerUpgrade > 18)
+                {
+                    tooltip.SetUpTooltip(job.ToString());
+                }
+                else
+                {
+                    tooltip.SetUpTooltip(job.ToString(), GameWorld.Instance.UnitManager.archerUpgrade, 
+                    GameWorld.Instance.UIManager.UpgradeUnitsBtn.costArcherUpgrade[GameWorld.Instance.UnitManager.archerUpgrade]);
+                }
                 break;
+            }
             case UnitJob.Wizard:
-                tooltip.SetUpTooltip(job.ToString(), GameWorld.Instance.UnitManager.wizardUpgrade, 
-                GameWorld.Instance.UIManager.UpgradeUnitsBtn.costWizardUpgrade[GameWorld.Instance.UnitManager.wizardUpgrade]);
+            {
+                if(GameWorld.Instance.UnitManager.wizardUpgrade > 18)
+                {
+                    tooltip.SetUpTooltip(job.ToString());
+                }
+                else
+                {
+                    tooltip.SetUpTooltip(job.ToString(), GameWorld.Instance.UnitManager.wizardUpgrade, 
+                    GameWorld.Instance.UIManager.UpgradeUnitsBtn.costWizardUpgrade[GameWorld.Instance.UnitManager.wizardUpgrade]);
+                }
                 break;
+            }
         }
     }
 }

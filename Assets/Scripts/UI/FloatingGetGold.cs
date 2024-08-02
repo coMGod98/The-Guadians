@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -7,10 +8,15 @@ public class FloatingGetGold : MonoBehaviour
     public Transform floatPlace;
     public GameObject goldPrefab;
     
-    public void FloatGold(Unit unit)
+    public void FloatGold(List<Unit> selectedUnitList)
     {
+        int totalGold = 0;
+        foreach(Unit unit in selectedUnitList)
+        {
+            totalGold += unit.unitData.salesGold;
+        }
         GameObject gold = Instantiate(goldPrefab, floatPlace);
-        gold.GetComponentInChildren<TextMeshProUGUI>().text =  $"+{unit.unitData.salesGold}Gold";
+        gold.GetComponentInChildren<TextMeshProUGUI>().text =  $"+{totalGold}Gold";
         StartCoroutine(FloatingGold(gold));
     }
 

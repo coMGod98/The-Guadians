@@ -10,6 +10,13 @@ public class UpgradeTooltip : MonoBehaviour
     public TextMeshProUGUI infoText;
     public TextMeshProUGUI goldText;
 
+
+    public void SetUpTooltip(string name)
+    {
+        nameText.text = name;
+        infoText.text = "Max upgrade";
+        goldText.text = "";
+    }
     public void SetUpTooltip(string name, int upgrade, int gold)
     {
         nameText.text = name;

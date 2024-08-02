@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using EasyUI.Toast;
-using UnityEngine.Events;
+
 
 public class UIManager : MonoBehaviour
 {

@@ -196,12 +196,12 @@ public class ShowDetails : MonoBehaviour
     public void SellUnits()
     {
         List<Unit> selectedUnits = GameWorld.Instance.UnitManager.selectedUnitList;
+        GameWorld.Instance.UIManager.FloatingGetGold.FloatGold(selectedUnits);
         for(int i = selectedUnits.Count - 1; i >= 0; --i)
         {
             Unit unit = selectedUnits[i];
             GameWorld.Instance.UnitManager.allUnitList.Remove(unit);
             GameWorld.Instance.AddGold(unit.unitData.salesGold);
-            GameWorld.Instance.UIManager.FloatingGetGold.FloatGold(unit);
             Destroy(unit.gameObject);
         }
         selectedUnits.Clear();
