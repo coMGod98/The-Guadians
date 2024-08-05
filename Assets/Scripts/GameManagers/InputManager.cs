@@ -76,6 +76,7 @@ public class InputManager : MonoBehaviour
                         DeselectAll();
                     }
                 }
+
             }
 
             if (Input.GetMouseButton(0))
@@ -87,7 +88,7 @@ public class InputManager : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
                 CalculateDragRect();
-                DragUnit();
+                DragSelectUnit();
 
                 start = end = Vector2.zero;
                 DrawDragRectangle();
@@ -192,12 +193,12 @@ public class InputManager : MonoBehaviour
         else SelectUnit(newUnit);
     }
 
-    private void DragSelectUnit(Unit newUnit) {
+    private void DragSelectUnit() {
         foreach (Unit unit in GameWorld.Instance.UnitManager.allUnitList)
         {
             if (dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)))
             {
-                if (!GameWorld.Instance.UnitManager.selectedUnitList.Contains(newUnit)) {
+                if (!GameWorld.Instance.UnitManager.selectedUnitList.Contains(unit)) {
                     SelectUnit(unit);
                 }
             }
@@ -228,16 +229,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void DragUnit()
-    {
-        foreach (Unit unit in GameWorld.Instance.UnitManager.allUnitList)
-        {
-            if (dragRect.Contains(mainCamera.WorldToScreenPoint(unit.transform.position)))
-            {
-                DragSelectUnit(unit);
-            }
-        }
-    }
+
 
     private void DrawDragRectangle() {
         dragRectangle.position = (start + end) * 0.5f;

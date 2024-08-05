@@ -8,6 +8,7 @@ public class Unit : MonoBehaviour
 
     public GameObject unitMarker;
     public Animator unitAnim;
+    public AudioSource unitSound;
     public Outline outline;
 
     public State unitState;
@@ -23,6 +24,7 @@ public class Unit : MonoBehaviour
 
         unitState = State.Normal;
         unitAnim = GetComponentInChildren<Animator>();
+        unitSound = GetComponent<AudioSource>();
         outline = GetComponent<Outline>();
         destination = transform.position;
         targetMonster = null;
