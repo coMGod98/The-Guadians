@@ -35,5 +35,4 @@ public class AoeBtn : MonoBehaviour
     public void RButton1() => Aoe(0);
     public void RButton2() => Aoe(1);
     public void RButton3() => Aoe(2);
-    public void RButton4() => Aoe(3);
 }
