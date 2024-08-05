@@ -18,14 +18,12 @@ public class AoeManager : MonoBehaviour
     private bool isPlacingAOE = false;
     private int aoeIndex = 0;
     private int placeableMask;
-    private int unplaceableMask;
 
     public event Action AoePlaced;
 
     void Start()
     {
         placeableMask = LayerMask.GetMask("Ground");
-        unplaceableMask = LayerMask.GetMask("Water") | LayerMask.GetMask("Grounds") ;
     }
     public void Update()
     {
@@ -62,17 +60,10 @@ public class AoeManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, placeableMask) && EventSystem.current.IsPointerOverGameObject() == false)
         {
-            Vector3 indicatorPosition = hit.point;
+            Vector3 indicatorPosition = new Vector3(hit.point.x, 0.7f, hit.point.z);
             curRangeCheck.transform.position = indicatorPosition;
             curRangeCheck.SetActive(true);
             curRangeCheckX.SetActive(false);
-        }
-        else if (Physics.Raycast(ray, out hit, Mathf.Infinity, unplaceableMask))
-        {
-            Vector3 indicatorPosition = hit.point;
-            curRangeCheckX.transform.position = indicatorPosition;
-            curRangeCheckX.SetActive(true);
-            curRangeCheck.SetActive(false);
         }
     }
 
@@ -83,17 +74,13 @@ public class AoeManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, placeableMask) && EventSystem.current.IsPointerOverGameObject() == false)
         {
-            Vector3 towerPosition = hit.point;
+            Vector3 towerPosition = new Vector3(hit.point.x, 0.7f, hit.point.z);
             Instantiate(aoePrefabs[aoeIndex], towerPosition, Quaternion.identity);
             isPlacingAOE = false;
             curRangeCheck.SetActive(false);
             curRangeCheckX.SetActive(false);
             AoePlaced?.Invoke();
             GameWorld.Instance.UIManager.isButtonLocked = false;
-        }
-        else if (Physics.Raycast(ray, out hit, Mathf.Infinity, unplaceableMask))
-        {
-            Toast.Show("��ġ �Ұ���", 2f, ToastColor.Black, ToastPosition.MiddleCenter); // ��ġ�� �Ұ��� �Ҷ� ������ �佺Ʈ �޽���
         }
     }
 
