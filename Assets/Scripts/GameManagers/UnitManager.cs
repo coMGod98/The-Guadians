@@ -159,9 +159,10 @@ public class UnitManager : MonoBehaviour
                 }
 
                 if (unit.attackElapsedTime > unit.unitData.bulletSpawnTime && unit.prevElapsedTime < unit.unitData.bulletSpawnTime)
+                {
                     GameWorld.Instance.BulletManager.SpawnBullet(unit);
-                    unit.unitSound.Stop();
-                    unit.unitSound.Play();
+                    unit.unitSound.PlayOneShot(unit.unitSoundClip);
+                }
             }
         }
     }

@@ -48,4 +48,21 @@ public class Unit : MonoBehaviour
             return default;
         }
     }
+
+    public AudioClip unitSoundClip
+    {
+        get
+        {
+            switch (unitData.job)
+            {
+                case UnitJob.Warrior:
+                return GameWorld.Instance.SoundManager.warrior;
+                case UnitJob.Archer:
+                return GameWorld.Instance.SoundManager.archer;
+                case UnitJob.Wizard:
+                return GameWorld.Instance.SoundManager.wizard;
+            }
+            return default;
+        }
+    }
 }

@@ -65,6 +65,7 @@ MonoBehaviour:
     bulletKey: 0
   unitMarker: {fileID: 8337243605124688575}
   unitAnim: {fileID: 0}
+  unitSound: {fileID: 0}
   outline: {fileID: 0}
   unitState: 0
   destination: {x: 0, y: 0, z: 0}
@@ -123,7 +124,7 @@ AudioSource:
   m_GameObject: {fileID: 7791673034692077389}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4731220894950794082, guid: b1446cd1eb60c264bab2188f3fde8526, type: 2}
   m_audioClip: {fileID: 8300000, guid: cb3efd1c2f6034e5e836c3407f10cad8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

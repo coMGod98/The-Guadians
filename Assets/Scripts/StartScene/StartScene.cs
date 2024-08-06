@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class StartScene : MonoBehaviour
 {
+    public void WaitAndStart()
+    {
+        Invoke("StartGame", 1.0f);
+    }
     public void StartGame()
     {
         SceneLoader.LoadScene(2);
     }
+
 
     public void QuitGame()
     {
