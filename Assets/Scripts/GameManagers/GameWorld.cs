@@ -9,7 +9,7 @@ public class GameWorld : Singleton<GameWorld>
     [SerializeField] private BulletManager _bulletManager;
     [SerializeField] private UIManager _uiManager;
     [SerializeField] private AoeManager _aoeManager;
-    //[SerializeField] private SoundManager _soundManager;
+    [SerializeField] private SoundManager _soundManager;
 
 
     public BalanceManager BalanceManager => _balanceManager;
@@ -19,7 +19,7 @@ public class GameWorld : Singleton<GameWorld>
     public BulletManager BulletManager => _bulletManager;
     public UIManager UIManager => _uiManager;
     public AoeManager AoeManager => _aoeManager;
-    //public SoundManager SoundManager => _soundManager;
+    public SoundManager SoundManager => _soundManager;
 
 
 
