@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.WSA;
 
 public class AoeManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class AoeManager : MonoBehaviour
     private int placeableMask;
 
     public event Action AoePlaced;
+
+    public bool MeteoActive = false;
 
     void Start()
     {
@@ -70,6 +73,7 @@ public class AoeManager : MonoBehaviour
         {
             Vector3 towerPosition = new Vector3(hit.point.x, 0.7f, hit.point.z);
             GameObject aoeInstance = Instantiate(aoePrefabs[aoeIndex], towerPosition, Quaternion.identity);
+            aoeInstance.GetComponent<AudioSource>().Play();
             isPlacingAOE = false;
             curRangeCheck.SetActive(false);
             AoePlaced?.Invoke();
@@ -91,6 +95,10 @@ public class AoeManager : MonoBehaviour
     {
         if (aoePrefab == aoePrefabs[0])
         {
+            if(MeteoActive)
+            {
+                return;
+            }
             StartCoroutine(MeteoAOE(position));
         }
         else if (aoePrefab == aoePrefabs[1])
@@ -105,6 +113,8 @@ public class AoeManager : MonoBehaviour
 
     private IEnumerator MeteoAOE(Vector3 position)
     {
+        MeteoActive = true;
+
         float duration = 5.0f; // 지속시간
         float damageInterval = 0.5f; // 데미지간격
         float damageAmount = 50.0f; // damageinterval 당 데미지 양
@@ -124,6 +134,8 @@ public class AoeManager : MonoBehaviour
             time += damageInterval;
             yield return new WaitForSeconds(damageInterval);
         }
+
+        MeteoActive = false;
     }
 
     private IEnumerator SnowAOE(Vector3 position)
