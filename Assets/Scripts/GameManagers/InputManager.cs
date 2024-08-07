@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
 
     public void AdvanceInput()
     {
-        if(EventSystem.current.IsPointerOverGameObject() == false)
+        if(EventSystem.current.IsPointerOverGameObject() == false && GameWorld.Instance.UIManager.GameMenu.gameMenu.activeSelf == false)
         {
             if (m_IsOneCkick && ((Time.time - m_Timer) > m_DoubleClickSecond))
             {
