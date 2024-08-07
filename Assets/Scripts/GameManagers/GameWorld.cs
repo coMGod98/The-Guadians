@@ -132,5 +132,6 @@ public class GameWorld : Singleton<GameWorld>
     public void AddGold(int amount) 
     {
         playerGolds += amount;
+        _soundManager.goldAudio.PlayOneShot(_soundManager.gold);
     }
 }
