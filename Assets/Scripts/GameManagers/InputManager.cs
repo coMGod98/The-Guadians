@@ -29,7 +29,7 @@ public class InputManager : MonoBehaviour
 
     public void AdvanceInput()
     {
-        if(EventSystem.current.IsPointerOverGameObject() == false && GameWorld.Instance.UIManager.GameMenu.gameMenu.activeSelf == false)
+        if(GameWorld.Instance.UIManager.GameMenu.gameMenu.activeSelf == false)
         {
             if (m_IsOneCkick && ((Time.time - m_Timer) > m_DoubleClickSecond))
             {
@@ -40,7 +40,7 @@ public class InputManager : MonoBehaviour
             {
                 start = Input.mousePosition;
                 dragRect = new Rect();
-                if (!m_IsOneCkick)
+                if (EventSystem.current.IsPointerOverGameObject() == false && !m_IsOneCkick)
                 {
                     m_Timer = Time.time;
                     m_IsOneCkick = true;
@@ -60,7 +60,7 @@ public class InputManager : MonoBehaviour
                         DeselectAll();
                     }
                 }
-                else if (m_IsOneCkick && ((Time.time - m_Timer) < m_DoubleClickSecond))
+                else if (EventSystem.current.IsPointerOverGameObject() == false && m_IsOneCkick && ((Time.time - m_Timer) < m_DoubleClickSecond))
                 {
                     m_IsOneCkick = false;
 
@@ -96,7 +96,7 @@ public class InputManager : MonoBehaviour
                 GameWorld.Instance.UIManager.ShowDetails.UnitDetails();
             }
 
-            if (Input.GetMouseButtonDown(1)) {
+            if (EventSystem.current.IsPointerOverGameObject() == false && Input.GetMouseButtonDown(1)) {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);            
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, monsterMask)) {
                     Monster monster = hit.transform.GetComponent<Monster>();
@@ -134,7 +134,7 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.V))
+        if (EventSystem.current.IsPointerOverGameObject() == false && Input.GetKeyDown(KeyCode.V))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, unitMask))
