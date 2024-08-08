@@ -35,12 +35,34 @@ public class UnitManager : MonoBehaviour
     private Dictionary<string, double> dicRank;
     double SumOfWeights;
 
+    // 유닛 간격
+    List<Vector3> destinationList;
+    float[] posRadiusList;
+    int[] posCountList;
+
     // 네브메쉬패스
     private NavMeshPath myPath;
 
     private void Awake(){
         allUnitList = new List<Unit>();
         selectedUnitList = new List<Unit>();
+
+
+        destinationList = new List<Vector3>();
+
+        posRadiusList = new float[10];
+        for(int i = 0; i < posRadiusList.Length; i++)
+        {
+            posRadiusList[i] = i * 2.0f; 
+        }
+
+        posCountList = new int[10];
+        posCountList[0] = 1;
+        posCountList[1] = 6;
+        for(int i = 2; i < posCountList.Length; i++)
+        {
+            posCountList[i] = posCountList[i - 1] * 2;
+        }
 
         dicRank = new Dictionary<string, double>()
         {
@@ -77,12 +99,14 @@ public class UnitManager : MonoBehaviour
         }
     }
 
-    public void UnitAI(){
+    public void UnitAI()
+    {
         for(int i = allUnitList.Count - 1; i >= 0; --i)
         {
             Unit unit = allUnitList[i];
             var newDest = new Vector3(Mathf.Clamp(unit.destination.x, walkableRangeX.x, walkableRangeX.y), walkableY, Mathf.Clamp(unit.destination.z, walkableRangeZ.x, walkableRangeZ.y));
             unit.destination = newDest;
+
             if (unit.forceMove)
             {
                 unit.targetMonster = null;
@@ -149,8 +173,6 @@ public class UnitManager : MonoBehaviour
                 float rotAngle = Vector3.Angle(unit.transform.forward, dir);
                 float rotDir = Vector3.Dot(unit.transform.right, dir) < 0.0f ? -1.0f : 1.0f;
                 unit.transform.Rotate(Vector3.up * rotDir * rotAngle);
-
-
 
                 if (unit.IsAttackable)
                 {
@@ -254,38 +276,29 @@ public class UnitManager : MonoBehaviour
 
     public void InputDestination(Vector3 pos)
     {
-        List<Vector3> destinationList = GetDestinationListAround(pos, new float[] { 2.0f, 4.0f, 6.0f}, new int[] { 5, 10, 20 });
-        
-        int destinationListIdx = 0;
+        destinationList.Clear();
+        for(int i = 0; i < posCountList.Length; i++)
+        {
+            int posCount = posCountList[i];
+            float radius = posRadiusList[i];
+            for (int j = 0; j < posCount; j++)
+            {
+                float angle = j * (360.0f / posCount);
+                float x = Mathf.Sin(angle);
+                float z = Mathf.Cos(angle);
+                Vector3 dir = new Vector3(x, 0.0f, z);
+                Vector3 destination = pos + dir * radius;
+                destinationList.Add(destination);
+            }
+        }
 
-        foreach(Unit unit in selectedUnitList){
-            unit.destination = destinationList[destinationListIdx];
-            destinationListIdx = (destinationListIdx + 1) % destinationList.Count;
+        int destinationIdx = 0;
+        foreach(Unit unit in selectedUnitList)
+        {
+            unit.destination = destinationList[destinationIdx];
+            destinationIdx = (destinationIdx + 1) % destinationList.Count;
             unit.forceMove = true;
         }
-    }
-
-    private List<Vector3> GetDestinationListAround(Vector3 pos, float[] ringRadiusArray, int[] ringPositionCount){
-        List<Vector3> destinatnionList = new List<Vector3>();
-        destinatnionList.Add(pos);
-        for(int i = 0; i < ringRadiusArray.Length; i++){
-            destinatnionList.AddRange(GetDestinationListAround(pos, ringRadiusArray[i], ringPositionCount[i]));
-        }
-        return destinatnionList;
-    }
-
-    private List<Vector3> GetDestinationListAround(Vector3 pos, float radius, int positionCount){
-        List<Vector3> destinationList = new List<Vector3>();
-        for (int i = 0; i < positionCount; i++)
-        {
-            float angle = i * (360.0f / positionCount);
-            float x = Mathf.Sin(angle);
-            float z = Mathf.Cos(angle);
-            Vector3 dir = new Vector3(x, 0.0f, z);
-            Vector3 destination = pos + dir * radius;
-            destinationList.Add(destination);
-        }
-        return destinationList;
     }
 
     // 스폰
