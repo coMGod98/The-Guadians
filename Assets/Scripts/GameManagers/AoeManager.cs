@@ -16,13 +16,15 @@ public class AoeManager : MonoBehaviour
 
     private GameObject curRangeCheck;
 
+    private bool isAoeSelected = false;
     private bool isPlacingAOE = false;
+
     private int aoeIndex = 0;
     private int placeableMask;
 
-    public event Action AoePlaced;
-
-    public bool MeteoActive = false;
+    public event Action MeteoPlaced;
+    public event Action SnowPlaced;
+    public event Action BomBPlaced;
 
     void Start()
     {
@@ -44,6 +46,8 @@ public class AoeManager : MonoBehaviour
     public void ButtonClicked()
     {
         isPlacingAOE = true;
+        isAoeSelected = true;  
+
         if (curRangeCheck == null)
         {
             curRangeCheck = Instantiate(rangePrefab);
@@ -75,12 +79,30 @@ public class AoeManager : MonoBehaviour
             GameObject aoeInstance = Instantiate(aoePrefabs[aoeIndex], towerPosition, Quaternion.identity);
             aoeInstance.GetComponent<AudioSource>().Play();
             isPlacingAOE = false;
+            isAoeSelected = false;  
             curRangeCheck.SetActive(false);
-            AoePlaced?.Invoke();
-            GameWorld.Instance.UIManager.isButtonLocked = false;
+
             AoeSkills(aoePrefabs[aoeIndex], towerPosition);
-            Destroy(aoeInstance, 5.0f); 
+            Destroy(aoeInstance, 5.0f);
         }
+    }
+
+    public void CancelAOESelection()
+    {
+        if (isPlacingAOE)
+        {
+            isPlacingAOE = false;
+            isAoeSelected = false;  
+            if (curRangeCheck != null)
+            {
+                curRangeCheck.SetActive(false);
+            }
+        }
+    }
+
+    public bool IsAoeSelected()
+    {
+        return isAoeSelected;
     }
 
     public void SelectedAOE(int index)
@@ -95,10 +117,6 @@ public class AoeManager : MonoBehaviour
     {
         if (aoePrefab == aoePrefabs[0])
         {
-            if(MeteoActive)
-            {
-                return;
-            }
             StartCoroutine(MeteoAOE(position));
         }
         else if (aoePrefab == aoePrefabs[1])
@@ -113,11 +131,9 @@ public class AoeManager : MonoBehaviour
 
     private IEnumerator MeteoAOE(Vector3 position)
     {
-        MeteoActive = true;
-
-        float duration = 5.0f; // 지속시간
-        float damageInterval = 0.5f; // 데미지간격
-        float damageAmount = 50.0f; // damageinterval 당 데미지 양
+        float duration = 5.0f;
+        float damageInterval = 0.5f;
+        float damageAmount = 50.0f;
         float time = 0.0f;
 
         while (time < duration)
@@ -135,14 +151,14 @@ public class AoeManager : MonoBehaviour
             yield return new WaitForSeconds(damageInterval);
         }
 
-        MeteoActive = false;
+        MeteoPlaced?.Invoke(); 
     }
 
     private IEnumerator SnowAOE(Vector3 position)
     {
-        float duration = 5.0f; // 지속시간
-        float checkInterval = 0.5f; // 체크간격
-        float slowSpeed = 1.0f; // 느려졌을때 속도
+        float duration = 5.0f;
+        float checkInterval = 0.5f;
+        float slowSpeed = 1.0f;
         List<Monster> slowedMonsters = new List<Monster>();
         float time = 0.0f;
 
@@ -163,7 +179,7 @@ public class AoeManager : MonoBehaviour
             {
                 if (Vector3.Distance(slowedMonsters[i].transform.position, position) > 5.5f)
                 {
-                    slowedMonsters[i].monsterData.Speed = GameWorld.Instance.BalanceManager.monsterDic[slowedMonsters[i].monsterData.round].Speed; 
+                    slowedMonsters[i].monsterData.Speed = GameWorld.Instance.BalanceManager.monsterDic[slowedMonsters[i].monsterData.round].Speed;
                     slowedMonsters.RemoveAt(i);
                 }
             }
@@ -174,10 +190,11 @@ public class AoeManager : MonoBehaviour
 
         foreach (Monster monster in slowedMonsters)
         {
-            monster.monsterData.Speed = GameWorld.Instance.BalanceManager.monsterDic[monster.monsterData.round].Speed; 
+            monster.monsterData.Speed = GameWorld.Instance.BalanceManager.monsterDic[monster.monsterData.round].Speed;
         }
-    }
 
+        SnowPlaced?.Invoke(); 
+    }
 
     private IEnumerator BomBAOE(Vector3 position)
     {
@@ -190,9 +207,11 @@ public class AoeManager : MonoBehaviour
             Monster monster = col.GetComponent<Monster>();
             if (monster != null && Vector3.Distance(monster.transform.position, position) <= radius)
             {
-                monster.InflictDamage(500.0f); // 데미지
+                monster.InflictDamage(500.0f);
             }
         }
+
+        BomBPlaced?.Invoke();
     }
 
 

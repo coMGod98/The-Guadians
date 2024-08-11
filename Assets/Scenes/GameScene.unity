@@ -15095,6 +15095,9 @@ MonoBehaviour:
   _upgradeTooltip: {fileID: 1609798231}
   _floatingGetGold: {fileID: 1447118854}
   isButtonLocked: 0
+  isMeteoLocked: 0
+  isSnowLocked: 0
+  isBomBLocked: 0
   timerText: {fileID: 1465655823}
   roundText: {fileID: 674134329}
   monsterCountText: {fileID: 63725007}
@@ -15929,7 +15932,6 @@ MonoBehaviour:
   - {fileID: 161766660727748596, guid: 0192ce5babd24c7499eb015449577d05, type: 3}
   - {fileID: 8378648546881499446, guid: 08cb90685b9446d49bfff58df64144e0, type: 3}
   rangePrefab: {fileID: 1600982113449665652, guid: 106102fa1048fdc49bf1fa712f25890b, type: 3}
-  MeteoActive: 0
 --- !u!4 &1860472885
 Transform:
   m_ObjectHideFlags: 0

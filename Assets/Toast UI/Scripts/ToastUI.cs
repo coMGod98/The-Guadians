@@ -3,11 +3,6 @@ using System.Collections ;
 using UnityEngine.UI ;
 using EasyUI.Toast ;
 
-/* -------------------------------
-   Created by : Hamza Herbou
-   hamza95herbou@gmail.com
----------------------------------- */
-
 namespace EasyUI.Helpers {
 
    public class ToastUI : MonoBehaviour {

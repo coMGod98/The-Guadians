@@ -22,7 +22,9 @@ public class UIManager : MonoBehaviour
     public FloatingGetGold FloatingGetGold => _floatingGetGold;
     
     public bool isButtonLocked = false;
-
+    public bool isMeteoLocked = false;
+    public bool isSnowLocked = false;
+    public bool isBomBLocked = false;
 
     [Header("Info")]
     public TextMeshProUGUI timerText;

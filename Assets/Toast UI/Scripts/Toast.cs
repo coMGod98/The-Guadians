@@ -1,11 +1,6 @@
 ﻿using UnityEngine ;
 using EasyUI.Helpers ;
 
-/* -------------------------------
-   Created by : Hamza Herbou
-   hamza95herbou@gmail.com
----------------------------------- */
-
 namespace EasyUI.Toast {
 
    public enum ToastColor {
