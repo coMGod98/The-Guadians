@@ -167,6 +167,8 @@ public class AoeManager : MonoBehaviour
             Collider[] colliders = Physics.OverlapSphere(position, 5.5f, LayerMask.GetMask("Monster"));
             foreach (Collider col in colliders)
             {
+                if (col == null) continue;  
+
                 Monster monster = col.GetComponent<Monster>();
                 if (monster != null && !slowedMonsters.Contains(monster))
                 {
@@ -177,6 +179,12 @@ public class AoeManager : MonoBehaviour
 
             for (int i = slowedMonsters.Count - 1; i >= 0; i--)
             {
+                if (slowedMonsters[i] == null || slowedMonsters[i].transform == null) 
+                {
+                    slowedMonsters.RemoveAt(i);
+                    continue;
+                }
+
                 if (Vector3.Distance(slowedMonsters[i].transform.position, position) > 5.5f)
                 {
                     slowedMonsters[i].monsterData.Speed = GameWorld.Instance.BalanceManager.monsterDic[slowedMonsters[i].monsterData.round].Speed;
@@ -190,11 +198,14 @@ public class AoeManager : MonoBehaviour
 
         foreach (Monster monster in slowedMonsters)
         {
+            if (monster == null) continue;  
+
             monster.monsterData.Speed = GameWorld.Instance.BalanceManager.monsterDic[monster.monsterData.round].Speed;
         }
 
-        SnowPlaced?.Invoke(); 
+        SnowPlaced?.Invoke();
     }
+
 
     private IEnumerator BomBAOE(Vector3 position)
     {
