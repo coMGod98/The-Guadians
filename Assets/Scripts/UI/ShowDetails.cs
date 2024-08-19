@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Pool;
 
 public class ShowDetails : MonoBehaviour
 {
@@ -69,7 +70,6 @@ public class ShowDetails : MonoBehaviour
         {
             showBossDetails.SetActive(false);
         }
-
     }
     
     public void UnitDetails()
@@ -170,6 +170,7 @@ public class ShowDetails : MonoBehaviour
         {
             for (int i = 1; i < portraitChild.Length; i++)
             {
+                // 풀링으로
                 Destroy(portraitChild[i].gameObject);
             }
         }
@@ -189,7 +190,6 @@ public class ShowDetails : MonoBehaviour
                 break;
             }
         }
-
         UnitDetails();
     }
 
@@ -202,6 +202,8 @@ public class ShowDetails : MonoBehaviour
             Unit unit = selectedUnits[i];
             GameWorld.Instance.UnitManager.allUnitList.Remove(unit);
             GameWorld.Instance.AddGold(unit.unitData.salesGold);
+
+            // 풀링으로
             Destroy(unit.gameObject);
         }
         selectedUnits.Clear();

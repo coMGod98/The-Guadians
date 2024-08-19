@@ -1,10 +1,8 @@
-using EasyUI.Toast;
 using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
-using UnityEngine.WSA;
 
 public class AoeManager : MonoBehaviour
 {
@@ -83,6 +81,8 @@ public class AoeManager : MonoBehaviour
             curRangeCheck.SetActive(false);
 
             AoeSkills(aoePrefabs[aoeIndex], towerPosition);
+
+            // 풀링으로
             Destroy(aoeInstance, 5.0f);
         }
     }

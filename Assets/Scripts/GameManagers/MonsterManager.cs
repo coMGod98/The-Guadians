@@ -47,6 +47,8 @@ public class MonsterManager : MonoBehaviour
     IEnumerator DisApearing(Monster monster)
     {
         yield return new WaitForSeconds(2.0f);
+        
+        // 풀링으로
         Destroy(monster.gameObject);
     }
 

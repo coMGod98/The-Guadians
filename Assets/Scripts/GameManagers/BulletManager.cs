@@ -36,6 +36,8 @@ public class BulletManager : MonoBehaviour
                             bullet.targetMonster.InflictDamage(bullet.bulletOwner.unitDamage * bullet.bulletData.damageCoefficient);
                             Instantiate(hitPrefabsArray[bullet.hitArrayIdx], socket.transform);
                             allBulletList.Remove(bullet);
+
+                            // 풀링으로 
                             Destroy(bullet.gameObject);
                         }
                     }
@@ -62,6 +64,8 @@ public class BulletManager : MonoBehaviour
                         if(Vector3.Distance(bullet.transform.position, socket.transform.position) < 0.1f)
                         {
                             allBulletList.Remove(bullet);
+
+                            // 풀링으로
                             Destroy(bullet.gameObject);
                         }
                     }
@@ -69,6 +73,8 @@ public class BulletManager : MonoBehaviour
                     bullet.transform.position.z < Range_z.x || bullet.transform.position.z > Range_z.y)
                     {
                         allBulletList.Remove(bullet);
+
+                        // 풀링으로
                         Destroy(bullet.gameObject);
                     }
                     break;
