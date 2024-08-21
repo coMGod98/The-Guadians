@@ -170,7 +170,6 @@ public class ShowDetails : MonoBehaviour
         {
             for (int i = 1; i < portraitChild.Length; i++)
             {
-                // 풀링으로
                 Destroy(portraitChild[i].gameObject);
             }
         }
@@ -203,7 +202,6 @@ public class ShowDetails : MonoBehaviour
             GameWorld.Instance.UnitManager.allUnitList.Remove(unit);
             GameWorld.Instance.AddGold(unit.unitData.salesGold);
 
-            // 풀링으로
             Destroy(unit.gameObject);
         }
         selectedUnits.Clear();

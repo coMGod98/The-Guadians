@@ -16,6 +16,8 @@ public class MonsterManager : MonoBehaviour
     [Header("WayPoint"), Tooltip("몬스터 웨이포인트")]
     public Transform[] wayPointArray;
 
+    public GameObject monsterPool;
+    Queue<Monster> monsterPoolArray;
     private float _rotSpeed = 360.0f;
 
     //네브메쉬
@@ -25,6 +27,7 @@ public class MonsterManager : MonoBehaviour
     {
         selectedMonster = null;
         allMonsterList = new List<Monster>();
+        monsterPoolArray = new Queue<Monster>();
     }
 
     public void MonsterAI()
@@ -37,8 +40,8 @@ public class MonsterManager : MonoBehaviour
                 monster.monsterAnim.SetTrigger("TDead");
                 GameWorld.Instance.AddGold(monster.monsterData.Gold);
                 GameWorld.Instance.UIManager.FloatingGetGold.FloatGold(monster);
-
                 allMonsterList.Remove(monster);
+
                 StartCoroutine(DisApearing(monster));
             }
         }
@@ -47,8 +50,6 @@ public class MonsterManager : MonoBehaviour
     IEnumerator DisApearing(Monster monster)
     {
         yield return new WaitForSeconds(2.0f);
-        
-        // 풀링으로
         Destroy(monster.gameObject);
     }
 
@@ -99,16 +100,13 @@ public class MonsterManager : MonoBehaviour
     public void SpawnMonster()
     {
         GameObject obj = Instantiate(monsterPrefabArray[GameWorld.Instance.curRound - 1], monsterSpawn);
-        //GameObject obj = Instantiate(monsterPrefabArray[0], monsterSpawn);
         Monster monster = obj.GetComponent<Monster>();
 
         int index = monster.name.IndexOf("(Clone)");
         monster.monsterType = GameWorld.Instance.curRound % 5 == 0 && GameWorld.Instance.curRound != 0 ? MonsterType.Boss : MonsterType.Normal;
         monster.monsterKey = monster.name.Substring(0, index);
         monster.monsterData = GameWorld.Instance.BalanceManager.monsterDic[monster.monsterKey];
-
         monster.Init();
-
         allMonsterList.Add(monster);
     }
 }

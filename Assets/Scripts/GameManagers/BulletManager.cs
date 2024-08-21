@@ -37,7 +37,6 @@ public class BulletManager : MonoBehaviour
                             Instantiate(hitPrefabsArray[bullet.hitArrayIdx], socket.transform);
                             allBulletList.Remove(bullet);
 
-                            // 풀링으로 
                             Destroy(bullet.gameObject);
                         }
                     }
@@ -65,7 +64,6 @@ public class BulletManager : MonoBehaviour
                         {
                             allBulletList.Remove(bullet);
 
-                            // 풀링으로
                             Destroy(bullet.gameObject);
                         }
                     }
@@ -74,7 +72,6 @@ public class BulletManager : MonoBehaviour
                     {
                         allBulletList.Remove(bullet);
 
-                        // 풀링으로
                         Destroy(bullet.gameObject);
                     }
                     break;
