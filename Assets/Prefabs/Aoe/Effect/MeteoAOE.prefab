@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3980763105393747086}
   - component: {fileID: 1405645535455539924}
   - component: {fileID: 7267142591122606911}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4908,7 +4908,7 @@ GameObject:
   - component: {fileID: 1466467560871372831}
   - component: {fileID: 3313559943216563738}
   - component: {fileID: 7329549980792489037}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9805,7 +9805,7 @@ GameObject:
   - component: {fileID: 3883609247617936164}
   - component: {fileID: 7949753231466285341}
   - component: {fileID: 6100238422124217393}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14693,7 +14693,7 @@ GameObject:
   - component: {fileID: 3828297121384214447}
   - component: {fileID: 101889714995972611}
   - component: {fileID: 4999251460415786748}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19590,7 +19590,7 @@ GameObject:
   - component: {fileID: 6059681292046567560}
   - component: {fileID: 7900352628819213084}
   - component: {fileID: 3945494290076453120}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24478,7 +24478,7 @@ GameObject:
   - component: {fileID: 7849018041819110541}
   - component: {fileID: 7239154184348900239}
   - component: {fileID: 8217213641433204592}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29376,7 +29376,7 @@ GameObject:
   - component: {fileID: 8176230078092200170}
   - component: {fileID: 8636462576248347671}
   - component: {fileID: -8603512736661036790}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MeteoAOE
   m_TagString: Untagged
   m_Icon: {fileID: 0}

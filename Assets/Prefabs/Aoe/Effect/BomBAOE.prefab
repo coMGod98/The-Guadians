@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6004309576442641856}
   - component: {fileID: 2208576233791906499}
   - component: {fileID: 6748891715396353994}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShockSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4899,7 +4899,7 @@ GameObject:
   - component: {fileID: 2226213819217850596}
   - component: {fileID: 4995461573065839325}
   - component: {fileID: 9198643070652686321}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9787,7 +9787,7 @@ GameObject:
   - component: {fileID: 2035276633874792270}
   - component: {fileID: 4071703275497007380}
   - component: {fileID: 5753999484807958783}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14684,7 +14684,7 @@ GameObject:
   - component: {fileID: 2871305002984362530}
   - component: {fileID: 1218978338253383016}
   - component: {fileID: 8691964172832635944}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19644,7 +19644,7 @@ GameObject:
   - component: {fileID: 4564877466507998175}
   - component: {fileID: 503385641847414234}
   - component: {fileID: 5672153417517129613}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24541,7 +24541,7 @@ GameObject:
   - component: {fileID: 3910520446954513020}
   - component: {fileID: 2285755066653096070}
   - component: {fileID: 8507343944333215554}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShockWaveIn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29429,7 +29429,7 @@ GameObject:
   - component: {fileID: 5409362478353471904}
   - component: {fileID: 8262427872422423092}
   - component: {fileID: 3010810982877829160}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34317,7 +34317,7 @@ GameObject:
   - component: {fileID: 6049286019085393236}
   - component: {fileID: 6586679001710254678}
   - component: {fileID: 5555007084276090537}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39216,7 +39216,7 @@ GameObject:
   - component: {fileID: 5726018809045565519}
   - component: {fileID: 6415707391935192240}
   - component: {fileID: 6379908036845006438}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BomBAOE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44219,7 +44219,7 @@ GameObject:
   - component: {fileID: 9158091433909932872}
   - component: {fileID: 5090179730832646364}
   - component: {fileID: 2144124106150056640}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShockWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49107,7 +49107,7 @@ GameObject:
   - component: {fileID: 2170898119577465967}
   - component: {fileID: 3056184392828457411}
   - component: {fileID: 7953545044103025980}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}

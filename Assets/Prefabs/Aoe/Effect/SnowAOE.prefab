@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 911693503594785049}
   - component: {fileID: 6273677078826306336}
   - component: {fileID: 7920636471530964492}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4900,7 +4900,7 @@ GameObject:
   - component: {fileID: 2100541099862133063}
   - component: {fileID: 1984875891814309306}
   - component: {fileID: 4812370301233765217}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SnowAOE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9911,7 +9911,7 @@ GameObject:
   - component: {fileID: 3250004757399677474}
   - component: {fileID: 1495062412500337703}
   - component: {fileID: 6698098109842949744}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14808,7 +14808,7 @@ GameObject:
   - component: {fileID: 1044030913614554803}
   - component: {fileID: 3081162857619714281}
   - component: {fileID: 6744621815756589314}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Snowflakes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19705,7 +19705,7 @@ GameObject:
   - component: {fileID: 6445078902102126082}
   - component: {fileID: 7870232523374136238}
   - component: {fileID: 2968358519268921169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24602,7 +24602,7 @@ GameObject:
   - component: {fileID: 4055776136547584293}
   - component: {fileID: 140423252894775985}
   - component: {fileID: 6525826674053744813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29490,7 +29490,7 @@ GameObject:
   - component: {fileID: 6174142838767263408}
   - component: {fileID: 6716276626152888754}
   - component: {fileID: 5425375358329472333}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
