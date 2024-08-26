@@ -274,7 +274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &419197133
 RectTransform:
   m_ObjectHideFlags: 0
@@ -316,15 +316,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: press any key
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: beb5f3d1cfe5c00438ef81fc6b795449, type: 2}
+  m_sharedMaterial: {fileID: -396049937439775605, guid: beb5f3d1cfe5c00438ef81fc6b795449, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282121984
-  m_fontColor: {r: 0, g: 1, b: 0.23238349, a: 1}
+    rgba: 4278230853
+  m_fontColor: {r: 0.27045408, g: 0.6226415, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
