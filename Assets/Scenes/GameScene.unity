@@ -3471,8 +3471,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294049536
-  m_fontColor: {r: 0, g: 1, b: 0.94429994, a: 1}
+    rgba: 46226
+  m_fontColor: {r: 0.57272494, g: 0.7075472, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8055,8 +8055,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: press any key
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: beb5f3d1cfe5c00438ef81fc6b795449, type: 2}
+  m_sharedMaterial: {fileID: -396049937439775605, guid: beb5f3d1cfe5c00438ef81fc6b795449, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9834,6 +9834,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3efd3e38aa7d84d2b8cc7ce13733c085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Victory: {fileID: 0}
+  PressanyKey: {fileID: 0}
+  fadeDuration: 2
+  delay: 1
 --- !u!1 &1046998350
 GameObject:
   m_ObjectHideFlags: 0
@@ -15659,6 +15663,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3efd3e38aa7d84d2b8cc7ce13733c085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Victory: {fileID: 348363125}
+  PressanyKey: {fileID: 853911983}
+  fadeDuration: 10
+  delay: 1
 --- !u!1 &1932673971
 GameObject:
   m_ObjectHideFlags: 0
