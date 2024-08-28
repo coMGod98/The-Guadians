@@ -949,8 +949,8 @@ RectTransform:
   m_Children:
   - {fileID: 300177348}
   - {fileID: 1284346021}
-  - {fileID: 1046671785}
   - {fileID: 1555004856}
+  - {fileID: 1046671785}
   - {fileID: 820398175}
   - {fileID: 1978500150}
   m_Father: {fileID: 0}
@@ -1901,6 +1901,7 @@ MonoBehaviour:
   wizard: {fileID: 0}
   gold: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: b1446cd1eb60c264bab2188f3fde8526, type: 2}
+  background: {fileID: 0}
   goldAudio: {fileID: 0}
 --- !u!1 &778834442
 GameObject:
@@ -2226,7 +2227,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Team Project
+  m_text: The Guardians
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: beb5f3d1cfe5c00438ef81fc6b795449, type: 2}
   m_sharedMaterial: {fileID: -396049937439775605, guid: beb5f3d1cfe5c00438ef81fc6b795449, type: 2}
@@ -2235,8 +2236,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278648811
-  m_fontColor: {r: 0.92315155, g: 1, b: 0.023584902, a: 1}
+    rgba: 4278233856
+  m_fontColor: {r: 0, g: 0.67058825, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2289,7 +2290,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -41.660217, y: -168.20776, z: -940.0481, w: -281.8261}
+  m_margin: {x: -329.0487, y: -168.20776, z: -940.0481, w: -238.14307}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2932,8 +2933,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.6156863, g: 0.6156863, b: 0, a: 1}
+    m_NormalColor: {r: 0, g: 0.67058825, b: 0.08627451, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.36078432, b: 0.07058824, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0, g: 0, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -3319,8 +3320,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.6156863, g: 0.6132076, b: 0, a: 1}
+    m_NormalColor: {r: 0, g: 0.67058825, b: 0.08627451, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.36078432, b: 0.07058824, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
@@ -3664,8 +3665,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.6156863, g: 0.6156863, b: 0, a: 1}
+    m_NormalColor: {r: 0, g: 0.6698113, b: 0.12078566, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.36078432, b: 0.07058824, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
