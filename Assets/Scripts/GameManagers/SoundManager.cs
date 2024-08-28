@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip wizard;
     public AudioClip gold;
     public AudioMixer audioMixer;
+    public AudioSource background;
     public AudioSource goldAudio;
 
 

@@ -16825,6 +16825,7 @@ MonoBehaviour:
   wizard: {fileID: 8300000, guid: 02f3d07d762c34a918548d0dbcca794a, type: 3}
   gold: {fileID: 8300000, guid: a851dbae0de2f4a5daa9145b9b593ea5, type: 3}
   audioMixer: {fileID: 24100000, guid: b1446cd1eb60c264bab2188f3fde8526, type: 2}
+  background: {fileID: 2123154761}
   goldAudio: {fileID: 0}
 --- !u!82 &2123154761
 AudioSource:
@@ -16836,7 +16837,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -460079462438908529, guid: b1446cd1eb60c264bab2188f3fde8526, type: 2}
-  m_audioClip: {fileID: 8300000, guid: cdf36a7412b98a147921f89e52d5a831, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e230e9415077e82458d45aca9b6caeac, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

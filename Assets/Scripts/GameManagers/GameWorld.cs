@@ -90,13 +90,15 @@ public class GameWorld : Singleton<GameWorld>
             if (curRound >= totalRounds && _monsterManager.allMonsterList.Count == 0)
             {
                 _uiManager.gameWin.SetActive(true);
+                _soundManager.background.Stop();
                 Time.timeScale = 0.0f;
                 
             }
 
-            if (_monsterManager.allMonsterList.Count >= 100 || (curRound >= totalRounds && _monsterManager.allMonsterList.Count > 0))
+            if (_monsterManager.allMonsterList.Count >= 10 || (curRound >= totalRounds && _monsterManager.allMonsterList.Count > 0))
             {
                 _uiManager.gameLost.SetActive(true);
+                _soundManager.background.Stop();
                 Time.timeScale = 0.0f;
                 
             }
