@@ -43,7 +43,7 @@ public class AoeBtn : MonoBehaviour
     {
         if (GameWorld.Instance.AoeManager.IsAoeSelected())
         {
-            Toast.Show("이미 다른 스킬을 선택했습니다.", 2f, ToastColor.Black, ToastPosition.MiddleCenter); // alredy choose skills
+            Toast.Show("Already Choose Skills", 2f, ToastColor.Black, ToastPosition.MiddleCenter); // alredy choose skills
             return;
         }
 
@@ -58,7 +58,7 @@ public class AoeBtn : MonoBehaviour
 
         if (isButtonLocked)
         {
-            Toast.Show("아직 스킬 사용이 되지 않았습니다", 2f, ToastColor.Black, ToastPosition.MiddleCenter); // skill not used yet
+            Toast.Show("Not Used Yet", 2f, ToastColor.Black, ToastPosition.MiddleCenter); // skill not used yet
             return;
         }
         else

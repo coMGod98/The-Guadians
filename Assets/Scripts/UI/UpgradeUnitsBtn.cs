@@ -43,7 +43,7 @@ public class UpgradeUnitsBtn : MonoBehaviour
 
                         if(GameWorld.Instance.UnitManager.warriorUpgrade > 18)
                         {
-                            Toast.Show("Max Warrior enhance = 19", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+                            Toast.Show("Max Warrior Enhance", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
                         }
                         else
                         {
@@ -56,7 +56,7 @@ public class UpgradeUnitsBtn : MonoBehaviour
                     {
                         if(GameWorld.Instance.UnitManager.archerUpgrade > 18)
                         {
-                            Toast.Show("Max Archer enhance = 20", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+                            Toast.Show("Max Archer Enhance", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
                         }
                         else
                         {
@@ -69,7 +69,7 @@ public class UpgradeUnitsBtn : MonoBehaviour
                     {
                         if(GameWorld.Instance.UnitManager.wizardUpgrade > 18)
                         {
-                            Toast.Show("Max Wizard enhance = 20", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
+                            Toast.Show("Max Wizard Enhance", 2f, ToastColor.Black, ToastPosition.MiddleCenter);
                         }
                         else
                         {

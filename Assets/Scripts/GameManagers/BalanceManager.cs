@@ -343,7 +343,7 @@ public class BalanceManager : MonoBehaviour
     {
         monsterDic = new Dictionary<string, MonsterData>();
         MonsterData monsterData = new MonsterData();
-        for(int i = 1; i < GameWorld.Instance.totalRounds; i++)
+        for(int i = 1; i < GameWorld.Instance.totalRounds + 1; i++)
         {
             monsterData.round = "Round" + i;
             monsterData.HP = (i % 5 == 0) ? 1000 * i : 100 * i;
