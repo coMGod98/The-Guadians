@@ -4404,15 +4404,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b3bf48c53e8f71f449c04d27ae29b4ea, type: 3}
   - {fileID: 21300000, guid: f78d5c20bb2e2e64fa9a94686899c243, type: 3}
   monsterPortraitList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 444493a375699d847959928ecd0432ca, type: 3}
+  - {fileID: 21300000, guid: 82dcf593bcad1d84ebe88ca3bd23e096, type: 3}
+  - {fileID: 21300000, guid: b43a52e10f971854985abaeee2601c72, type: 3}
+  - {fileID: 21300000, guid: 80d2ae562ebee53409c91401b0aeb5f1, type: 3}
+  - {fileID: 21300000, guid: 4a5733455867e6b4582cbf48e8693ab9, type: 3}
+  - {fileID: 21300000, guid: 0198e11338150d84892a395560e8c761, type: 3}
+  - {fileID: 21300000, guid: 19c38f25a3af4ad4c86606e864eafc37, type: 3}
+  - {fileID: 21300000, guid: 3cb857db859264a4a84f922e252471a0, type: 3}
+  - {fileID: 21300000, guid: 6ce9614d2509d3c409b6e1975edf4864, type: 3}
+  - {fileID: 21300000, guid: df58b6f594ecfa443965b45271679c05, type: 3}
   showSelectedUnits: {fileID: 1294684632}
   showUnitDetails: {fileID: 1495954567}
   unitPortrait: {fileID: 919484734}

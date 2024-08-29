@@ -95,7 +95,7 @@ public class GameWorld : Singleton<GameWorld>
                 
             }
 
-            if (_monsterManager.allMonsterList.Count >= 10 || _uiManager.gameLost.activeSelf || (curRound >= totalRounds && _monsterManager.allMonsterList.Count > 0))
+            if (_monsterManager.allMonsterList.Count >= 100 || _uiManager.gameLost.activeSelf || (curRound >= totalRounds && _monsterManager.allMonsterList.Count > 0))
             {
                 _uiManager.gameLost.SetActive(true);
                 _soundManager.background.Stop();

@@ -39,6 +39,7 @@ public class ShowDetails : MonoBehaviour
         if(selectedMonster != null)
         {
             showMonsterDetails.SetActive(true);
+            monsterPortrait.sprite = monsterPortraitList[GameWorld.Instance.curRound - 1];
             monsterHPSlider.value = selectedMonster.curHP / selectedMonster.monsterData.HP;
             nameText.text = selectedMonster.monsterKey;
             hpText.text = $"{selectedMonster.curHP} / {selectedMonster.monsterData.HP}";
