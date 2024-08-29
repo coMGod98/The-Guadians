@@ -16,8 +16,6 @@ public class MonsterManager : MonoBehaviour
     [Header("WayPoint"), Tooltip("몬스터 웨이포인트")]
     public Transform[] wayPointArray;
 
-    public GameObject monsterPool;
-    Queue<Monster> monsterPoolArray;
     private float _rotSpeed = 360.0f;
 
     //네브메쉬
@@ -27,7 +25,6 @@ public class MonsterManager : MonoBehaviour
     {
         selectedMonster = null;
         allMonsterList = new List<Monster>();
-        monsterPoolArray = new Queue<Monster>();
     }
 
     public void MonsterAI()

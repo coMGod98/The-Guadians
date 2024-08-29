@@ -62,7 +62,7 @@ public class GameWorld : Singleton<GameWorld>
 
     private void Update()
     {
-        if (curRound < totalRounds)
+        if (curRound <= totalRounds)
         {
             float curRoundTime = (curRound % 5 == 0 && curRound != 0) ? bossRoundTime : normalRoundTime;
             curRoundTime = (curRound == 0) ? 20 : curRoundTime;
@@ -87,7 +87,7 @@ public class GameWorld : Singleton<GameWorld>
                 spawnCount = 0;
             }
 
-            if ((curRound >= totalRounds && _monsterManager.allMonsterList.Count == 0) || _uiManager.gameWin.activeSelf)
+            if ((curRound > totalRounds && _monsterManager.allMonsterList.Count <= 0) || _uiManager.gameWin.activeSelf)
             {
                 _uiManager.gameWin.SetActive(true);
                 _soundManager.background.Stop();
@@ -95,7 +95,7 @@ public class GameWorld : Singleton<GameWorld>
                 
             }
 
-            if (_monsterManager.allMonsterList.Count >= 100 || _uiManager.gameLost.activeSelf || (curRound >= totalRounds && _monsterManager.allMonsterList.Count > 0))
+            if (_monsterManager.allMonsterList.Count >= 100 || _uiManager.gameLost.activeSelf || (curRound > totalRounds && _monsterManager.allMonsterList.Count > 0))
             {
                 _uiManager.gameLost.SetActive(true);
                 _soundManager.background.Stop();
